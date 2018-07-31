@@ -55,7 +55,7 @@ ENGINE = InnoDB;
 -- Table narrativeArcs
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS narrativeArcs (
-  Id INT NOT NULL,
+  Id INT NOT NULL AUTO_INCREMENT,
   Number INT NOT NULL,
   Title VARCHAR(255) NOT NULL,
   Synopsie VARCHAR(255) NOT NULL,
@@ -76,7 +76,7 @@ ENGINE = InnoDB;
 -- Table volumes
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS volumes (
-  Id INT NOT NULL,
+  Id INT NOT NULL AUTO_INCREMENT,
   Number INT NOT NULL,
   Title VARCHAR(255) NOT NULL,
   Synopsie VARCHAR(255) NOT NULL,
@@ -97,7 +97,7 @@ ENGINE = InnoDB;
 -- Table chapters
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS chapters (
-  Id INT NOT NULL,
+  Id INT NOT NULL AUTO_INCREMENT,
   Number INT NOT NULL,
   Title VARCHAR(255) NOT NULL,
   Synopsie VARCHAR(255) NOT NULL,
@@ -118,7 +118,7 @@ ENGINE = InnoDB;
 -- Table comicStrips
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS comicStrips (
-  Id INT NOT NULL,
+  Id INT NOT NULL AUTO_INCREMENT,
   Number INT NOT NULL,
   Path VARCHAR(250) NOT NULL,
   chapterId INT NOT NULL,
@@ -136,7 +136,7 @@ ENGINE = InnoDB;
 -- Table genre
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS genre (
-  Id INT NOT NULL,
+  Id INT NOT NULL AUTO_INCREMENT,
   Label VARCHAR(45) NOT NULL,
   PRIMARY KEY (Id))
 ENGINE = InnoDB;
