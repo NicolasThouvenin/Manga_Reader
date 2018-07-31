@@ -9,10 +9,14 @@
             <div id="logo">
                 <h1>LOGO</h1>
             </div> <!-- logo -->
-            <div id="bouton">
-                <input type="button" value="login">
-                <input type="button" value="Sign in">
-            </div> <!-- bouttons -->
+            <div id="container">
+                <form id="login" action="check_login.php" method="POST">
+                    <input type="email" name="email" placeholder="email" required="required">
+                    <input type="password" name="pwd" placeholder="1234" required="required">
+                    <input type="checkbox" id="remember" value="remember">
+                    <label for="remember">Remember Me</label>
+                    <input type="submit" value="login" name="login">
+            </div> <!-- container -->
         </div> <!-- page -->
     </body>
 </html>
