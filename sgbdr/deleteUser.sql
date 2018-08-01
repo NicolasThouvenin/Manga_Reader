@@ -1,8 +1,8 @@
 DELIMITER $$
-CREATE PROCEDURE deleteUser(IN inId INT)
-/* Cette procédure supprime un utilisateur à partir de son Id. */
+CREATE PROCEDURE deleteComic(IN inId INT)
+/* Cette procédure supprime une BD à partir de son Id. */
 BEGIN
-	DELETE FROM users where Id = inId;
+	DELETE FROM comics where Id = inId;
 END $$
 
-CALL createUser(2);
+CALL deleteComic(2);
