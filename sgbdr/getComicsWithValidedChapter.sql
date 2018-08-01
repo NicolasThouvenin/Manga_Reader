@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE getComicsWithValidedChapter(IN inComicId INTEGER)
+CREATE PROCEDURE getComicsWithValidedChapter()
 /* Cette procédure stockée renvoie la liste des comics avec au moins un chapitre validé */
 BEGIN
 
