@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>My Blog</title>
-        <link rel="stylesheet" type="text/css" href="myStyle.css">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
     </head>
     <body>
         <div class="page">
@@ -37,45 +37,149 @@
                     <input id="searchbar" type="search" name="q" placeholder="search comic or author">
                 </div> <!-- banner -->
                 <?php
-                /*
-                    include 'connexion.php';
-                    if ($db) {
-                        echo "<p class='log'>Connexion réussie.<br>";
-                        echo "Information sur le serveur : ".mysqli_get_host_info($db)."</p>";
+                /*        Commented until the connection to database is functional
+                try {
+                    include 'connection.php';
+                    
+                    echo "<p class='log'>Connexion réussie.<br>";
                         
-                        $sql = "SELECT "
-                        $resultat = $db->prepare($sql);
-                        $resultat->execute(array())
-
-                        
-                        while ($ligne = $resultat->fetch()) {
-                            $coverPath = "library\cover\".$name."_cover
-                        ?>
-                <article id="<?php echo $name ?>">
+                    $stmt = $db->prepare('CALL getComics();');
+                    $stmt->execute();
+                    if ($stmt->rowCount() !== 0) {
+                        echo "<p class='error'>Sorry we haven't found any results matching this search.</p>";
+                    } else {
+                        while ($ligne = $stmt->fetch()) {
+                            $coverPath = "library\\".$line['Id']."\\".$line['Id']."_cover".$line['CoverExt'];
+                ?>
+                <article id="<?php echo $line['Id'] ?>">
                     <img src="<?php echo $coverPath ?>" alt="cover">
-                    <p class="comics_name"><?php echo $name ?><p>
-                    <p class="comics_authors"><?php echo $authors ?><p>
-                    <p class="comics_tags"><?php echo $tags ?><p>
+                    <p class="comics_name"><?php echo $line['Title'] ?><p>
                 </article>
+
+                <p class="error">
                 <?php
                         }
-                    } */
-                    
-
+                    }
+                }
+                catch(Exception $e) {
+                    die('Error : '.$e->getMessage());
+                }*/
             ?>
+            </p>
+            <!-- These articles are only for apparence testing, and are to be eventualy deleted -->
                 <article>
-                    <img src="library\cover\Dragon_Ball_cover.jpg" alt="cover">
+                    <img src="library\cover\Dragon_Ball_cover.jpg" alt="cover" height="225" width="150">
                     <p>Dragon Ball</p>
                 </article>
                 <article>
-                    <img src="library\cover\one-punch-man_cover.jpg" alt="cover">
+                    <img src="library\cover\one-punch-man_cover.jpg" alt="cover" height="225" width="150">
                     <p>One Punch Man</p>
                 </article>
                 <article>
-                    <img src="library\cover\berserk_cover.jpg" alt="cover">
+                    <img src="library\cover\Hellsing_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Hellsing</p>
+                </article>
+                <article>
+                    <img src="library\cover\berserk_cover.jpg" alt="cover" height="225" width="150">
                     <p>Berserk</p>
                 </article>
-
+                <article>
+                    <img src="library\cover\bleach_cover.png" alt="cover" height="225" width="150">
+                    <p>Bleach</p>
+                </article>
+                <article>
+                    <img src="library\cover\D.Gray-man_cover.png" alt="cover" height="225" width="150">
+                    <p>D.Gray-man</p>
+                </article>
+                <article>
+                    <img src="library\cover\One_Piece_cover.png" alt="cover" height="225" width="150">
+                    <p>One Piece</p>
+                </article>
+                <article>
+                    <img src="library\cover\Dragon_Ball_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Dragon Ball</p>
+                </article>
+                <article>
+                    <img src="library\cover\one-punch-man_cover.jpg" alt="cover" height="225" width="150">
+                    <p>One Punch Man</p>
+                </article>
+                <article>
+                    <img src="library\cover\Hellsing_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Hellsing</p>
+                </article>
+                <article>
+                    <img src="library\cover\berserk_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Berserk</p>
+                </article>
+                <article>
+                    <img src="library\cover\bleach_cover.png" alt="cover" height="225" width="150">
+                    <p>Bleach</p>
+                </article>
+                <article>
+                    <img src="library\cover\D.Gray-man_cover.png" alt="cover" height="225" width="150">
+                    <p>D.Gray-man</p>
+                </article>
+                <article>
+                    <img src="library\cover\One_Piece_cover.png" alt="cover" height="225" width="150">
+                    <p>One Piece</p>
+                </article>
+                <article>
+                    <img src="library\cover\Dragon_Ball_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Dragon Ball</p>
+                </article>
+                <article>
+                    <img src="library\cover\one-punch-man_cover.jpg" alt="cover" height="225" width="150">
+                    <p>One Punch Man</p>
+                </article>
+                <article>
+                    <img src="library\cover\Hellsing_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Hellsing</p>
+                </article>
+                <article>
+                    <img src="library\cover\berserk_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Berserk</p>
+                </article>
+                <article>
+                    <img src="library\cover\bleach_cover.png" alt="cover" height="225" width="150">
+                    <p>Bleach</p>
+                </article>
+                <article>
+                    <img src="library\cover\D.Gray-man_cover.png" alt="cover" height="225" width="150">
+                    <p>D.Gray-man</p>
+                </article>
+                <article>
+                    <img src="library\cover\One_Piece_cover.png" alt="cover" height="225" width="150">
+                    <p>One Piece</p>
+                </article>
+                <article>
+                    <img src="library\cover\Dragon_Ball_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Dragon Ball</p>
+                </article>
+                <article>
+                    <img src="library\cover\one-punch-man_cover.jpg" alt="cover" height="225" width="150">
+                    <p>One Punch Man</p>
+                </article>
+                <article>
+                    <img src="library\cover\Hellsing_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Hellsing</p>
+                </article>
+                <article>
+                    <img src="library\cover\berserk_cover.jpg" alt="cover" height="225" width="150">
+                    <p>Berserk</p>
+                </article>
+                <article>
+                    <img src="library\cover\bleach_cover.png" alt="cover" height="225" width="150">
+                    <p>Bleach</p>
+                </article>
+                <article>
+                    <img src="library\cover\D.Gray-man_cover.png" alt="cover" height="225" width="150">
+                    <p>D.Gray-man</p>
+                </article>
+                <article>
+                    <img src="library\cover\One_Piece_cover.png" alt="cover" height="225" width="150">
+                    <p>One Piece</p>
+                </article>
+            
             </main>
         </div> <!-- page -->
     </body>
