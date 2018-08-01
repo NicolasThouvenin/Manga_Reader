@@ -33,7 +33,7 @@ function Init()
 }
 
 
-init();
+Init();
 
 
 function insertmember(){
@@ -220,7 +220,6 @@ if (isset($_POST['subscriptionform']))
 
 
 
-
 					<tr align="right">
 
 						<td>
@@ -235,11 +234,6 @@ if (isset($_POST['subscriptionform']))
 						</td>
 
 					</tr>
-
-
-
-
-
 
 
 
