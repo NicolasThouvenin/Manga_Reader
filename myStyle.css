@@ -1,0 +1,73 @@
+body, p {
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 82px;
+    background-color: rgb(59, 59, 59)
+
+}
+
+.logo_container {
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    height: 82px;
+    line-height: 82px;
+}
+
+header div, header input {
+    display: inline-grid;
+}
+
+.add {
+    margin: 27px 0 0 40px;
+}
+
+.logo {
+
+    margin: auto;
+    width: 50px;
+    z-index: 999;
+    vertical-align: middle;
+}
+
+.displayUser {
+    float: right;
+    margin-right: 40px;
+}
+
+.displayUser input {
+    margin: 12px 0 2px 0;
+}
+
+main {
+    padding: 82px 50px 50px 0;
+    width: 800px;
+    margin: auto;
+}
+
+.banner {
+
+    width: 100%;
+    height: 50px;
+    background-color: dimgray;
+}
+
+#searchbar {
+    float: right;
+    margin: 10px 10px 0 0;
+}
+
+.log {
+    display: none;
+}
+
+article {
+    width: 200px;
+    padding: 10px;
+    float: left;
+}
