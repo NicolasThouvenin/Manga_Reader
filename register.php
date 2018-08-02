@@ -15,10 +15,10 @@
 			<input type="password" id="password" name="password" placeholder="Mot de passe" required>
 			<input type="email" id="email" name="email" placeholder="Entrez une adresse email valide" required>
 			<?php
-				session_start();
-				$_SESSION['inscriptionToken'] = uniqid();
-				echo '<input id="inscriptionToken" name="inscriptionToken" type="hidden" value="'.$_SESSION['inscriptionToken'].'">';
-				//Pour des raisons de sécurité, on acceptera que les post d'inscription renvoyant le token d'inscription
+                            session_start();
+                            $_SESSION['inscriptionToken'] = uniqid();
+                            echo '<input id="inscriptionToken" name="inscriptionToken" type="hidden" value="'.$_SESSION['inscriptionToken'].'">';
+                            //Pour des raisons de sécurité, on acceptera que les post d'inscription renvoyant le token d'inscription
 			?>
 			<input type="submit" name="submit">
 		</form>
