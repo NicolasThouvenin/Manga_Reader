@@ -1,10 +1,15 @@
     /****************************/
     /***** Header & General *****/
     /****************************/
+a {
+    color: rgb(189, 186, 172);
+    text-decoration: none;
+}
 
 html {
     background-color: rgb(61, 61, 61);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(189, 186, 172);
 }
 
 body, p {
@@ -41,7 +46,6 @@ header div, header input {
 }
 
 .userName {
-    color: rgb(189, 186, 172);
     font-size: 18px;
     margin: 12px 0 2px 0;
 }
@@ -80,7 +84,6 @@ article {
     width: 180px;
     padding: 20px 10px;
     float: left;
-    color: rgb(189, 186, 172);
     font-size: 18px;
 }
 
@@ -114,7 +117,6 @@ article {
     width: 810px;
     background-color: rgb(102, 102, 102);
     border: solid rgb(94, 94, 94) 1px;
-    color: rgb(189, 186, 172);
     font-size: 20px;
     font-weight: 500;
 }

@@ -14,12 +14,12 @@
                 <?php
                     session_start();
                     if (isset($_SESSION["userId"])) {
-                     // SELECT on user table with userNameLogin
+                        // if a user is connected
                         echo "<p class='userName'>".$_SESSION["Login"]."</p>";
-                        echo "<p><a class='userName' href='deconnect.php'>Logout</a></p>";
+                        echo "<p><a class='userName' href='deconnect.php'>Log out</a></p>";
                     } else {
                     ?>
-                    <input type='button' onclick="location.href='login.php';" value="Login" >
+                    <input type='button' onclick="location.href='login.php';" value="Log in" >
                     <input type='button' onclick="location.href='createAccount.php';" value="Register" >
                     <?php
                     }
@@ -47,15 +47,19 @@
                         echo "<p class='error'>Sorry we haven't found any results matching this search.</p>";
                     } else {
                         while ($line = $stmt->fetch()) {
-                            print_r($line);
+                            
+                            // for testing purposes, printed in a display: none <p>
+                            // print_r($line);
+
+                            // Path to the comic cover
                             $coverPath = "library\\".$line['Id']."\\".$line['Id']."_cover".".".$line['CoverExt'];
                 ?>
+
                 <article id="<?php echo $line['Id'] ?>">
-                    <img src="<?php echo $coverPath ?>" alt="cover">
-                    <p class="comics_name"><?php echo $line['Title'] ?><p>
+                    <a href="book.php?bookId=<?php echo $line['Id'] ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
+                    <p class="comics_name"><a href="book.php?bookId=<?php echo $line['Id'] ?>"><?php echo $line['Title'] ?></a><p>
                 </article>
 
-                <p class="error">
                 <?php
                         }
                     }
@@ -63,8 +67,7 @@
                 catch(Exception $e) {
                     die('Error : '.$e->getMessage());
                 }
-            ?>
-                </p> <!--  CONNECTION ERROR -->
+                ?>
             </main>
         </div> <!-- page -->
     </body>
