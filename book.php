@@ -15,15 +15,21 @@
                 <div class="displayUser">
             <?php
                 session_start();
-                if (isset($_SESSION["userName"])) {
-                    // SELECT on user table with userName
-                    echo "<img src='".$avatar."' alt='avatar'>";
-                    echo "<p>".$userName."</p>";
-                } else {
+                if (isset($_SESSION["userId"])) {
+                    // SELECT on user table with userNameLogin
+                       echo "<p class='userName'>".$_SESSION["Login"]."</p>";
+                       echo "<p><a class='userName' href='deconnect.php'>Log out</a></p>";
+                   } else {
                     ?>
-                    <input type='button' onclick="location.href='login.php';" value="Login" >
+                    <input type='button' onclick="location.href='login.php';" value="Log in" >
                     <input type='button' onclick="location.href='createAccount.php';" value="Register" >
                     <?php
+
+                    /*      TO BE DELETED       */
+                    $_SESSION["userId"] = 345;
+                    $_SESSION["Login"] = "Nico";
+                    /****************************/
+
                 }
             ?>
                 </div> <!-- displayUser -->
@@ -35,7 +41,23 @@
                 </div> <!-- banner -->
 
                 <!-- Page Content -->
+                <?php
+                    if (isset($_GET["bookId"])) {
+                        try {
+                            include 'connection.php';
+                            
+                            echo "<p class='log'>Connexion réussie.<br>";
+                                
+                            $stmt = $db->prepare('CALL getComicData(:Id)');
+                            $stmt->bindParam(':Id', $_GET['bookId'], PDO::PARAM_INT);
+                            $stmt->execute();
+                            if ($stmt->rowCount() == 0) {
+                                echo "Sorry we haven't found any results matching this search.</p>";
+                            } else {
+                            echo "</p>";
 
+
+                                ?>
                 <div id="book_cover">
                     <img src="library\cover\Dragon_Ball_cover.jpg" alt="cover" height="375" width="250">
                 </div> <!-- book_cover -->
@@ -54,6 +76,17 @@
 
 
                 </div> <!-- chapter -->
+                                <?php
+                            }
+                        }
+                        catch(Exception $e) {
+                            die('Error : '.$e->getMessage());
+                        }
+                    } else {
+                        header("Location:homePage.php");
+                    }
+                ?>
+
             </main>
         </div> <!-- page -->
     </body>
