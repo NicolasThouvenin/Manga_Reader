@@ -17,9 +17,9 @@
 
             session_start();
 
-            if (!isset($_SESSION['inscriptionToken'])) {
+            if (!isset($_SESSION['registerToken'])) {
                 throw new Exception("La requête post d'inscription ne possède pas de token correspondant à un formulaire d'inscription envoyé par le serveur");
-            } else if ($_SESSION['inscriptionToken'] != $_POST['inscriptionToken']) {
+            } else if ($_SESSION['registerToken'] != $_POST['registerToken']) {
                 throw new Exception("La requête post d'inscription n'indique pas pas le même token d'inscription que celui de la session du serveur");
             }
 
@@ -43,7 +43,7 @@
 
                 $result = $db->query("SELECT @lastUserId")->fetch(PDO::FETCH_ASSOC);                
                 $_SESSION['userId'] = $result['@lastUserId'];
-                print_r($_SESSION);
+
                 header('Location: homePage.php');
             }
 
