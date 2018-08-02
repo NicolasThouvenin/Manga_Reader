@@ -36,5 +36,6 @@ BEGIN
 			ON volumesData.narrativeArcId = n.Id
 		) AS narrativeArcsData
 	ON narrativeArcsData.comicId = comics.Id
+	WHERE comics.Id = inComicId
 	GROUP BY comics.Id;
 END $$
