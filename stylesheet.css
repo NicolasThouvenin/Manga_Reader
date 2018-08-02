@@ -1,3 +1,7 @@
+    /****************************/
+    /***** Header & General *****/
+    /****************************/
+
 html {
     background-color: rgb(61, 61, 61);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,28 +19,20 @@ header {
     background-color: rgb(41, 41, 41)
 }
 
-.logo_container {
-    width: 100%;
-    position: fixed;
-    z-index: 999;
-    height: 82px;
-    line-height: 82px;
-}
-
 header div, header input {
     display: inline-grid;
 }
 
 .add {
     margin: 27px 0 0 40px;
+    z-index: 150;
 }
 
 .logo {
-
     margin: auto;
     width: 50px;
-    z-index: 999;
-    vertical-align: middle;
+    margin-top: -20px;
+    display: block;
 }
 
 .displayUser {
@@ -44,6 +40,11 @@ header div, header input {
     margin-right: 40px;
 }
 
+.userName {
+    color: rgb(189, 186, 172);
+    font-size: 18px;
+    margin: 12px 0 2px 0;
+}
 .displayUser input {
     margin: 12px 0 2px 0;
 }
@@ -71,6 +72,10 @@ main {
     display: none;
 }
 
+    /****************************/
+    /*****   homePage.PHP   *****/
+    /****************************/
+
 article {
     width: 180px;
     padding: 20px 10px;
@@ -79,3 +84,37 @@ article {
     font-size: 18px;
 }
 
+    /****************************/
+    /*****     book.PHP     *****/
+    /****************************/
+
+#book_cover {
+    padding: 20px;
+    width: 250px;
+    border: solid black 2px;
+    display: inline-block;
+}
+
+#book_meta {
+    line-height: 1.6em;
+    width: 476px;
+    float: right;
+    padding: 20px;
+}
+
+#synopsis {
+    padding-top: 30px;
+    line-height: 1.4em;
+}
+
+#chapter p {
+    margin: 30px 0;
+    height: 25px;
+    line-height: 25px;
+    width: 810px;
+    background-color: rgb(102, 102, 102);
+    border: solid rgb(94, 94, 94) 1px;
+    color: rgb(189, 186, 172);
+    font-size: 20px;
+    font-weight: 500;
+}
