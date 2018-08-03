@@ -15,7 +15,7 @@
                     session_start();
                     if (isset($_SESSION["user"])) {
                         // if a user is connected
-                        echo "<p class='userName'>" . $_SESSION["user"]["Login"]. "</p>";
+                        echo "<p class='userName'>" . $_SESSION["user"]->getLogin() . "</p>";
                         echo "<p><a class='userName' href='deconnect.php'>Log out</a></p>";
                     } else {
                         ?>

@@ -18,9 +18,9 @@
             session_start();
 
             if (!isset($_SESSION['registerToken'])) {
-                throw new Exception("La requÃªte post d'inscription ne possÃ¨de pas de token correspondant Ã  un formulaire d'inscription envoyÃ© par le serveur");
+                throw new Exception("La requête post d'inscription ne possède pas de token correspondant à un formulaire d'inscription envoyé par le serveur");
             } else if ($_SESSION['registerToken'] != $_POST['registerToken']) {
-                throw new Exception("La requÃªte post d'inscription n'indique pas pas le mÃªme token d'inscription que celui de la session du serveur");
+                throw new Exception("La requête post d'inscription n'indique pas pas le même token d'inscription que celui de la session du serveur");
             }
 
             if (!isset($_SESSION['userId'])) {
@@ -35,7 +35,7 @@
                 $addUser->bindParam(':firstname', $checkedData['firstname'], PDO::PARAM_STR, 255);
                 $addUser->bindParam(':surname', $checkedData['surname'], PDO::PARAM_STR, 255);
                 $addUser->bindParam(':birthDate', $checkedData['birthDate'], PDO::PARAM_STR, 10);
-                $addUser->bindParam(':password', $checkedData['password'], PDO::PARAM_STR, 25);
+                $addUser->bindParam(':password', $checkedData['password'], PDO::PARAM_STR, 255);
                 $addUser->bindParam(':email', $checkedData['email'], PDO::PARAM_STR, 254);
 
                 $addUser->execute();
