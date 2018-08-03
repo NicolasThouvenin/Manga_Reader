@@ -35,7 +35,7 @@
                 $addUser->bindParam(':firstname', $checkedData['firstname'], PDO::PARAM_STR, 255);
                 $addUser->bindParam(':surname', $checkedData['surname'], PDO::PARAM_STR, 255);
                 $addUser->bindParam(':birthDate', $checkedData['birthDate'], PDO::PARAM_STR, 10);
-                $addUser->bindParam(':password', $checkedData['password'], PDO::PARAM_STR, 255);
+                $addUser->bindParam(':password', $checkedData['password'], PDO::PARAM_STR, 25);
                 $addUser->bindParam(':email', $checkedData['email'], PDO::PARAM_STR, 254);
 
                 $addUser->execute();
