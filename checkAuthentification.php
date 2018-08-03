@@ -34,7 +34,7 @@
             if ($logger->rowCount() == 1) {
                 include('user.class.php');
                 while ($line = $logger->fetch()) {
-                    $GLOBALS['user'] = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $line['EmailValidated']);
+                    $_SESSION['user'] = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $line['EmailValidated']);
                 }
 
                 $logger->closeCursor();
