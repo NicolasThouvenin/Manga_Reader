@@ -9,14 +9,14 @@
             private $Email;
             private $EmailValidated;
 
-            public function __construct(int $Id, string $Login, string $Firstname, string $Surname, string $BirthDate, string $Email, boolean $EmailValidated) {
-                $this->$Id = $Id;
-                $this->$Login = $Login;
-                $this->$Firstname = $Firstname;
-                $this->$Surname = $Surname;
-                $this->$BirthDate = $BirthDate;
-                $this->$Email = $Email;
-                $this->$EmailValidated = $EmailValidated;
+            public function __construct(int $Id, string $Login, string $Firstname, string $Surname, string $BirthDate, string $Email, bool $EmailValidated) {
+                $this->Id = $Id;
+                $this->Login = $Login;
+                $this->Firstname = $Firstname;
+                $this->Surname = $Surname;
+                $this->BirthDate = $BirthDate;
+                $this->Email = $Email;
+                $this->EmailValidated = $EmailValidated;
             }
             
             public function getId() {

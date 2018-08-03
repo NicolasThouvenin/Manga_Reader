@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Vérification de l'authentification</title>
-    <meta charset="utf-8">
-</head>
-<body>
-    <?php
+    <head>
+        <title>Vérification de l'authentification</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <?php
+
         function checkData($data) {
             foreach ($data as $key => $value) {
                 $data[$key] = htmlentities($value);
@@ -14,7 +15,7 @@
         }
 
         try {
-
+            include('user.class.php');
             session_start();
 
             if (!isset($_SESSION['loginToken'])) {
@@ -27,28 +28,26 @@
 
             $checkedData = checkData($_POST);
 
-            $logger = $db->prepare("SELECT users.* FROM users WHERE Login = :login AND password = PASSWORD(:password);");            
+            $logger = $db->prepare("SELECT users.* FROM users WHERE Login = :login AND password = PASSWORD(:password);");
 
             $logger->execute(array('login' => $_POST['login'], 'password' => $_POST['password']));
 
             if ($logger->rowCount() == 1) {
-                include('user.class.php');
+
                 while ($line = $logger->fetch()) {
-                    $_SESSION['user'] = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $line['EmailValidated']);
+                    $validated = ($line["EmailValidated"] === "1" ? true : false);
+                    $_SESSION['user'] = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $validated);
                 }
 
                 $logger->closeCursor();
                 header('Location: homePage.php');
-
             } else {
                 $logger->closeCursor();
                 header('Location: login.php');
             };
-
-
-        } catch(Exception $e) {
-            die('Erreur : '.$e->getMessage());
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
         };
-    ?>
-</body>
+        ?>
+    </body>
 </html>

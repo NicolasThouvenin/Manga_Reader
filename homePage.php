@@ -13,14 +13,14 @@
                 <div class="displayUser">
                     <?php
                     session_start();
-                    if (isset($_SESSION["userId"])) {
+                    if (isset($_SESSION["user"])) {
                         // if a user is connected
-                        echo "<p class='userName'>" . $_SESSION["Login"] . "</p>";
+                        echo "<p class='userName'>" . $_SESSION["user"]["Login"]. "</p>";
                         echo "<p><a class='userName' href='deconnect.php'>Log out</a></p>";
                     } else {
                         ?>
                         <input type='button' onclick="location.href = 'login.php';" value="Log in" >
-                        <input type='button' onclick="location.href = 'createAccount.php';" value="Register" >
+                        <input type='button' onclick="location.href = 'register.php';" value="Register" >
                         <?php
                     }
                     ?>
@@ -38,7 +38,7 @@
                 try {
                     include 'connection.php';
 
-                    echo "<p class='log'>Connexion réussie.<br>";
+                    echo "<p class='log'>Connection successful.<br>";
 
                     $stmt = $db->prepare('CALL getComicsWithValidatedChapter()');
                     $stmt->execute();
