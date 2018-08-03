@@ -54,15 +54,13 @@
                         } else {
                             $book = $stmt->fetch();
 
-                            //print_r($book);
-
                             echo '<script>';
                             echo 'var book = ' . $book["arcs"] . ';';
                             echo 'var title = "' . $book["Title"] . '";';
                             echo '</script>';
                             ?>
                             <div id="book_cover">
-                                <img src="<?php echo "library\\" . $_GET['bookId'] . "\\" . $_GET['bookId'] . "_cover." . $book["CoverExt"]; ?>" alt="cover" height="375" width="250">
+                                <img title="dragon ball" src="<?php echo "library\\" . $_GET['bookId'] . "\\" . $_GET['bookId'] . "_cover." . $book["CoverExt"]; ?>" alt="cover" height="375" width="250">
                             </div> <!-- book_cover -->
                             <div id="book_meta">
                                 <p id="book_title"><?php echo $book["Title"]; ?></p>
@@ -74,11 +72,27 @@
                             </div>  <!-- book_meta -->
                             <div id="chapters">
                                 <p id="chapters_header"><?php echo $book["Title"]; ?> Chapters</p>
+                                
+                                            <!--   Generated Part    -->
                                 <div id="vol1">
-                                    <p class='volume'>Volume 1
-                                        <span class='volume_title'>Le très méchant Tutu</span>
-                                        <span class="volume_synopsis">Le gars et le cochon doivent détruire les armées du méchant Tutu</span>
+                                    <p class='volume'>Volume 1 :
+                                        <span class='volume_title'>Le trÃ©s mÃ©chant Tutu</span>
+                                        <span class="volume_synopsis">Le gars et le cochon doivent dÃ©truire les armÃ©es du mÃ©chant Tutu</span>
                                         <span class="volume_release">2018-07-31</span></p>
+                                    <ul>
+                                        <li>
+                                            <p class='chapter'>Chapter 2 :
+                                                <span class='chapter_title' title="le garÃ§on et le cochon croisent la route d'un inquiÃ©tant bandit">Un nouvel ennemi?</span>
+                                                <span class="chapter_release">2018-08-03</span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p class='chapter'>Chapter 1 :
+                                                <span class='chapter_title' title="Le gars rencontre le cochon">La rencontre</span>
+                                                <span class="chapter_release">2018-08-01</span>
+                                            </p>
+                                        </li>
+                                    </ul>
                                 </div>
 
 
