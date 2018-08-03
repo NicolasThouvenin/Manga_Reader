@@ -1,0 +1,21 @@
+{
+	"number":1,
+	"title":"Le voyage vers l'Ouest",
+	"synopsie":"Un gars rencontre un cochon et part vers l'Ouest",
+	"startDate":"2018-07-31",
+	"endDate":"",
+	"volumes":{
+		"number":1,
+		"title":"Le trés méchant Tutu",
+		"synopsie":"Le gars et le cochon doivent détruire les armées du méchant Tutu",
+		"startDate":"2018-07-31",
+		"endDate":"",
+		"chapters":{
+			"number":1,
+			"title":"La rencontre",
+			"synopsie":"Le gars rencontre le cochon",
+			"validated":1,
+			"publicationDate":"2018-08-01"
+		}
+	}
+}
