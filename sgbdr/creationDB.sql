@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`comics` (
   `EndDate` DATE NULL,
   `CoverExt` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`Id`),
-  UNIQUE INDEX `Title_UNIQUE` (`Title` ASC) VISIBLE)
+  UNIQUE INDEX `Title_UNIQUE` (`Title` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`users` (
   `Email` VARCHAR(254) NOT NULL,
   `EmailValided` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`Id`),
-  UNIQUE INDEX `Login_UNIQUE` (`Login` ASC) VISIBLE,
-  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE)
+  UNIQUE INDEX `Login_UNIQUE` (`Login` ASC),
+  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC))
 ENGINE = InnoDB;
 
 
@@ -57,8 +57,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`authors` (
   `comicId` INT NOT NULL,
   `userId` INT NOT NULL,
-  INDEX `fk_authors_comics_idx` (`comicId` ASC) VISIBLE,
-  INDEX `fk_authors_users1_idx` (`userId` ASC) VISIBLE,
+  INDEX `fk_authors_comics_idx` (`comicId` ASC),
+  INDEX `fk_authors_users1_idx` (`userId` ASC),
   CONSTRAINT `fk_authors_comics`
     FOREIGN KEY (`comicId`)
     REFERENCES `bubbleUpDB`.`comics` (`Id`)
@@ -76,18 +76,17 @@ ENGINE = InnoDB;
 -- Table `bubbleUpDB`.`volumes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`volumes` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `Number` INT NOT NULL,
   `Title` VARCHAR(255) NOT NULL,
   `Synopsis` VARCHAR(255) NOT NULL,
   `StartDate` DATE NOT NULL,
   `EndDate` DATE NULL,
-  `narrativeArcId` INT NOT NULL,
-  `comics_Id` INT NOT NULL,
+  `comicId` INT NOT NULL,
   PRIMARY KEY (`Id`),
-  INDEX `fk_volumes_comics1_idx` (`comics_Id` ASC) VISIBLE,
+  INDEX `fk_volumes_comics1_idx` (`comicId` ASC),
   CONSTRAINT `fk_volumes_comics1`
-    FOREIGN KEY (`comics_Id`)
+    FOREIGN KEY (`comicId`)
     REFERENCES `bubbleUpDB`.`comics` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -98,15 +97,15 @@ ENGINE = InnoDB;
 -- Table `bubbleUpDB`.`chapters`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`chapters` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `Number` INT NOT NULL,
   `Title` VARCHAR(255) NOT NULL,
   `Synopsis` VARCHAR(255) NOT NULL,
-  `Validated` TINYINT NOT NULL,
+  `Validated` TINYINT NOT NULL DEFAULT 0,
   `PublicationDate` DATE NULL,
   `volumeId` INT NOT NULL,
   PRIMARY KEY (`Id`),
-  INDEX `fk_chapters_volumes1_idx` (`volumeId` ASC) VISIBLE,
+  INDEX `fk_chapters_volumes1_idx` (`volumeId` ASC),
   CONSTRAINT `fk_chapters_volumes1`
     FOREIGN KEY (`volumeId`)
     REFERENCES `bubbleUpDB`.`volumes` (`Id`)
@@ -119,12 +118,12 @@ ENGINE = InnoDB;
 -- Table `bubbleUpDB`.`comicStrips`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`comicStrips` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `Number` INT NOT NULL,
   `Ext` VARCHAR(10) NOT NULL,
   `chapterId` INT NOT NULL,
   PRIMARY KEY (`Id`),
-  INDEX `fk_comicStrips_chapters1_idx` (`chapterId` ASC) VISIBLE,
+  INDEX `fk_comicStrips_chapters1_idx` (`chapterId` ASC),
   CONSTRAINT `fk_comicStrips_chapters1`
     FOREIGN KEY (`chapterId`)
     REFERENCES `bubbleUpDB`.`chapters` (`Id`)
@@ -137,10 +136,10 @@ ENGINE = InnoDB;
 -- Table `bubbleUpDB`.`genres`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`genres` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `Label` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id`),
-  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC) VISIBLE)
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
 ENGINE = InnoDB;
 
 
@@ -150,8 +149,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`comicsGenres` (
   `genreId` INT NOT NULL,
   `comicId` INT NOT NULL,
-  INDEX `fk_searchComics_genre1_idx` (`genreId` ASC) VISIBLE,
-  INDEX `fk_searchComics_comics1_idx` (`comicId` ASC) VISIBLE,
+  INDEX `fk_searchComics_genre1_idx` (`genreId` ASC),
+  INDEX `fk_searchComics_comics1_idx` (`comicId` ASC),
   CONSTRAINT `fk_searchComics_genre1`
     FOREIGN KEY (`genreId`)
     REFERENCES `bubbleUpDB`.`genres` (`Id`)
@@ -165,16 +164,6 @@ CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`comicsGenres` (
 ENGINE = InnoDB;
 
 USE `bubbleUpDB`;
-
-DELIMITER $$
-USE `bubbleUpDB`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `bubbleUpDB`.`chapters_BEFORE_UPDATE` BEFORE UPDATE ON `chapters` FOR EACH ROW
-BEGIN
-	IF (OLD.Validated = 0 OR NEW.Validated = 1) THEN
-		SET NEW.PublicationDate = NOW();
-	END IF;
-END$$
-
 
 DELIMITER ;
 
