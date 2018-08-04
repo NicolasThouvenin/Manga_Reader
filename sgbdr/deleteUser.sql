@@ -4,5 +4,3 @@ CREATE PROCEDURE deleteComic(IN inId INT)
 BEGIN
 	DELETE FROM comics where Id = inId;
 END $$
-
-CALL deleteComic(2);
