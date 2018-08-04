@@ -15,7 +15,7 @@
         }
 
         try {
-            include('user.class.php');
+            require('user.class.php');
             session_start();
 
             if (!isset($_SESSION['loginToken'])) {
@@ -36,11 +36,13 @@
 
                 while ($line = $logger->fetch()) {
                     $validated = ($line["EmailValidated"] === "1" ? true : false);
-                    $_SESSION['user'] = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $validated);
+                    $user = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $validated);
+                    $user->getLogin();
+                    $_SESSION['user'] = $user;
                 }
 
                 $logger->closeCursor();
-                header('Location: homePage.php');
+                //header('Location: homePage.php');
             } else {
                 $logger->closeCursor();
                 header('Location: login.php');

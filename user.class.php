@@ -1,5 +1,7 @@
 <?php
-	class User {
+        class User {
+            
+            /* Cette classe correspond aux informations sur un utilisateur */
 
             private $Id;
             private $Login;
@@ -22,7 +24,7 @@
             public function getId() {
                 return $this->Id;
             }
-            function getLogin() {
+            public function getLogin() {
                 return $this->Login;
             }
 
@@ -45,7 +47,7 @@
             public function getEmailValidated() {
                 return $this->EmailValidated;
             }
-            function setLogin($Login) {
+            public function setLogin($Login) {
                 $this->_validateLength($Login, 255);
                 $this->Login = $Login;
             }
@@ -79,5 +81,5 @@
                     throw new Exception('La longueur de la chaine de caractère est trop longue');
                 }
             }
-	}
+    }
 ?>

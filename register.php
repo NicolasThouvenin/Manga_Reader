@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>Inscription</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/form.css">
     <meta charset="utf-8">
 </head>
 <body>
     <div class="form-div">
-        <form id="register" name="register" method="post" action="addUser.php">
+        <form id="register" name="register" method="post" action="addUser.php" onsubmit="return validateRegisterForm(this)" method="post">
             <input type="text" id="login" name="login" placeholder="Login" required>
             <input type="text" id="firstname" name="firstname" placeholder="Prénom" required>
             <input type="text" id="surname" name="surname" placeholder="Nom" required>
@@ -23,5 +23,6 @@
             <input type="submit" name="submit">
         </form>
     </div>
+    <script type="text/javascript" src="script/checkForm.js"></script>
 </body>
 </html>
