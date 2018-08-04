@@ -7,20 +7,14 @@ BEGIN
 	WHERE comics.Id IN
 
 	(
-		SELECT narrativeArcs.comicId
-		FROM narrativeArcs
-		WHERE narrativeArcs.Id IN
+		SELECT volumes.comicId
+		FROM volumes
+		WHERE volumes.Id IN
 
 		(
-			SELECT volumes.narrativeArcId
-			FROM volumes
-			WHERE volumes.Id IN
-
-			(
-				SELECT chapters.volumeId
-				FROM chapters
-				WHERE chapters.Validated = 1
-			)
+			SELECT chapters.volumeId
+			FROM chapters
+			WHERE chapters.Validated = 1
 		)
 	);
 END $$
