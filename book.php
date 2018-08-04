@@ -9,15 +9,18 @@
     </head>
     <body>
         <div class="page">
+            
+            <!-- *********** Generating Page Header ******************* -->
             <header>
                 <input class="add" type='button' onclick="location.href = 'designer.php';" value="Add Creation">
 
                 <div class="displayUser">
+                    
                     <?php
                     session_start();
-                    if (isset($_SESSION["userId"])) {
+                    if (isset($_SESSION["user"])) {
                         // SELECT on user table with userNameLogin
-                        echo "<p class='userName'>" . $_SESSION["Login"] . "</p>";
+                        echo "<p class='userName'>" . $_SESSION["user"]->getLogin() . "</p>";
                         echo "<p><a class='userName' href='deconnect.php'>Log out</a></p>";
                     } else {
                         ?>
@@ -34,7 +37,7 @@
                     <input id="searchbar" type="search" name="q" placeholder="search comic or author">
                 </div> <!-- banner -->
 
-                <!-- Page Content -->
+                <!-- *****************    Page Content ***************** -->
                 <?php
                 if (isset($_GET["bookId"])) {
                     try {
@@ -49,26 +52,53 @@
                         if ($stmt->rowCount() == 0) {
                             echo "<p>Sorry we haven't found any results matching this search.</p>";
                         } else {
-                            $line = $stmt->fetch();
+                            $book = $stmt->fetch();
+
+                            echo '<script>';
+                            echo 'var book = ' . $book["arcs"] . ';';
+                            echo 'var title = "' . $book["Title"] . '";';
+                            echo '</script>';
                             ?>
                             <div id="book_cover">
-                                <img src="<?php echo "library\\" . $_GET['bookId'] . "\\" . $_GET['bookId'] . "_cover.jpg"; ?>" alt="cover" height="375" width="250">
+                                <img title="dragon ball" src="<?php echo "library\\" . $_GET['bookId'] . "\\" . $_GET['bookId'] . "_cover." . $book["CoverExt"]; ?>" alt="cover" height="375" width="250">
                             </div> <!-- book_cover -->
                             <div id="book_meta">
-                                <p id="book_title">Dragon Ball</p>
-                                <p id="book_author">Toriyama Akira</p>
-                                <p id="book_release">1984</p>
-                                <p id="book_genre">Action, Adventure, Comedy, Fantasy, Martial Arts, Shounen</p>
-                                <p id="synopsis">Dragon Ball follows the adventures of Goku from his childhood through adulthood as he trains in martial arts and explores the world in search of the seven mystical orbs known as the Dragon Balls, which can summon a wish-granting dragon when gathered. Along his journey, Goku makes several friends and battles a wide variety of villains, many of whom also seek the Dragon Balls.</p>
+                                <p id="book_title"><?php echo $book["Title"]; ?></p>
+                                <p id="book_author"><?php echo $book["Login"]; ?></p>
+                                <p id="book_release"><?php echo $book["StartDate"]; ?></p>
+                                <p id="book_genre"><?php echo $book["Genres"]; ?></p>
+                                <p id="synopsis"><?php echo $book["Synopsie"]; ?></p>
+
                             </div>  <!-- book_meta -->
-                            <div id="chapter">
-                                <p>Dragon Ball Chapters</p>
+                            <div id="chapters">
+                                <p id="chapters_header"><?php echo $book["Title"]; ?> Chapters</p>
+                                
+                                            <!--   Generated Part    -->
+                                <div id="vol1">
+                                    <p class='volume'>Volume 1 :
+                                        <span class='volume_title'>Le trés méchant Tutu</span>
+                                        <span class="volume_synopsis">Le gars et le cochon doivent détruire les armées du méchant Tutu</span>
+                                        <span class="volume_release">2018-07-31</span></p>
+                                    <ul>
+                                        <li>
+                                            <p class='chapter'>Chapter 2 :
+                                                <span class='chapter_title' title="le garçon et le cochon croisent la route d'un inquiétant bandit">Un nouvel ennemi?</span>
+                                                <span class="chapter_release">2018-08-03</span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p class='chapter'>Chapter 1 :
+                                                <span class='chapter_title' title="Le gars rencontre le cochon">La rencontre</span>
+                                                <span class="chapter_release">2018-08-01</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
 
 
 
 
-
-                            </div> <!-- chapter -->
+                            </div> <!-- chapters -->
                             <?php
                         }
                     } catch (Exception $e) {
@@ -80,6 +110,7 @@
                 ?>
 
             </main>
+
         </div> <!-- page -->
     </body>
 </html>

@@ -1,5 +1,5 @@
     /****************************/
-    /***** Header & General *****/
+    /***** Header & General  *****/
     /****************************/
 a {
     color: rgb(189, 186, 172);
@@ -88,7 +88,7 @@ article {
 }
 
     /****************************/
-    /*****     book.PHP     *****/
+    /*****       book.PHP       *****/
     /****************************/
 
 #book_cover {
@@ -110,7 +110,7 @@ article {
     line-height: 1.4em;
 }
 
-#chapter p {
+#chapters_header {
     margin: 30px 0;
     height: 25px;
     line-height: 25px;
@@ -119,4 +119,23 @@ article {
     border: solid rgb(94, 94, 94) 1px;
     font-size: 20px;
     font-weight: 500;
+}
+
+.volume {
+    font-weight: 500;
+}
+
+.volume_synopsis {
+    font-weight: normal;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.volume_release, .chapter_release {
+    font-weight: normal;
+    float: right;
+}
+
+ul {
+    list-style: none;
 }
