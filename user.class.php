@@ -12,7 +12,7 @@
             private $EmailValidated;
             private $token;
 
-            public function __construct(int $Id, string $Login, string $Firstname, string $Surname, string $BirthDate, string $Email, bool $EmailValidated, string $key) {
+            public function __construct(int $Id, string $Login, string $Firstname, string $Surname, string $BirthDate, string $Email, bool $EmailValidated, string $Token) {
                 $this->Id = $Id;
                 $this->Login = $Login;
                 $this->Firstname = $Firstname;
@@ -20,7 +20,7 @@
                 $this->BirthDate = $BirthDate;
                 $this->Email = $Email;
                 $this->EmailValidated = $EmailValidated;
-                $this->setToken($key);
+                $this->setToken($Token);
             }
             
             public function getId() {
@@ -79,8 +79,20 @@
                 $this->EmailValidated = $EmailValidated;
             }
 
-            public function setToken() {
-                $this->EmailValidated = $EmailValidated;
+            public function setToken($key) {
+                $this->Token = $EmailValidated;
+            }
+
+            public function checkToken() {
+                required('connection');
+                $checkToken = $db->prepare("CALL createUser(:token, :login, @isAuthentified)");
+                $checkToken->bindParam(':token', $this->Token, PDO::PARAM_STR, 64);
+                $checkToken->bindParam(':login', $this->Login, PDO::PARAM_STR, 255);
+                $checkToken->execute();
+                $checkToken->closeCursor();
+                $result = $db->query("SELECT @isAuthentified")->fetch(PDO::FETCH_ASSOC);
+                $isChecked = ($result['@isAuthentified'] === '1' ? true : false);
+                return $isChecked;
             }
             
             private function _validateLength(string $string, int $maxLength) {
