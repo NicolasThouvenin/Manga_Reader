@@ -16,8 +16,8 @@
             <input type="email" id="email" name="email" placeholder="Entrez une adresse email valide" required>
             <?php
                 session_start();
-                $_SESSION['registerToken'] = uniqid();
-                echo '<input id="registerToken" name="registerToken" type="hidden" value="'.$_SESSION['registerToken'].'">';
+                $_SESSION['uniqid'] = uniqid();
+                echo '<input id="uniqid" name="uniqid" type="hidden" value="'.$_SESSION['uniqid'].'">';
                 //Pour des raisons de sécurité, on acceptera que les post d'inscription renvoyant le token d'inscription
             ?>
             <input type="submit" name="submit">

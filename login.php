@@ -12,9 +12,8 @@
 			<input type="password" id="password" name="password" placeholder="Mot de passe" required>
 			<?php
                 session_start();
-                $_SESSION['loginToken'] = uniqid();
-                echo '<input id="loginToken" name="loginToken" type="hidden" value="'.$_SESSION['loginToken'].'">';
-                echo $_SESSION['loginToken'];
+                $_SESSION['uniqid'] = uniqid();
+                echo '<input id="uniqid" name="uniqid" type="hidden" value="'.$_SESSION['uniqid'].'">';
                 //Pour des raisons de sécurité, on acceptera que les post  renvoyant le token du formulaire de login
 			?>
 			<input type="submit" name="submit">

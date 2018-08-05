@@ -20,7 +20,7 @@
                 $this->BirthDate = $BirthDate;
                 $this->Email = $Email;
                 $this->EmailValidated = $EmailValidated;
-                $this->setToken($Token);
+                $this->Token = $Token;
             }
             
             public function getId() {
@@ -77,10 +77,6 @@
 
             public function setEmailValidated($EmailValidated) {
                 $this->EmailValidated = $EmailValidated;
-            }
-
-            public function setToken($key) {
-                $this->Token = $EmailValidated;
             }
 
             public function checkToken() {
