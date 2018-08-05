@@ -80,7 +80,7 @@
             }
 
             public function checkToken() {
-                required('connection');
+                require('connection');
                 $checkToken = $db->prepare("CALL createUser(:token, :login, @isAuthentified)");
                 $checkToken->bindParam(':token', $this->Token, PDO::PARAM_STR, 64);
                 $checkToken->bindParam(':login', $this->Login, PDO::PARAM_STR, 255);
