@@ -1,0 +1,23 @@
+.bad-input {
+    border: red 2px solid;
+}
+
+
+.form-div {
+	margin: auto;
+	width: 75%;
+	padding: 5%;
+}
+
+form {
+	margin: auto;
+	padding: 10px;
+}
+
+form > input {
+	display: block;
+	border: 1px solid;
+	margin: 5px;
+	padding: 10px;
+	border-radius: 10px
+}

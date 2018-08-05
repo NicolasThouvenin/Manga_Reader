@@ -2,7 +2,8 @@
 <html>
 <head>
 	<title>Inscription</title>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="css/main_lg.css">
+	<link rel="stylesheet" type="text/css" href="css/form.css">
 	<meta charset="utf-8">
 </head>
 <body>
@@ -16,7 +17,7 @@
                 echo '<input id="uniqid" name="uniqid" type="hidden" value="'.$_SESSION['uniqid'].'">';
                 //Pour des raisons de sécurité, on acceptera que les post  renvoyant le token du formulaire de login
 			?>
-			<input type="submit" name="submit">
+			<input type="submit" name="submit" value="Login">
 		</form>
 	</div>
 </body>
