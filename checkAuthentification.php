@@ -35,10 +35,16 @@
             if ($logger->rowCount() == 1) {
 
                 while ($line = $logger->fetch()) {
-                    $validated = ($line["EmailValidated"] === "1" ? true : false);
-                    $user = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $validated);
-                    $user->getLogin();
-                    $_SESSION['user'] = $user;
+                    
+                    $token = hash('sha256', session_id().$_SESSION['registerToken'].$checkedData['login']);
+
+                    $addToken = $db->prepare("CALL addToken(:token, :login)");
+                    $addToken->bindParam(':token', $token, PDO::PARAM_STR, 64);
+                    $addToken->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
+
+                    $validated = ($line['EmailValidated'] === '1' ? true : false);
+                    $user = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $validated, $token);
+                    setcookie ('user', serialize($user));
                 }
 
                 $logger->closeCursor();

@@ -10,8 +10,9 @@
             private $BirthDate;
             private $Email;
             private $EmailValidated;
+            private $token;
 
-            public function __construct(int $Id, string $Login, string $Firstname, string $Surname, string $BirthDate, string $Email, bool $EmailValidated) {
+            public function __construct(int $Id, string $Login, string $Firstname, string $Surname, string $BirthDate, string $Email, bool $EmailValidated, string $key) {
                 $this->Id = $Id;
                 $this->Login = $Login;
                 $this->Firstname = $Firstname;
@@ -19,6 +20,7 @@
                 $this->BirthDate = $BirthDate;
                 $this->Email = $Email;
                 $this->EmailValidated = $EmailValidated;
+                $this->setToken($key);
             }
             
             public function getId() {
@@ -47,6 +49,7 @@
             public function getEmailValidated() {
                 return $this->EmailValidated;
             }
+
             public function setLogin($Login) {
                 $this->_validateLength($Login, 255);
                 $this->Login = $Login;
@@ -73,6 +76,10 @@
             }
 
             public function setEmailValidated($EmailValidated) {
+                $this->EmailValidated = $EmailValidated;
+            }
+
+            public function setToken() {
                 $this->EmailValidated = $EmailValidated;
             }
             

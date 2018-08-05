@@ -167,6 +167,15 @@ USE `bubbleUpDB`;
 
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- Table `bubbleUpDB`.`tokens`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`tokens` (
+  `Token` VARCHAR(64) NOT NULL,
+  `Login` VARCHAR(255) NOT NULL,
+  UNIQUE INDEX `Token_UNIQUE` (`Token` ASC))
+ENGINE = InnoDB;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
