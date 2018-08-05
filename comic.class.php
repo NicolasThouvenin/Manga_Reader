@@ -78,6 +78,16 @@ class Comic {
             } else {
                 $endDate = $line['EndDate'];
             }
+
+            $volume = new Volume($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate);
+
+            $this->Volumes[$line['Id']] = $volume;
+        }
+    }
+
+    public function getVolumes() {
+        foreach ($this->Volumes as $volume) {
+            yield $volume;
         }
     }
 
