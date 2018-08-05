@@ -1,5 +1,7 @@
 <?php 
 
+    require('chapter.class.php'); 
+
 	class Volume {
 		private $Id;
 		private $Number;
@@ -7,7 +9,7 @@
 	    private $Synopsis;
 	    private $StartDate;
 	    private $EndDate;
-	    private $Volumes = array();
+	    private $Chapters = array();
 
 
 		public function __construct(int $Id, int $Number, string $Title, string $Synopsis, string $StartDate, string $EndDate) {
@@ -17,8 +19,9 @@
 	      $this->Synopsis = $Synopsis;
 	      $this->StartDate = $StartDate;
 	      $this->EndDate = $EndDate;
+          $this->SetChapters();
 	    }
-        
+
         function getId() {
             return $this->Id;
         }
@@ -43,10 +46,6 @@
             return $this->EndDate;
         }
 
-        function getVolumes() {
-            return $this->Volumes;
-        }
-
         function setNumber($Number) {
             $this->Number = $Number;
         }
@@ -67,9 +66,35 @@
             $this->EndDate = $EndDate;
         }
 
-        function setVolumes($Volumes) {
-            $this->Volumes = $Volumes;
+        private function SetChapters() {
+
+            require('connection.php');
+                       
+
+            $result = $db->prepare("SELECT * FROM chapters WHERE volumeId = volumeId");
+            $result->execute(array('volumeId' => $this->Id));
+
+            while ($line = $result->fetch()) {
+
+                $validated = ($line['Validated'] === '1' ? true : false);
+
+                if ($line['PublicationDate'] === null) {
+                    $publicationDate = '';
+                } else {
+                    $publicationDate = $line['PublicationDate'];
+                }
+
+                $chapter = new Chapter($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $validated, $publicationDate);
+
+                $this->Chapters[$line['Id']] = $chapter;
+            }
         }
+
+        public function getChapters() {
+            foreach ($this->Chapters as $chapter) {
+                yield $chapter;
+        }
+    }
 
 	}
 ?>

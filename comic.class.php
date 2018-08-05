@@ -1,94 +1,96 @@
 <?php
 
-class Comic {
-    
-    private $Id;
-    private $Title;
-    private $Synopsis;
-    private $StartDate;
-    private $EndDate;
-    private $CoverExt;
-    private $Volumes = array();
+    require('volume.class.php');
 
-    public function __construct(int $Id, string $Title, string $Synopsis, string $StartDate, string $EndDate, string $CoverExt) {
-      $this->Id = $Id;
-      $this->Title = $Title;
-      $this->Synopsis = $Synopsis;
-      $this->StartDate = $StartDate;
-      $this->EndDate = $EndDate;
-      $this->CoverExt = $CoverExt;
-      $this->SetVolumes();
-    }
-    
-    function getId() {
-        return $this->Id;
-    }
+    class Comic {
+        
+        private $Id;
+        private $Title;
+        private $Synopsis;
+        private $StartDate;
+        private $EndDate;
+        private $CoverExt;
+        private $Volumes = array();
 
-    function getTitle() {
-        return $this->Title;
-    }
+        public function __construct(int $Id, string $Title, string $Synopsis, string $StartDate, string $EndDate, string $CoverExt) {
+          $this->Id = $Id;
+          $this->Title = $Title;
+          $this->Synopsis = $Synopsis;
+          $this->StartDate = $StartDate;
+          $this->EndDate = $EndDate;
+          $this->CoverExt = $CoverExt;
+          $this->SetVolumes();
+        }
+        
+        function getId() {
+            return $this->Id;
+        }
 
-    function getSynopsis() {
-        return $this->Synopsis;
-    }
+        function getTitle() {
+            return $this->Title;
+        }
 
-    function getStartDate() {
-        return $this->StartDate;
-    }
+        function getSynopsis() {
+            return $this->Synopsis;
+        }
 
-    function getEndDate() {
-        return $this->EndDate;
-    }
+        function getStartDate() {
+            return $this->StartDate;
+        }
 
-    function getCoverExt() {
-        return $this->CoverExt;
-    }
+        function getEndDate() {
+            return $this->EndDate;
+        }
 
-    function setTitle($Title) {
-        $this->Title = $Title;
-    }
+        function getCoverExt() {
+            return $this->CoverExt;
+        }
 
-    function setSynopsis($Synopsis) {
-        $this->Synopsis = $Synopsis;
-    }
+        function setTitle($Title) {
+            $this->Title = $Title;
+        }
 
-    function setStartDate($StartDate) {
-        $this->StartDate = $StartDate;
-    }
+        function setSynopsis($Synopsis) {
+            $this->Synopsis = $Synopsis;
+        }
 
-    function setEndDate($EndDate) {
-        $this->EndDate = $EndDate;
-    }
+        function setStartDate($StartDate) {
+            $this->StartDate = $StartDate;
+        }
 
-    function setCoverExt($CoverExt) {
-        $this->CoverExt = $CoverExt;
-    }
+        function setEndDate($EndDate) {
+            $this->EndDate = $EndDate;
+        }
 
-    private function SetVolumes() {
-        require('connection.php');
-        require('volume.class.php');
+        function setCoverExt($CoverExt) {
+            $this->CoverExt = $CoverExt;
+        }
 
-        $result = $db->prepare("SELECT * FROM volumes WHERE comicId = :comicId");
-        $result->execute(array('comicId' => $this->Id));
+        private function SetVolumes() {
+            require('connection.php');
+            
+            $result = $db->prepare("SELECT * FROM volumes WHERE comicId = :comicId");
+            $result->execute(array('comicId' => $this->Id));
 
-        while ($line = $result->fetch()) {
+            while ($line = $result->fetch()) {
 
-            if ($line['EndDate'] === null) {
-                $endDate = '';
-            } else {
-                $endDate = $line['EndDate'];
+                if ($line['EndDate'] === null) {
+                    $endDate = '';
+                } else {
+                    $endDate = $line['EndDate'];
+                }
+
+                $volume = new Volume($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate);
+
+                $this->Volumes[$line['Id']] = $volume;
             }
-
-            $volume = new Volume($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate);
-
-            $this->Volumes[$line['Id']] = $volume;
         }
-    }
 
-    public function getVolumes() {
-        foreach ($this->Volumes as $volume) {
-            yield $volume;
+        public function getVolumes() {
+            foreach ($this->Volumes as $volume) {
+                yield $volume;
+            }
         }
-    }
 
-}
+    }
+?>

@@ -17,7 +17,10 @@
 		
 		echo $comic->getTitle().'<br>';
 		foreach ($comic->getVolumes() as $volume) {
-			echo ' - '.$volume->getTitle();
+			echo '.... '.$volume->getTitle().'<br>';
+			foreach ($volume->getChapters() as $chapter) {
+				echo '........ '.$chapter->getTitle().'<br>';
+			}
 		}
 	}
 ?>
