@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="form-div">
-        <form id="register" name="register" method="post" action="addUser.php" onsubmit="return validateRegisterForm(this)" method="post">
+        <form id="register" name="register" method="post" action="addUser.php">
             <input type="text" id="login" name="login" placeholder="Login" required>
             <input type="text" id="firstname" name="firstname" placeholder="Prénom" required>
             <input type="text" id="surname" name="surname" placeholder="Nom" required>
@@ -24,6 +24,5 @@
             <input type="submit" name="submit" value="Créer un compte">
         </form>
     </div>
-    <script type="text/javascript" src="script/checkForm.js"></script>
 </body>
 </html>
