@@ -12,17 +12,32 @@
         private $GenreIds = array();
         private $Authors = array();
 
-
         public function __construct(int $Id, string $Title, string $Synopsis, string $StartDate, string $EndDate, string $CoverExt) {
-          $this->Id = $Id;
-          $this->Title = $Title;
-          $this->Synopsis = $Synopsis;
-          $this->StartDate = $StartDate;
-          $this->EndDate = $EndDate;
-          $this->CoverExt = $CoverExt;
-          $this->SetVolumes();
-          $this->SetGenreIds();
-          $this->SetAuthors();
+
+            $this->Id = $Id;
+
+            require('connection.php');
+
+            $result = $db->prepare("SELECT * FROM comics WHERE id = :comicId");
+            $result->execute(array('comicId' => 1));
+
+            while ($line = $result->fetch()) {
+
+                $this->Title = $line['Title'];
+                $this->Synopsis = $line['Synopsis'];
+                $this->StartDate = $line['StartDate'];
+                $this->CoverExt = $line['CoverExt'];
+
+                if ($line['EndDate'] === null) {
+                    $this->EndDate = '';
+                } else {
+                    $this->EndDate = $line['EndDate'];
+                }
+            }
+
+            $this->SetVolumes();
+            $this->SetGenreIds();
+            $this->SetAuthors();
         }
         
         function getId() {

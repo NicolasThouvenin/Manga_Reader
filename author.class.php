@@ -10,18 +10,12 @@
 		}
 
 		private function SetComics() {
-            $result = $db->prepare("SELECT comics.* FROM comics WHERE Id = :comicId");
+            $result = $db->prepare("SELECT comics.Id FROM comics WHERE Id = :comicId");
             $result->execute(array('comicId' => $this->Id));
 
             while ($line = $result->fetch()) {
 
-	            if ($line['EndDate'] === null) {
-                    $endDate = '';
-                } else {
-                    $endDate = $line['EndDate'];
-                }
-
-            	$comic = Comic($line['Id'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate, $line['CoverExt']);
+            	$comic = Comic($line['Id']);
             	$this->Comics[$line['Id']] = $comic;
             }
 		}
