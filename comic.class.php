@@ -1,7 +1,6 @@
 <?php
 
     require('volume.class.php');
-    require('user.class.php');
 
     class Comic {
         
