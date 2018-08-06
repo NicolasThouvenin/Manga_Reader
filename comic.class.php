@@ -1,6 +1,7 @@
 <?php
 
     require('volume.class.php');
+    require('user.class.php');
 
     class Comic {
         
@@ -23,6 +24,8 @@
           $this->EndDate = $EndDate;
           $this->CoverExt = $CoverExt;
           $this->SetVolumes();
+          $this->SetGenreIds();
+          $this->SetAuthors();
         }
         
         function getId() {
@@ -103,7 +106,7 @@
             $result->execute(array('comicId' => $this->Id));
 
             while ($line = $result->fetch()) {
-            	array_push($this->GenreIds, $line['comicId']);
+            	array_push($this->GenreIds, $line['genreId']);
             }
         }
 
@@ -127,7 +130,7 @@
 
             while ($line = $result->fetch()) {
             	$token = ''; //Cette utilisateur n'est pas connecté
-            	$author = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $line['Validated'], $token);
+            	$author = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $line['EmailValidated'], $token);
             	$this->Authors[$line['Id']] = $author;
             }
         }

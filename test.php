@@ -15,6 +15,9 @@
 		$comic = new Comic($line['Id'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate, $line['CoverExt']);
 		
 		echo $comic->getTitle().'<br>';
+		foreach ($comic->getGenreIds() as $genreId) {
+			echo $genreId.', ';
+		}
 		foreach ($comic->getVolumes() as $volume) {
 			echo '.... '.$volume->getTitle().'<br>';
 			foreach ($volume->getChapters() as $chapter) {
