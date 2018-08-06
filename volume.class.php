@@ -1,7 +1,5 @@
 <?php 
 
-    require('chapter.class.php'); 
-
 	class Volume {
 		private $Id;
 		private $Number;

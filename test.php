@@ -1,7 +1,10 @@
 <?php
 	require('connection.php');
 	require('comic.class.php');
+	require('volume.class.php');
+	require('chapter.class.php');
 	require('user.class.php');
+	require('author.class.php');
 
 	$result = $db->prepare("SELECT * FROM comics WHERE id = :comicId");
 	$result->execute(array('comicId' => 1));

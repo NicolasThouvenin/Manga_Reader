@@ -1,10 +1,8 @@
 <?php
 
-    require('volume.class.php');
-
     class Comic {
         
-        private $Id;
+        protected $Id;
         private $Title;
         private $Synopsis;
         private $StartDate;
@@ -128,8 +126,7 @@
             $result->execute(array('comicId' => $this->Id));
 
             while ($line = $result->fetch()) {
-            	$token = ''; //Cette utilisateur n'est pas connecté
-            	$author = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $line['EmailValidated'], $token);
+            	$author = new Author($line['Id']);
             	$this->Authors[$line['Id']] = $author;
             }
         }
