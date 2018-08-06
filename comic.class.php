@@ -116,12 +116,19 @@
         private function SetAuthors() {
 
         	require('connection.php');
+
+        	$query = "SELECT users.* FROM users 
+        	JOIN authors
+        	ON users.Id = authors.userId
+        	WHERE authors.comicId = :comicId"
             
-            $result = $db->prepare("SELECT genreId FROM comicsgenres WHERE comicId = :comicId");
+            $result = $db->prepare($query);
             $result->execute(array('comicId' => $this->Id));
 
             while ($line = $result->fetch()) {
-            	array_push($this->GenreIds, $line['comicId']);
+            	$token = ''; //Cette utilisateur n'est pas connecté
+            	$author = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $line['Validated'], $token);
+            	$this->Authors[$line['Id']] = $author;
             }
         }
 
