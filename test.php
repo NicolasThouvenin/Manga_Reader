@@ -1,6 +1,7 @@
 <?php
 	require('connection.php');
 	require('comic.class.php');
+	require('user.class.php');
 
 	$result = $db->prepare("SELECT * FROM comics WHERE id = :comicId");
 	$result->execute(array('comicId' => 1));
@@ -15,8 +16,8 @@
 		$comic = new Comic($line['Id'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate, $line['CoverExt']);
 		
 		echo $comic->getTitle().'<br>';
-		foreach ($comic->getGenreIds() as $genreId) {
-			echo $genreId.', ';
+		foreach ($comic->getAuthors() as $author) {
+			echo 'Auteur : '.$author->getLogin().'<br>';
 		}
 		foreach ($comic->getVolumes() as $volume) {
 			echo '.... '.$volume->getTitle().'<br>';

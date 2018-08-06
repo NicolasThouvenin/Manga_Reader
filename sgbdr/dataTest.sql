@@ -15,7 +15,7 @@ CALL createComicStrip(2, 'jpg', 1, @id);
 CALL createComicStrip(3, 'jpg', 1, @id);
 CALL createComicStrip(4, 'jpg', 1, @id);
 
-CALL createChapter('La fin du sortilège', 'Tutu a jeté un sort sur le village', 1, @lastChapter);
+CALL createChapter('La fin du sortilège', 'Tutu a jeté un sort sur le village', 2, @lastChapter);
 CALL createComicStrip(1, 'jpg', 2, @id);
 CALL createComicStrip(2, 'jpg', 2, @id);
 CALL createComicStrip(3, 'jpg', 2, @id);
@@ -23,6 +23,6 @@ CALL createComicStrip(4, 'jpg', 2, @id);
 
 CALL createVolume('La grande méchante Tata', 'Le gars aidé du cochon doivent combatte Tata la sorcière', '2018-08-31', 1, @lastVolume);
 
-CALL createChapter('Les chutes d''eau', 'Il tombe à l''eau', 2, @lastChapter);
+CALL createChapter('Les chutes d''eau', 'Il tombe à l''eau', 3, @lastChapter);
 
-CALL createChapter('Les grands magasins', 'Il s''achète une robe', 2, @lastChapter);
+CALL createChapter('Les grands magasins', 'Il s''achète une robe', 4, @lastChapter);
