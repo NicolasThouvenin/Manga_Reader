@@ -120,7 +120,7 @@
         	$query = "SELECT users.* FROM users 
         	JOIN authors
         	ON users.Id = authors.userId
-        	WHERE authors.comicId = :comicId"
+        	WHERE authors.comicId = :comicId";
             
             $result = $db->prepare($query);
             $result->execute(array('comicId' => $this->Id));
