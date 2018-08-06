@@ -72,10 +72,10 @@
                             </div> <!-- book_cover -->
                             <div id="book_meta">
                                 <p id="book_title"><?php echo $comic->getTitle(); ?></p>
-                                <p id="book_author"><?php/*
+                                <p id="book_author"><?php
                                     foreach ($comic->getAuthors() as $author) {
-                                        echo $author . ", ";
-                                    }*/
+                                        echo $author->getLogin() . ", ";
+                                    }
                                     ?></p>
                                 <p id="book_release"><?php echo $comic->getStartDate(); ?></p>
                                 <p id="book_genre"><?php
