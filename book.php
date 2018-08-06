@@ -16,13 +16,17 @@
 
                 <div class="displayUser">
                     <?php
+                    require('comic.class.php');
+
                     require('user.class.php');
+
+                    
                     session_start();
                     if (isset($_COOKIE['user'])) {
                         $user = unserialize($_COOKIE['user']);
                         // if a user is connected
                         echo "<p class='userName'>" . $user->getLogin() . "</p>";
-                        echo "<p><a class='userName' href='deconnect.php'>Log out</a></p>";
+                        echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
                     } else {
                         ?>
                         <input type='button' onclick="location.href = 'login.php';" value="Log in" >
@@ -43,7 +47,6 @@
                 if (isset($_GET["bookId"])) {
                     try {
                         require('connection.php');
-                        require('comic.class.php');
 
                         echo "<p class='log'>Connection succeeded.</p>";
 
@@ -68,7 +71,7 @@
                             echo '</script>';
                             ?>
                             <div id="book_cover">
-                                <img title="<?php echo $comic->getTitle(); ?>" src="<?php echo "library\\" . $_GET['bookId'] . "\\" . $_GET['bookId'] . "_cover." . $comic->getCoverExt(); ?>" alt="cover" height="375" width="250">
+                                <img title="<?php echo $comic->getTitle(); ?>" src="<?php echo "comics\\" . $_GET['bookId'] . "\\" . $_GET['bookId'] . "_cover." . $comic->getCoverExt(); ?>" alt="cover" height="375" width="250">
                             </div> <!-- book_cover -->
                             <div id="book_meta">
                                 <p id="book_title"><?php echo $comic->getTitle(); ?></p>
@@ -105,7 +108,7 @@
                                             foreach ($volume->getChapters() as $chapter) {
                                                 ?>
                                                 <li>
-                                                    <p class='chapter'><a href="reader.php">Chapter <?php echo $chapter->getNumber(); ?>
+                                                    <p class='chapter'><a href="comicsReader.php">Chapter <?php echo $chapter->getNumber(); ?>
                                                             <span class='chapter_title' title="<?php echo $chapter->getSynopsis() ?>"><?php echo $chapter->getTitle() ?></span>
                                                             <span class="chapter_release"><?php echo $chapter->getPublicationDate() ?></span>
                                                         </a></p>

@@ -2,8 +2,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Home</title>
+        <title>Comic Reader</title>
         <link rel="stylesheet" type="text/css" href="css\main_lg.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     </head>
     <body>
         <div class="page">
@@ -12,6 +14,7 @@
 
                 <div class="displayUser">
                     <?php
+                    require('user.class.php');
                     require('comic.class.php');
 
 
@@ -43,26 +46,25 @@
                     include 'connection.php';
 
                     echo "<p class='log'>Connection successful.<br>";
-
-                    $stmt = $db->prepare('CALL getComicsWithValidatedChapter()');
-                    $stmt->execute();
-                    if ($stmt->rowCount() == 0) {
-                        echo "<p class='error'>Sorry we haven't found any results matching this search.</p>";
-                    } else {
-                        while ($line = $stmt->fetch()) {
-
-                            // Path to the comic cover
-                            $coverPath = "comics\\" . $line['Id'] . "\\" . $line['Id'] . "_cover" . "." . $line['CoverExt'];
+                    ?>
+                    <div class="reader">
+                        <?php
+                        for ($id = 1; $id < 97; $id++) {
+                            //$message = 'Hello ' . ($user->is_logged_in() ? $user->get('first_name') : 'Guest');
                             ?>
+                            <div class="bubble">
+                                <div class="bubble_number"><?php echo $id ?> / 96</div>
 
-                            <article id="<?php echo $line['Id'] ?>">
-                                <a href="book.php?bookId=<?php echo $line['Id'] ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
-                                <p class="comics_name"><a href="book.php?bookId=<?php echo $line['Id'] ?>"><?php echo $line['Title'] ?></a><p>
-                            </article>
-
+                                <img src="<?php echo "comics\\1\\1\\" . ($id < 10 ? "0" . $id : $id) . ".jpg"; ?>" height="600">
+                                <div class="text"><?php echo $id ?></div>
+                            </div>
                             <?php
                         }
-                    }
+                        ?>
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+                    <?php
                 } catch (Exception $e) {
                     die('Error : ' . $e->getMessage());
                 }
@@ -70,4 +72,5 @@
             </main>
         </div> <!-- page -->
     </body>
+            <script src="script/comicReader.js"></script>
 </html>
