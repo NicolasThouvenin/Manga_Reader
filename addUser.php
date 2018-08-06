@@ -15,6 +15,14 @@
 
         try {
 
+            require('connection.php');
+            require('comic.class.php');
+            require('volume.class.php');
+            require('chapter.class.php');
+            require('user.class.php');
+            require('author.class.php');
+            require('authentified.class.php');
+
             session_start();
 
             if (!isset($_SESSION['uniqid'])) {
@@ -23,41 +31,34 @@
                 throw new Exception("La requête post d'inscription n'indique pas pas le même token d'inscription que celui de la session du serveur");
             }
 
-            if (!isset($_COOKIE['user'])) {
+            $checkedData = checkData($_POST);
+            $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId)");
 
-                include('connection.php');
+            $addUser->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
+            $addUser->bindParam(':firstname', $checkedData['firstname'], PDO::PARAM_STR, 255);
+            $addUser->bindParam(':surname', $checkedData['surname'], PDO::PARAM_STR, 255);
+            $addUser->bindParam(':birthDate', $checkedData['birthDate'], PDO::PARAM_STR, 10);
+            $addUser->bindParam(':password', $checkedData['password'], PDO::PARAM_STR, 255);
+            $addUser->bindParam(':email', $checkedData['email'], PDO::PARAM_STR, 254);
 
-                $checkedData = checkData($_POST);
-                $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId)");
+            $addUser->execute();
+            $addUser->closeCursor();
 
-                $addUser->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
-                $addUser->bindParam(':firstname', $checkedData['firstname'], PDO::PARAM_STR, 255);
-                $addUser->bindParam(':surname', $checkedData['surname'], PDO::PARAM_STR, 255);
-                $addUser->bindParam(':birthDate', $checkedData['birthDate'], PDO::PARAM_STR, 10);
-                $addUser->bindParam(':password', $checkedData['password'], PDO::PARAM_STR, 255);
-                $addUser->bindParam(':email', $checkedData['email'], PDO::PARAM_STR, 254);
-
-                $addUser->execute();
-                $addUser->closeCursor();
-
-                $result = $db->query("SELECT @lastUserId")->fetch(PDO::FETCH_ASSOC);
+            $result = $db->query("SELECT @lastUserId")->fetch(PDO::FETCH_ASSOC);
 
 
-                $token = hash('sha256', session_id().$_SESSION['uniqid'].$checkedData['login']);
+            $token = hash('sha256', session_id().$_SESSION['uniqid'].$checkedData['login']);
 
-                $addToken = $db->prepare("CALL addToken(:token, :login)");
-                $addToken->bindParam(':token', $token, PDO::PARAM_STR, 64);
-                $addToken->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
+            $addToken = $db->prepare("CALL addToken(:token, :login)");
+            $addToken->bindParam(':token', $token, PDO::PARAM_STR, 64);
+            $addToken->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
 
-                $validated = false;              
-                $user = new User($result['@lastUserId'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $validated, $token);
-                $userSerialized = serialize($user);
-                setcookie ('user', $userSerialized);
+            $validated = false;              
+            $user = new User($result['@lastUserId'], $checkedData['login'], $checkedData['firstname'], $checkedData['surname'], $checkedData['birthDate'], $checkedData['email'], $validated, $token);
+            $userSerialized = serialize($user);
+            setcookie ('user', $userSerialized);
 
-                header('Location: homePage.php');
-            }
-
-
+            header('Location: homePage.php');
 
         } catch(Exception $e) {
             die('Erreur : '.$e->getMessage());
