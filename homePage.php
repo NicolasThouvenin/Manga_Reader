@@ -13,8 +13,12 @@
                 <div class="displayUser">
                     <?php
                     require('comic.class.php');
-
-
+                    require('volume.class.php');
+                    require('chapter.class.php');
+                    require('user.class.php');
+                    require('author.class.php');
+                    require('authentified.class.php');
+                    
                     session_start();
                     if (isset($_COOKIE['user'])) {
                         $user = unserialize($_COOKIE['user']);

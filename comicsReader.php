@@ -14,8 +14,12 @@
 
                 <div class="displayUser">
                     <?php
-                    require('user.class.php');
                     require('comic.class.php');
+                    require('volume.class.php');
+                    require('chapter.class.php');
+                    require('user.class.php');
+                    require('author.class.php');
+                    require('authentified.class.php');
 
 
                     session_start();
@@ -50,7 +54,6 @@
                     <div class="reader">
                         <?php
                         for ($id = 1; $id < 97; $id++) {
-                            //$message = 'Hello ' . ($user->is_logged_in() ? $user->get('first_name') : 'Guest');
                             ?>
                             <div class="bubble">
                                 <div class="bubble_number"><?php echo $id ?> / 96</div>
