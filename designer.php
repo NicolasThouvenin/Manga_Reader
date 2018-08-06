@@ -2,25 +2,38 @@
 // require '/includes/connect_db.php';
 include('connection.php');
 // echo var_dump($_FILES);
-
 // THIS FUNCTION Check the files and send an uploadMessage if not true
 if(!empty($_FILES))
 {
 		// Here the bubbleNumber represent the variable "name" in the input
-	$fileName=($_FILES['bubbleNumber']['name']);
-	$fileExtension = strrchr($fileName, ".");
-	$fileTmpName=$_FILES['bubbleNumber']['tmp_name'];
-	$fileDestination='libraries/BD/'.$fileName;
+	$bubbleName=($_FILES['bubbleNumber']['name']);
+	$coverName=($_FILES['coverNumber']['name']);
+	$bubbleFileExtension = strrchr($bubbleName, ".");
+	$coverFileExtension = strrchr($coverName, ".");
+	$bubbleTmpName=$_FILES['bubbleNumber']['tmp_name'];
+	$coverTmpName=$_FILES['coverNumber']['tmp_name'];
+	$bubbleDestination='libraries/BD/'.$bubbleName;
+	$coverDestination='libraries/covers/'.$coverName;
 	$extensionAccepted=array('.gif','.GIF','.jpg','.jpeg','.JPG','.JPEG','.png','.PNG');
 	
-	if(in_array($fileExtension, $extensionAccepted))
+	if(in_array($bubbleFileExtension, $extensionAccepted)or(in_array($coverFileExtension, $extensionAccepted)))
 	{
-		if(preg_match('/\bimage\b/',$_FILES['bubbleNumber']['type']))
+		// if it is a bubble
+		if(preg_match('/\bimage\b/',$_FILES['bubbleNumber']['type'])or(preg_match('/\bimage\b/',$_FILES['coverNumber']['type'])))
 		{
 			// It will move the file name to the destination 
-			if(move_uploaded_file($fileTmpName, $fileDestination)){
+			if(move_uploaded_file($bubbleTmpName, $bubbleDestination)){
 				$req=$db->prepare('INSERT INTO files (name,fileUrl) VALUES (?,?)');
-				$req->execute(array($fileName,$fileDestination));
+				$req->execute(array($bubbleName,$bubbleDestination));
+			}
+		}
+		// if it is a cover
+		elseif(preg_match('/\bimage\b/',$_FILES['coverNumber']['type']))
+		{
+			// It will move the file name to the destination 
+			if(move_uploaded_file($coverTmpName, $coverDestination)){
+				$req=$db->prepare('INSERT INTO files (name,fileUrl) VALUES (?,?)');
+				$req->execute(array($coverName,$coverDestination));
 			}
 		}
 		else{
@@ -33,6 +46,10 @@ if(!empty($_FILES))
 	}
 }
 ?>
+
+
+
+
 <!-- End of checking Files -->
 
 
@@ -71,18 +88,19 @@ if(!empty($_FILES))
 						<option value="scienceFiction">Science fiction</option>
 						<option value="thriller">Thriller</option>
 					</select></label><br/><br>
-					<label>Synopsys : <textarea rows="5" cols="40" name="synopsis" placeholder="Explain in summary your book" required="required"></textarea></label><br><br>
+					<label>Synopsis : <textarea rows="5" cols="40" name="synopsis" placeholder="Explain in summary your book" required="required"></textarea></label><br><br>
 					<!-- don't forget to put a catcha here  -->
 					<input type="submit" name="validateNewBook" value="Validate"/>
 				</form>
 			</fieldset>
 		<?php } ?>
 
+
 		<!-- This block summarizes all the information provided by the user -->
+
 		<?php
 		if(isset($_POST['validateNewBook'])){
 			?>
-			
 			<div class="bookInformation">
 				<fieldset>
 					<legend>Your Book information :</legend>
@@ -97,48 +115,103 @@ if(!empty($_FILES))
 				</fieldset>
 			</div>
 			<br><br>
+
+
+			<!-- BEGIN OF COVER UPLOAD -->
+
+
+			<br><br>
 			<form method="POST">
-				<input type="submit" value="Start to upload your bubbles" name="uploadBubble">
-			</form>
-		<?php }	?>
-
-
-		<!-- UPLOAD BOOKS -->
-		<?php if(isset($_POST['uploadBubble']) or (isset($_POST['sendBubble']))){?>
-			<br>
-			<form method="POST" enctype="multipart/form-data">
-				<label for="icone">Upload a file (JPG, PNG or GIF | max. 10Mo per files) :</label><br />
-				<input type="file" name="bubbleNumber" id="bubble"/><br><br>
-				<input type="submit" name="sendBubble" value="Send file" />
+				<input type="submit" value="Upload your cover" name="uploadCover">
 			</form>
 
-			<?php if(isset($_POST['sendBubble'])){?>
-				<!-- HERE YOU WILL HAVE A VIEW OF WHAT YOU HAVE JUST UPLOADED -->
-				<h1>Uploaded bubbles</h1>
-				<div class="scrollBubbles">
-					<?php 
-					$req=$db->query('SELECT name,fileUrl FROM files');
-					while($data=$req->fetch()){
-						$imageData = base64_encode(file_get_contents($data['fileUrl']));
-						echo '<br><img src="data:image/jpeg;base64,'.$imageData.'"> 
-						<style>
-						img{
-							width:20%;
-							height:auto;
+
+			<!-- UPLOAD COVER -->
+			<?php if(isset($_POST['uploadCover'])){?>
+				<br>
+				<form method="POST" enctype="multipart/form-data">
+					<p>Cover<\p>
+						<label for="icone">Upload a file (JPG, PNG or GIF | max. 10Mo per files) :</label><br />
+						<input type="file" name="coverNumber" id="bubble"/><br><br>
+						<input type="submit" name="sendCover" value="Send cover" />
+					</form>
+
+					<?php if(isset($_POST['sendCover'])){?>
+						<!-- HERE YOU WILL HAVE A VIEW OF WHAT YOU HAVE JUST UPLOADED -->
+						<h1>Uploaded Cover</h1>
+						<div>
+							<?php 
+							$req=$db->query('SELECT name,fileUrl FROM files');
+							while($data=$req->fetch()){
+								$imageData = base64_encode(file_get_contents($data['fileUrl']));
+								echo '<br><img src="data:image/jpeg;base64,'.$imageData.'"> 
+								<style>
+								img{
+									width:20%;
+									height:auto;
+								}
+								.scrollBubbles{
+									height:400px;
+									overflow-y:scroll;
+								}
+								</style>
+								';
+							}
+							?>
+						</div>
+					<?php } ?>
+				<?php } ?>
+
+				<!-- END OF COVER UPLOAD -->
+
+
+
+
+				<!-- BEGIN OF BUBBLE UPLOAD -->
+				<br><br>
+				<form method="POST">
+					<input type="submit" value="Start to upload your bubbles" name="uploadBubble">
+				</form>
+			<?php }	?>
+
+
+			<!-- UPLOAD BOOKS -->
+			<?php if(isset($_POST['uploadBubble']) or (isset($_POST['sendBubble']))){?>
+				<br>
+				<form method="POST" enctype="multipart/form-data">
+					<label for="icone">Upload a file (JPG, PNG or GIF | max. 10Mo per files) :</label><br />
+					<input type="file" name="bubbleNumber" id="bubble"/><br><br>
+					<input type="submit" name="sendBubble" value="Send file" />
+				</form>
+
+				<?php if(isset($_POST['sendBubble'])){?>
+					<!-- HERE YOU WILL HAVE A VIEW OF WHAT YOU HAVE JUST UPLOADED -->
+					<h1>Uploaded bubbles</h1>
+					<div class="scrollBubbles">
+						<?php 
+						$req=$db->query('SELECT name,fileUrl FROM files');
+						while($data=$req->fetch()){
+							$imageData = base64_encode(file_get_contents($data['fileUrl']));
+							echo '<br><img src="data:image/jpeg;base64,'.$imageData.'"> 
+							<style>
+							img{
+								width:20%;
+								height:auto;
+							}
+							.scrollBubbles{
+								height:400px;
+								overflow-y:scroll;
+							}
+							</style>
+							';
 						}
-						.scrollBubbles{
-							height:400px;
-							overflow-y:scroll;
-						}
-						</style>
-						';
-					}
-					?>
-				</div>
+						?>
+					</div>
+				<?php } ?>
 			<?php } ?>
-		<?php } ?>
+			<!-- END OF BUBBLE UPLOAD -->
 
-	</div><!-- End of page DIV -->
+		</div><!-- End of page DIV -->
 
-</body>
-</html>
+	</body>
+	</html>
