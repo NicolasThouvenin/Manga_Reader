@@ -5,6 +5,8 @@
 	require('chapter.class.php');
 	require('user.class.php');
 	require('author.class.php');
+	require('authentified.class.php');
+	
 
 	$result = $db->prepare("SELECT * FROM comics WHERE id = :comicId");
 	$result->execute(array('comicId' => 1));
