@@ -11,6 +11,9 @@
         private $EndDate;
         private $CoverExt;
         private $Volumes = array();
+        private $GenreIds = array();
+        private $Authors = array();
+
 
         public function __construct(int $Id, string $Title, string $Synopsis, string $StartDate, string $EndDate, string $CoverExt) {
           $this->Id = $Id;
@@ -91,6 +94,42 @@
                 yield $volume;
             }
         }
+
+        private function SetGenreIds() {
+
+        	require('connection.php');
+            
+            $result = $db->prepare("SELECT genreId FROM comicsgenres WHERE comicId = :comicId");
+            $result->execute(array('comicId' => $this->Id));
+
+            while ($line = $result->fetch()) {
+            	array_push($this->GenreIds, $line['comicId']);
+            }
+        }
+
+        function getGenreIds() {
+        	foreach ($this->GenreIds as $genreId) {
+                yield $genreId;
+            }
+        }
+
+        private function SetAuthors() {
+
+        	require('connection.php');
+            
+            $result = $db->prepare("SELECT genreId FROM comicsgenres WHERE comicId = :comicId");
+            $result->execute(array('comicId' => $this->Id));
+
+            while ($line = $result->fetch()) {
+            	array_push($this->GenreIds, $line['comicId']);
+            }
+        }
+
+        function getAuthors() {
+        	foreach ($this->Authors as $author) {
+                yield $author;
+            }
+        }        
 
     }
 ?>
