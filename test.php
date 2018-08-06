@@ -13,7 +13,6 @@
 			$endDate = $line['EndDate'];
 		}
 		$comic = new Comic($line['Id'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate, $line['CoverExt']);
-		$serializedComic = serialize($comic);
 		
 		echo $comic->getTitle().'<br>';
 		foreach ($comic->getVolumes() as $volume) {
