@@ -28,7 +28,7 @@
                 include('connection.php');
 
                 $checkedData = checkData($_POST);
-                $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, :token, @lastUserId)");
+                $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId)");
 
                 $addUser->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
                 $addUser->bindParam(':firstname', $checkedData['firstname'], PDO::PARAM_STR, 255);
