@@ -14,7 +14,8 @@ $(document).ready(function () {
      }
      }
      $("#book_genre")[0].innerHTML = listGenre.slice(0, -2) + ".";
-     $("book_author")[0].innerHTML = $("book_author")[0].innerHTML.slice(0, -2);
+     
+     $("#book_author")[0].innerHTML = $("#book_author")[0].innerHTML.slice(0, -2);
      
     
      // Put the title of the comic as the page title
