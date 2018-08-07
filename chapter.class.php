@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+    require('connection.php');
 
 	class Chapter {
         
@@ -70,8 +72,7 @@
         }
 
         private function SetComicStrips() {
-            try {
-                require('connection.php');    
+            try { 
 
                 $result = $db->prepare("SELECT * FROM comicStrips WHERE chapterId = :chapterId");
                 $result->execute(array('chapterId' => $this->Id));
@@ -104,7 +105,7 @@
             $this->ComicStrips;
         }
 
-        function AddComicStrip($bubbleTmpName) {
+        function AddComicStrip($comicStripTmpName) {
 
             try {
 
@@ -113,10 +114,10 @@
                     $this->ComicStripsLoaded = true;
                 }
 
-                $Filename = hash('sha256', uniqid()).'.'.$this->GetExtension($bubbleTmpName);
+                $Filename = hash('sha256', uniqid()).'.'.$this->GetExtension($comicStripTmpName);
                 $FilePath = 'comics\\'.$this->chapterImagesFolder.'\\'.$Filename;
 
-                if(move_uploaded_file($bubbleTmpName, $FilePath)) {
+                if(move_uploaded_file($comicStripTmpName, $FilePath)) {
 
                     $addComicStrip = $db->prepare("CALL createComicStrip(:fileName, :chapterId, @lastComicStripId)");
                     $addComicStrip->bindParam(':fileName', $Filename, PDO::PARAM_STR, 75);
