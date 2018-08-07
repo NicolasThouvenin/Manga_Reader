@@ -246,7 +246,7 @@ class Comic {
         try {
             require('connection.php');
             $startDate = date('Y-m-d');
-            $addVolume = $db->prepare("CALL createVolume(:title, :synopsis, :startDate, :comicId, @lastVolumeId, @lastVolumeNumber");
+            $addVolume = $db->prepare("CALL createVolume(:title, :synopsis, :startDate, :comicId, @lastVolumeId, @lastVolumeNumber)");
             $addVolume->bindParam(':title', $title, PDO::PARAM_STR, 255);
             $addVolume->bindParam(':synopsis', $synopsis, PDO::PARAM_STR, 255);
             $addVolume->bindParam(':startDate', $startDate, PDO::PARAM_STR, 10);
@@ -258,7 +258,7 @@ class Comic {
 
             $endDate = '';
 
-            $volume = new Volume($result['@lastVolumeId'], $result['@lastVolumeNumber'], $title, $synopsis, $date, $endDate);
+            $volume = new Volume($result['@lastVolumeId'], $result['@lastVolumeNumber'], $title, $synopsis, $endDate, $endDate);
             $this->Volumes[$result['@lastVolumeId']] = $volume;
 
         } catch (Exception $e) {
