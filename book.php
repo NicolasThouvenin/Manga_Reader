@@ -16,11 +16,11 @@
 
                 <div class="displayUser">
                     <?php
-                    require('connection.php');
+                    require('required.php');
 
                     session_start();
-                    if (isset($_COOKIE['user'])) {
-                        $user = unserialize($_COOKIE['user']);
+                    if (isset($_COOKIE['Authentified'])) {
+                        $user = unserialize($_COOKIE['Authentified']);
                         // if a user is connected
                         echo "<p class='userName'>" . $user->getLogin() . "</p>";
                         echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
@@ -118,30 +118,6 @@
                                     <?php
                                 }
                                 ?>
-                                <!--        List format
-                                <div id="vol1">
-                                    <p class='volume'>Volume 1 :
-                                        <span class='volume_title'>Le trés méchant Tutu</span>
-                                        <span class="volume_synopsis">Le gars et le cochon doivent détruire les armées du méchant Tutu</span>
-                                        <span class="volume_release">2018-07-31</span></p>
-                                    <ul>
-                                        <li>
-                                            <p class='chapter'>Chapter 2 :
-                                                <span class='chapter_title' title="le garçon et le cochon croisent la route d'un inquiétant bandit">Un nouvel ennemi?</span>
-                                                <span class="chapter_release">2018-08-03</span>
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p class='chapter'>Chapter 1 :
-                                                <span class='chapter_title' title="Le gars rencontre le cochon">La rencontre</span>
-                                                <span class="chapter_release">2018-08-01</span>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>-->
-
-
-
 
                             </div> <!-- chapters -->
                             <?php

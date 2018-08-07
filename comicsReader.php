@@ -14,17 +14,12 @@
 
                 <div class="displayUser">
                     <?php
-                    require('comic.class.php');
-                    require('volume.class.php');
-                    require('chapter.class.php');
-                    require('user.class.php');
-                    require('author.class.php');
-                    require('authentified.class.php');
+                    require('required.php');
 
 
                     session_start();
-                    if (isset($_COOKIE['user'])) {
-                        $user = unserialize($_COOKIE['user']);
+                    if (isset($_COOKIE['Authentified'])) {
+                        $user = unserialize($_COOKIE['Authentified']);
                         // if a user is connected
                         echo "<p class='userName'>" . $user->getLogin() . "</p>";
                         echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";

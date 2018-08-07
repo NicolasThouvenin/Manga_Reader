@@ -1,5 +1,4 @@
 <?php 
-    require('connection.php');
     require('comic.class.php');
     require('volume.class.php');
     require('chapter.class.php');
