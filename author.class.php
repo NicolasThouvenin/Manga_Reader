@@ -13,7 +13,7 @@
 
 		private function SetComics() {
 			try {
-				require('conection.php');
+				require('connection.php');
 				$query = "SELECT comics.Id FROM comics
 				JOIN authors
 				ON comics.Id = authors.comicId
