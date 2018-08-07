@@ -44,7 +44,7 @@
                     echo "<p class='log'>Connection successful.<br>";
                     ?>
                     <article id="new">
-                        <a href="book.php?bookId=#"><div id="new_icon"><img src="ressources\\plus.png"></div></a>
+                        <a href="newComic.php"><div id="new_icon"><img src="ressources\\plus.png"></div></a>
                         <p class="comics_name"><a href="#">New Comic</a><p>
                     </article>
 
