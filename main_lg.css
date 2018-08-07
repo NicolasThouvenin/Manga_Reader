@@ -1,0 +1,300 @@
+/****************************/
+/***** Header & General  *****/
+/****************************/
+
+
+
+.registerButton {
+  /** Font Style **/
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  text-transform:uppercase;
+  font-size:14px;
+    color:#fff;
+  text-decoration:none;
+    font-weight:bold;
+    text-transform:uppercase;
+    text-shadow:rgba(0, 0, 0, 0.30) 0 -1.25px 0;
+  
+  /** Button Style **/ 
+  display:-moz-inline-stack;
+  -webkit-font-smoothing:antialiased;
+    display:inline-block;
+    vertical-align:middle;
+    vertical-align:auto;
+    zoom:1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+    border:1px solid #13619f;
+    background: #00cc66;
+    padding:3px 20px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -ms-border-radius:3px;
+    -o-border-radius:3px;
+    border-radius:3px;
+    -webkit-box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+    -moz-box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+    box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+}
+
+/** Active State Style **/
+.registerButton:active {
+    border-color:#083559;
+    -webkit-box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    -moz-box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+}
+
+a {
+    color: rgb(189, 186, 172);
+    text-decoration: none;
+}
+
+html {
+    background-color: rgb(61, 61, 61);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(189, 186, 172);
+}
+
+body, p {
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 82px;
+    background-color: rgb(41, 41, 41)
+}
+
+header div, header input {
+    display: inline-grid;
+}
+
+.add {
+    margin: 27px 0 0 40px;
+    z-index: 150;
+}
+
+.logo {
+    margin: auto;
+    width: 50px;
+    margin-top: -20px;
+    display: block;
+}
+
+.displayUser {
+    float: right;
+    margin-right: 40px;
+}
+
+.userName {
+    font-size: 18px;
+    margin: 12px 0 2px 0;
+}
+.displayUser input {
+    margin: 12px 0 2px 0;
+}
+
+main {
+    padding: 82px 0px 10px 0;
+    width: 810px;
+    margin: auto;
+}
+
+.banner {
+
+    width: 100%;
+    height: 50px;
+    background-color: dimgray;
+    margin-bottom: 20px;
+}
+
+#searchbar {
+    float: right;
+    margin: 10px 10px 0 0;
+}
+
+.log {
+    display: none;
+}
+
+
+/****************************/
+/*****   homePage.PHP   *****/
+/****************************/
+
+article {
+    width: 180px;
+    padding: 20px 10px;
+    float: left;
+    font-size: 18px;
+}
+
+/****************************/
+/*****       book.PHP       *****/
+/****************************/
+
+#book_cover {
+    padding: 20px;
+    width: 250px;
+    border: solid black 2px;
+    display: inline-block;
+}
+
+#book_meta {
+    line-height: 1.6em;
+    width: 476px;
+    float: right;
+    padding: 20px;
+}
+
+#synopsis {
+    padding-top: 30px;
+    line-height: 1.4em;
+}
+
+#chapters_header {
+    background: linear-gradient(to right, rgb(102,102,102) 10%, rgb(61,61,61) 100%);
+    margin: 30px 0;
+    height: 25px;
+    line-height: 25px;
+    width: 810px;
+    border: solid rgb(94, 94, 94) 1px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.volume {
+    font-weight: 500;
+}
+
+.volume_synopsis {
+    font-weight: normal;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.volume_release, .chapter_release {
+    font-weight: normal;
+    float: right;
+}
+
+ul {
+    list-style: none;
+}
+
+/****************************/
+/*****      reader.PHP      *****/
+/****************************/
+
+.reader {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+
+.bubble {
+    margin: auto;
+    display: none;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.bubble_number {
+    color: #000;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+.strip_container {
+    margin: auto;
+    width: fit-content;
+}
+
+.comicstrip {
+    max-height: 600px;
+    max-width: 100%;
+}
+
+/****************************/
+/****  designerHome.PHP  ****/
+/****************************/
+
+.banner > p {
+    text-align: center;
+    font-size: 28px;
+    line-height: 50px;
+    padding-left: 170px;
+    font-weight: 500;
+}
+
+#new_icon {
+    background-color: rgb(181, 173, 144);
+    height: 225px;
+    width: 150px;
+}
+
+#new_icon > img {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 50px;
+    top: 87px;
+}
