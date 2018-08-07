@@ -147,7 +147,7 @@
 
                 require('connection.php');
 
-                $getChapterImagesFolder = $db->prepare("CALL createComicStrip(:chapterId, @chapterFolderPath");
+                $getChapterImagesFolder = $db->prepare("CALL getChapterFolderPath(:chapterId, @chapterFolderPath)");
                 $getChapterImagesFolder->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
                 $getChapterImagesFolder->execute();
 
