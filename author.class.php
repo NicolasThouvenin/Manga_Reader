@@ -23,7 +23,7 @@
 	            $result->execute(array('authorId' => $this->Id));
 
 	            while ($line = $result->fetch()) {
-	            	$comic = Comic($line['Id']);
+	            	$comic = new Comic($line['Id']);
 	            	$this->Comics[$line['Id']] = $comic;
 	            }
 			}  catch (Exception $e) {
