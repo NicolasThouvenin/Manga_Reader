@@ -1,7 +1,5 @@
 <?php
 
-    require('connection.php');
-
 	class Chapter {
         
 		private $Id;
@@ -74,6 +72,8 @@
         private function SetComicStrips() {
             try { 
 
+                require('connection.php');
+
                 $result = $db->prepare("SELECT * FROM comicStrips WHERE chapterId = :chapterId");
                 $result->execute(array('chapterId' => $this->Id));
 
@@ -119,6 +119,8 @@
 
                 if(move_uploaded_file($comicStripTmpName, $FilePath)) {
 
+                    require('connection.php');
+
                     $addComicStrip = $db->prepare("CALL createComicStrip(:fileName, :chapterId, @lastComicStripId)");
                     $addComicStrip->bindParam(':fileName', $Filename, PDO::PARAM_STR, 75);
                     $addComicStrip->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
@@ -142,6 +144,8 @@
         private function SetChapterImagesFolder() {
 
             try {
+
+                require('connection.php');
 
                 $getChapterImagesFolder = $db->prepare("CALL createComicStrip(:chapterId, @chapterFolderPath");
                 $getChapterImagesFolder->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
