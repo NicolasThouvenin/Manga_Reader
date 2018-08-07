@@ -191,7 +191,29 @@
         	foreach ($this->Authors as $author) {
                 yield $author;
             }
-        }        
+        }
+
+        function AddCover($coverTmpName) {
+            try {
+
+                $FilePath = 'comics\\'.$this->Id.'\\cover.'.$GetExtension($coverTmpName);
+                if(!move_uploaded_file($coverTmpName, $FilePath)) {
+                    throw new Exception("\nL'image du cover n'a pas pu être ajouté par move_uploaded_file : ".$e->getMessage());
+                }
+            } catch (Exception $e) {
+                throw new Exception("\nErreur lors de l'ajout du cover : ".$e->getMessage());
+            }
+
+        }
+
+        private function GetExtension($tmpName) {
+            $check = explode('/', mime_content_type($tmpName));
+            if ($check[0] !== 'image') {
+                throw new Exception("\nLe fichier n'est pas une image : ".$e->getMessage());
+            } else {
+                return $check[1];
+            }
+        }  
 
     }
 ?>
