@@ -17,7 +17,7 @@
 	      $this->Synopsis = $Synopsis;
 	      $this->StartDate = $StartDate;
 	      $this->EndDate = $EndDate;
-          $this->SetChapters();
+          $this->ChaptersLoaded = false;
 	    }
 
         function getId() {
@@ -92,6 +92,10 @@
         }
 
         public function getChapters() {
+            if (!$this->ChaptersLoaded) {
+                $this->SetChapters();
+                $this->ChaptersLoaded = true;
+            }
             foreach ($this->Chapters as $chapter) {
                 yield $chapter;
         }

@@ -8,6 +8,7 @@
 	    private $Synopsis;
         private $Validated;
 	    private $PublicationDate;
+        private $comicStrips = array();
 
 
 		public function __construct(int $Id, int $Number, string $Title, string $Synopsis, bool $Validated, string $PublicationDate) {
@@ -17,6 +18,7 @@
 	      $this->Synopsis = $Synopsis;
 	      $this->Validated = $Validated;
 	      $this->PublicationDate = $PublicationDate;
+          $this->ComicStripsLoaded = false;
 	    }
 
         function getId() {
@@ -61,6 +63,18 @@
 
         function setPublicationDate($PublicationDate) {
             $this->PublicationDate = $PublicationDate;
+        }
+
+        private function SetComicStrips() {
+            //$this->comicStrips 
+        }
+
+        function GetComicStrips() {
+            if (!$this->ComicStripsLoaded) {
+                $this->SetComicStrips();
+                $this->ComicStripsLoaded = true;
+            }
+            $this->comicStrips 
         }
 	}
 ?>
