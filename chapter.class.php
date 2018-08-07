@@ -154,7 +154,9 @@
                 $getChapterImagesFolder->closeCursor();
                 $result = $db->query("SELECT @chapterFolderPath")->fetch(PDO::FETCH_ASSOC);
 
-                $this->chapterImagesFolder = $result['@chapterFolderPath'];
+                $this->chapterImagesFolder = 'comics'.'\\'.$result['@chapterFolderPath'];
+                mkdir($this->chapterImagesFolder, 0777, true);
+
 
             } catch (Exception $e) {
                 throw new Exception("\nErreur lors de la recherche du chemin du dossier image du chapitre : ".$e->getMessage());
