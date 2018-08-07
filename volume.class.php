@@ -66,25 +66,28 @@
 
         private function SetChapters() {
 
-            require('connection.php');
-                       
+            try {
+                require('connection.php');    
 
-            $result = $db->prepare("SELECT * FROM chapters WHERE volumeId = volumeId");
-            $result->execute(array('volumeId' => $this->Id));
+                $result = $db->prepare("SELECT * FROM chapters WHERE volumeId = volumeId");
+                $result->execute(array('volumeId' => $this->Id));
 
-            while ($line = $result->fetch()) {
+                while ($line = $result->fetch()) {
 
-                $validated = ($line['Validated'] === '1' ? true : false);
+                    $validated = ($line['Validated'] === '1' ? true : false);
 
-                if ($line['PublicationDate'] === null) {
-                    $publicationDate = '';
-                } else {
-                    $publicationDate = $line['PublicationDate'];
+                    if ($line['PublicationDate'] === null) {
+                        $publicationDate = '';
+                    } else {
+                        $publicationDate = $line['PublicationDate'];
+                    }
+
+                    $chapter = new Chapter($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $validated, $publicationDate);
+
+                    $this->Chapters[$line['Id']] = $chapter;
                 }
-
-                $chapter = new Chapter($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $validated, $publicationDate);
-
-                $this->Chapters[$line['Id']] = $chapter;
+            } catch (Exception $e) {
+                throw new Exception("\nErreur lors de la création de la liste de d'objets chapitres : ".$e->getMessage());
             }
         }
 

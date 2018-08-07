@@ -33,19 +33,10 @@
             $logger->execute(array('login' => $_POST['login'], 'password' => $_POST['password']));
 
             if ($logger->rowCount() == 1) {
-
                 while ($line = $logger->fetch()) {
-                    
-                    $token = hash('sha256', session_id().$_SESSION['uniqid'].$checkedData['login']);
-
-                    $addToken = $db->prepare("CALL addToken(:token, :login)");
-                    $addToken->bindParam(':token', $token, PDO::PARAM_STR, 64);
-                    $addToken->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
-
-                    $validated = ($line['EmailValidated'] === '1' ? true : false);
-                    $user = new User($line['Id'], $line['Login'], $line['Firstname'], $line['Surname'], $line['BirthDate'], $line['Email'], $validated, $token);
-                    $userSerialized = serialize($user);
-                    setcookie ('user', $userSerialized);
+                    $authentified = new Authentified($line['Id'], $_SESSION['uniqid']);
+                    $authentifiedSerialized = serialize($authentified);
+                    setcookie ('authentified', $authentifiedSerialized);
                 }
 
                 $logger->closeCursor();

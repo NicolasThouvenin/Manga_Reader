@@ -2,22 +2,33 @@
 
 	class Author extends User {
 
+		/* Cette classe correspond aux informations sur un auteur et donne accès à ses bandes dessinnées. */
+
 		private $Comics = array();
 		private $ComicsLoaded = false;
 
 		public function __construct(int $Id) {
-			$this->Id = $Id;
+			parent::__construct($Id);
 		}
 
 		private function SetComics() {
-            $result = $db->prepare("SELECT comics.Id FROM comics WHERE Id = :comicId");
-            $result->execute(array('comicId' => $this->Id));
+			try {
+				$query = "SELECT comics.Id FROM comics
+				JOIN authors
+				ON comics.Id = authors.comicId
+				WHERE authors.userId = :authorId;"
 
-            while ($line = $result->fetch()) {
+				$result = $db->prepare($query);
+	            $result->execute(array('authorId' => $this->Id));
 
-            	$comic = Comic($line['Id']);
-            	$this->Comics[$line['Id']] = $comic;
+	            while ($line = $result->fetch()) {
+	            	$comic = Comic($line['Id']);
+	            	$this->Comics[$line['Id']] = $comic;
+	            }
+			}  catch (Exception $e) {
+                throw new Exception("\nErreur lors de la création du token dans la base de données : ".$e->getMessage());
             }
+
 		}
 
 		function getComics() {

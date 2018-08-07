@@ -19,27 +19,33 @@
 
             $this->Id = $Id;
 
-            require('connection.php');
+            try {
 
-            $result = $db->prepare("SELECT * FROM comics WHERE id = :comicId");
-            $result->execute(array('comicId' => 1));
+                require('connection.php');
 
-            while ($line = $result->fetch()) {
+                $result = $db->prepare("SELECT * FROM comics WHERE id = :comicId");
+                $result->execute(array('comicId' => 1));
 
-                $this->Title = $line['Title'];
-                $this->Synopsis = $line['Synopsis'];
-                $this->StartDate = $line['StartDate'];
-                $this->CoverExt = $line['CoverExt'];
+                while ($line = $result->fetch()) {
 
-                if ($line['EndDate'] === null) {
-                    $this->EndDate = '';
-                } else {
-                    $this->EndDate = $line['EndDate'];
+                    $this->Title = $line['Title'];
+                    $this->Synopsis = $line['Synopsis'];
+                    $this->StartDate = $line['StartDate'];
+                    $this->CoverExt = $line['CoverExt'];
+
+                    if ($line['EndDate'] === null) {
+                        $this->EndDate = '';
+                    } else {
+                        $this->EndDate = $line['EndDate'];
+                    }
                 }
-            }
 
-            $this->SetGenreIds();
-            $this->SetAuthors();
+                $this->SetGenreIds();
+                $this->SetAuthors();
+
+            }  catch (Exception $e) {
+                throw new Exception("\nErreur lors de la création de l'objet comic : ".$e->getMessage());
+            }
         }
         
         function getId() {
@@ -87,22 +93,29 @@
         }
 
         private function SetVolumes() {
-            require('connection.php');
-            
-            $result = $db->prepare("SELECT * FROM volumes WHERE comicId = :comicId");
-            $result->execute(array('comicId' => $this->Id));
 
-            while ($line = $result->fetch()) {
+            try {
 
-                if ($line['EndDate'] === null) {
-                    $endDate = '';
-                } else {
-                    $endDate = $line['EndDate'];
+                require('connection.php');
+                
+                $result = $db->prepare("SELECT * FROM volumes WHERE comicId = :comicId");
+                $result->execute(array('comicId' => $this->Id));
+
+                while ($line = $result->fetch()) {
+
+                    if ($line['EndDate'] === null) {
+                        $endDate = '';
+                    } else {
+                        $endDate = $line['EndDate'];
+                    }
+
+                    $volume = new Volume($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate);
+
+                    $this->Volumes[$line['Id']] = $volume;
                 }
 
-                $volume = new Volume($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate);
-
-                $this->Volumes[$line['Id']] = $volume;
+            }  catch (Exception $e) {
+                throw new Exception("\nErreur lors de la création de la liste de volumes : ".$e->getMessage());
             }
         }
 
@@ -118,14 +131,22 @@
         }
 
         private function SetGenreIds() {
-        	require('connection.php');
-            
-            $result = $db->prepare("SELECT genreId FROM comicsgenres WHERE comicId = :comicId");
-            $result->execute(array('comicId' => $this->Id));
 
-            while ($line = $result->fetch()) {
-            	array_push($this->GenreIds, $line['genreId']);
+            try {
+
+                require('connection.php');
+                
+                $result = $db->prepare("SELECT genreId FROM comicsgenres WHERE comicId = :comicId");
+                $result->execute(array('comicId' => $this->Id));
+
+                while ($line = $result->fetch()) {
+                    array_push($this->GenreIds, $line['genreId']);
+                }
+
+            } catch (Exception $e) {
+                throw new Exception("\nErreur lors de la création de la liste de d'indentifiant de genres : ".$e->getMessage());
             }
+
         }
 
         function getGenreIds() {
@@ -140,20 +161,26 @@
 
         private function SetAuthors() {
 
-        	require('connection.php');
+            try {
 
-        	$query = "SELECT users.* FROM users 
-        	JOIN authors
-        	ON users.Id = authors.userId
-        	WHERE authors.comicId = :comicId";
-            
-            $result = $db->prepare($query);
-            $result->execute(array('comicId' => $this->Id));
+                require('connection.php');
 
-            while ($line = $result->fetch()) {
-            	$author = new Author($line['Id']);
-            	$this->Authors[$line['Id']] = $author;
+                $query = "SELECT users.* FROM users 
+                JOIN authors
+                ON users.Id = authors.userId
+                WHERE authors.comicId = :comicId";
+                
+                $result = $db->prepare($query);
+                $result->execute(array('comicId' => $this->Id));
+
+                while ($line = $result->fetch()) {
+                    $author = new Author($line['Id']);
+                    $this->Authors[$line['Id']] = $author;
+                }
+            } catch (Exception $e) {
+                throw new Exception("\nErreur lors de la création de la liste d'objets auteurs : ".$e->getMessage());
             }
+
         }
 
         function getAuthors() {

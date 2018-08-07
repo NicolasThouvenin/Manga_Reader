@@ -10,17 +10,33 @@
             private $BirthDate;
             private $Email;
             private $EmailValidated;
-            private $token;
 
-            public function __construct(int $Id, string $Login, string $Firstname, string $Surname, string $BirthDate, string $Email, bool $EmailValidated, string $Token) {
+            public function __construct(int $Id) {
+
                 $this->Id = $Id;
-                $this->Login = $Login;
-                $this->Firstname = $Firstname;
-                $this->Surname = $Surname;
-                $this->BirthDate = $BirthDate;
-                $this->Email = $Email;
-                $this->EmailValidated = $EmailValidated;
-                $this->Token = $Token;
+
+                try {
+
+                    $user = $db->prepare("SELECT users.* FROM users WHERE Id = :id;");
+                    $user->execute(array('id' => $Id));
+
+                    if ($user->rowCount() == 1) {
+                        while ($line = $user->fetch()) {
+                            $this->Login = $line['Login'];
+                            $this->Firstname = $line['Firstname'];
+                            $this->Surname = $line['Surname'];
+                            $this->BirthDate = $line['BirthDate'];
+                            $this->Email = $line['Email'];
+                            $this->EmailValidated = ($line['EmailValidated'] === '1' ? true : false);
+                        }
+                    } else {
+                        throw new Exception('Utilisateur inconnu dans la base.');
+                    }
+                    $user->closeCursor();
+
+                } catch (Exception $e) {
+                    throw new Exception("\nErreur lors de la création de l'objet user : ".$e->getMessage());
+                } 
             }
             
             public function getId() {
@@ -66,7 +82,7 @@
             }
 
             public function setBirthDate($BirthDate) {
-                $this->_validateLength($BirthDate, 255);
+                $this->_validateLength($BirthDate, 255); //hétité de la class user
                 $this->BirthDate = $BirthDate;
             }
 
@@ -77,18 +93,6 @@
 
             public function setEmailValidated($EmailValidated) {
                 $this->EmailValidated = $EmailValidated;
-            }
-
-            public function checkToken() {
-                require('connection');
-                $checkToken = $db->prepare("CALL createUser(:token, :login, @isAuthentified)");
-                $checkToken->bindParam(':token', $this->Token, PDO::PARAM_STR, 64);
-                $checkToken->bindParam(':login', $this->Login, PDO::PARAM_STR, 255);
-                $checkToken->execute();
-                $checkToken->closeCursor();
-                $result = $db->query("SELECT @isAuthentified")->fetch(PDO::FETCH_ASSOC);
-                $isChecked = ($result['@isAuthentified'] === '1' ? true : false);
-                return $isChecked;
             }
             
             private function _validateLength(string $string, int $maxLength) {
