@@ -8,8 +8,8 @@ if (!isset($_GET["bookId"])) {
 if (isset($_POST["submit"])) {
     try {
         $comic = new Comic($_GET["bookId"]);
-        $comic->createVolume(htmlentities($_POST["submit"]), htmlentities($_POST["submit"]));
-        header("Location:newChapter.php");
+        $comic->createVolume(htmlentities($_POST["title"]), htmlentities($_POST["synopsis"]));
+        //header("Location:newChapter.php");
     } catch (Exception $e) {
         die('Error : ' . $e->getMessage());
     }
@@ -98,7 +98,7 @@ if (isset($_POST["submit"])) {
                     <div id="add_new">
                         <span id="add_volume" onclick="toggleForm()">Create New Volume</span>
                         <span id="add_chapter"><a href="newChapter.php">Create New Chapter</a></span>
-                        <form id="new_volume_form" method="POST" action="comic.php">
+                        <?php  echo '<form id="new_volume_form" method="POST" action="comic.php?bookId='.$_GET["bookId"].'">' ?>
                             <p></p><input type="text" name="title" placeholder="Volume Title" required></p>
                             <p><textarea name="synopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
                             <input type="submit" name="submit" value="Create Volume">

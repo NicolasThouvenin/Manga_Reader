@@ -44,6 +44,7 @@ class Comic {
             $this->SetGenreIds();
             $this->SetAuthors();
             $this->SetImagesFolder();
+            
         } catch (Exception $e) {
             throw new Exception("\nErreur lors de la création de l'objet comic : " . $e->getMessage());
         }
@@ -244,21 +245,24 @@ class Comic {
     function createVolume($title, $synopsis) {
         try {
             require('connection.php');
-            $date = date("Y-m-d");
-            $addVolume = $db->prepare("CALL createVolume(:title, :synopsis, :date, :comicId, @lastVolumeId, @lastVolumeNumber");
+            $startDate = date('Y-m-d');
+            $addVolume = $db->prepare("CALL createVolume(:title, :synopsis, :startDate, :comicId, @lastVolumeId, @lastVolumeNumber");
             $addVolume->bindParam(':title', $title, PDO::PARAM_STR, 255);
             $addVolume->bindParam(':synopsis', $synopsis, PDO::PARAM_STR, 255);
-            $addVolume->bindParam(':date', $date, PDO::PARAM_STR, 10);
+            $addVolume->bindParam(':startDate', $startDate, PDO::PARAM_STR, 10);
             $addVolume->bindParam(':comicId', $this->Id, PDO::PARAM_INT);
             $addVolume->execute();
             $addVolume->closeCursor();
 
             $result = $db->query("SELECT @lastVolumeId, @lastVolumeNumber")->fetch(PDO::FETCH_ASSOC);
 
-            $volume = new Volume($result['@lastVolumeId'], $result['@lastVolumeNumber'], $title, $synopsis, $date, "");
+            $endDate = '';
+
+            $volume = new Volume($result['@lastVolumeId'], $result['@lastVolumeNumber'], $title, $synopsis, $date, $endDate);
             $this->Volumes[$result['@lastVolumeId']] = $volume;
+
         } catch (Exception $e) {
-            throw new Exception("\nError during new volume creation : " . $e->getMessage());
+            throw new Exception("\nError during new volume creation : ". $e->getMessage());
         }
     }
 
