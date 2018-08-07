@@ -17,11 +17,12 @@
                     session_start();
                     if (isset($_COOKIE['authentified'])) {
                         $user = unserialize($_COOKIE['authentified']);
+
                         // if a user is connected
-                        echo "<p class='userName'>" . $user->getLogin() . "</p>";
+                        echo "<p class='userName'><a href='profile.php'>" . $user->getLogin() . "</a></p>";
                         echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
                     } else {
-                       // header("Location:login.php");
+                        header("Location:login.php");
                     }
                     ?>
                 </div> <!-- displayUser -->
