@@ -57,8 +57,9 @@
                             ?>
                             <div class="bubble">
                                 <div class="bubble_number"><?php echo $id ?> / 96</div>
-
-                                <img src="<?php echo "comics\\1\\1\\" . ($id < 10 ? "0" . $id : $id) . ".jpg"; ?>" height="600">
+                                <div class="strip_container">
+                                    <img class="comicstrip" src="<?php echo "comics\\1\\1\\" . ($id < 10 ? "0" . $id : $id) . ".jpg"; ?>">
+                                </div>
                                 <div class="text"><?php echo $id ?></div>
                             </div>
                             <?php
@@ -75,5 +76,5 @@
             </main>
         </div> <!-- page -->
     </body>
-            <script src="script/comicReader.js"></script>
+    <script src="script/comicReader.js"></script>
 </html>

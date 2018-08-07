@@ -142,7 +142,7 @@ ul {
 }
 
 /****************************/
-/*****       book.PHP       *****/
+/*****      reader.PHP      *****/
 /****************************/
 
 .reader {
@@ -151,7 +151,9 @@ ul {
   margin: auto;
 }
 
+
 .bubble {
+    margin: auto;
     display: none;
 }
 
@@ -182,11 +184,10 @@ ul {
 
 /* Caption text */
 .text {
-  color: #f2f2f2;
   font-size: 15px;
   padding: 8px 12px;
   position: absolute;
-  bottom: 8px;
+  bottom: -25px;
   width: 100%;
   text-align: center;
 }
@@ -216,4 +217,14 @@ ul {
 @keyframes fade {
   from {opacity: .4} 
   to {opacity: 1}
+}
+
+.strip_container {
+    margin: auto;
+    width: fit-content;
+}
+
+.comicstrip {
+     max-height: 600px;
+     max-width: 100%;
 }
