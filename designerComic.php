@@ -12,7 +12,7 @@
 
                 <div class="displayUser">
                     <?php
-                    require('user.class.php');
+                    require('required.php');
                     session_start();
                     if (isset($_COOKIE['user'])) {
                         $user = unserialize($_COOKIE['user']);

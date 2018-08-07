@@ -15,7 +15,7 @@
         }
  
         try {
-            require('user.class.php');
+            require('required.php');
             session_start();
 
             if (!isset($_SESSION['uniqid'])) {
@@ -23,8 +23,6 @@
             } else if ($_SESSION['uniqid'] != $_POST['uniqid']) {
                 throw new Exception("La requête post n'indique pas pas le même token d'authentification que celui de la session du serveur");
             }
-
-            include('connection.php');
 
             $checkedData = checkData($_POST);
 

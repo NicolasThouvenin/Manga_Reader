@@ -12,12 +12,7 @@
 
                 <div class="displayUser">
                     <?php
-                    require('comic.class.php');
-                    require('volume.class.php');
-                    require('chapter.class.php');
-                    require('user.class.php');
-                    require('author.class.php');
-                    require('authentified.class.php');
+                    require('required.php');
 
                     session_start();
                     if (isset($_COOKIE['user'])) {
