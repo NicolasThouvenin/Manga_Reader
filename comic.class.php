@@ -8,11 +8,14 @@
         private $StartDate;
         private $EndDate;
         private $CoverExt;
+        private $volumesLoaded = false;
         private $Volumes = array();
+        private $GenreIdsLoaded = false;
         private $GenreIds = array();
+        private $AuthorsLoaded = false;
         private $Authors = array();
 
-        public function __construct(int $Id, string $Title, string $Synopsis, string $StartDate, string $EndDate, string $CoverExt) {
+        public function __construct(int $Id) {
 
             $this->Id = $Id;
 
@@ -35,7 +38,6 @@
                 }
             }
 
-            $this->SetVolumes();
             $this->SetGenreIds();
             $this->SetAuthors();
         }
@@ -105,13 +107,17 @@
         }
 
         public function getVolumes() {
+            if (!$this->volumesLoaded) {
+               $this->SetVolumes();
+               $this->volumesLoaded = true;
+            }
+            
             foreach ($this->Volumes as $volume) {
                 yield $volume;
             }
         }
 
         private function SetGenreIds() {
-
         	require('connection.php');
             
             $result = $db->prepare("SELECT genreId FROM comicsgenres WHERE comicId = :comicId");
@@ -123,6 +129,10 @@
         }
 
         function getGenreIds() {
+            if (!$this->GenreIdsLoaded) {
+                $this->SetGenreIds();
+                $this->GenreIdsLoaded = true;
+            }
         	foreach ($this->GenreIds as $genreId) {
                 yield $genreId;
             }
@@ -147,6 +157,10 @@
         }
 
         function getAuthors() {
+            if (!$this->AuthorsLoaded) {
+                $this->SetAuthors();
+                $this->AuthorsLoaded = true;
+            }
         	foreach ($this->Authors as $author) {
                 yield $author;
             }
