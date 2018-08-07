@@ -55,12 +55,12 @@
                         $comicId = $comic->getId();
 
                         // Path to the comic cover
-                        $coverPath = "comics\\" . $comicId . "\\" . $comicId . "_cover" . "." . $comic->getId();
+                        $coverPath = "comics\\" . $comicId . "\\cover." . $comic->getCoverExt();
                         ?>
 
                         <article id="<?php echo $comic->getId() ?>">
-                            <a href="book.php?bookId=<?php echo $comic->getId() ?>"><img src="<?php echo $comic->getCoverExt() ?>" alt="cover" width="150" height="225"></a>
-                            <p class="comics_name"><a href="book.php?bookId=<?php $comic->getId() ?>"><?php echo $comic->getTitle() ?></a><p>
+                            <a href="comic.php?bookId=<?php echo $comic->getId() ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
+                            <p class="comics_name"><a href="comic.php?bookId=<?php $comic->getId() ?>"><?php echo $comic->getTitle() ?></a><p>
                         </article>
 
                         <?php
