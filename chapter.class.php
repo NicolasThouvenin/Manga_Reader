@@ -127,9 +127,9 @@
                     $addComicStrip->execute();
 
                     $addComicStrip->closeCursor();
-                    $result = $db->query("SELECT @lastComicStripId")->fetch(PDO::FETCH_ASSOC);
+                    $result = $db->query("SELECT @lastComicStripId, @lastComicStripNumber")->fetch(PDO::FETCH_ASSOC);
 
-                    $comicStrip = new ComicStrip($result['@lastComicStripId'], $Number, $Filename);
+                    $comicStrip = new ComicStrip($result['@lastComicStripId'], $result['@lastComicStripNumber'], $Filename);
                     $this->ComicStrips[$result['@lastComicStripId']] = $comicStrip;
 
                 } else {
