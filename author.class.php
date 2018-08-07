@@ -16,7 +16,7 @@
 				$query = "SELECT comics.Id FROM comics
 				JOIN authors
 				ON comics.Id = authors.comicId
-				WHERE authors.userId = :authorId;"
+				WHERE authors.userId = :authorId;";
 
 				$result = $db->prepare($query);
 	            $result->execute(array('authorId' => $this->Id));
