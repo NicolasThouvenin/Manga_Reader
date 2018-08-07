@@ -16,6 +16,7 @@
  
         try {
             require('required.php');
+            require('connection.php');
             session_start();
 
             if (!isset($_SESSION['uniqid'])) {

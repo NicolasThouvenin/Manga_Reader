@@ -9,19 +9,21 @@
 
             	try {
             	    parent::__construct($Id);
-                	$this->setToken($uniqid);
+                	$this->SetToken($uniqid);
 
             	} catch (Exception $e) {
                     throw new Exception("\nErreur lors de la création de l'objet Authentified : ".$e->getMessage());
                 }
             }
 
-            private function setToken($uniqid) {
+            private function SetToken($uniqid) {
             	try {
-	            	$this->Token = hash('sha256', session_id().$uniqid.$this->Login);
-	                $addToken = $db->prepare("CALL addToken(:token, :login)");
-	                $addToken->bindParam(':token', $this->token, PDO::PARAM_STR, 64);
-	                $addToken->bindParam(':login', $this->Login, PDO::PARAM_STR, 255);
+                    require('connection.php');
+	            	$this->Token = hash('sha256', session_id().$uniqid.$this->getLogin());
+	                $addToken = $db->prepare("CALL addToken(:login, :token)");
+                    $login = $this->getLogin();
+	                $addToken->bindParam(':login', $login, PDO::PARAM_STR, 255);
+                    $addToken->bindParam(':token', $this->Token, PDO::PARAM_STR, 64);
 	                $addToken->execute();
 	                $addToken->closeCursor();	
             	} catch (Exception $e) {
@@ -30,16 +32,17 @@
 
             }
 
-            public function checkToken() {
+            public function CheckToken() {
             	try {
             	    require('connection');
 	                $checkToken = $db->prepare("CALL createUser(:token, :login, @isAuthentified)");
 	                $checkToken->bindParam(':token', $this->Token, PDO::PARAM_STR, 64);
-	                $checkToken->bindParam(':login', $this->Login, PDO::PARAM_STR, 255);
+	                $checkToken->bindParam(':login', $this->getLogin(), PDO::PARAM_STR, 255);
 	                $checkToken->execute();
 	                $checkToken->closeCursor();
 	                $result = $db->query("SELECT @isAuthentified")->fetch(PDO::FETCH_ASSOC);
-	                $isChecked = ($result['@isAuthentified'] === '1' ? true : false);
+	                return ($result['@isAuthentified'] === '1' ? true : false);
+
             	} catch (Exception $e) {
                     throw new Exception("\nErreur lors de la vérification du token de la base de données : ".$e->getMessage());
                 }

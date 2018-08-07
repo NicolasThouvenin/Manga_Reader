@@ -17,6 +17,8 @@
 
                 try {
 
+                    require('connection.php');
+
                     $user = $db->prepare("SELECT users.* FROM users WHERE Id = :id;");
                     $user->execute(array('id' => $Id));
 
