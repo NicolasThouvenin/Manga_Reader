@@ -18,6 +18,7 @@
                 echo '<input id="uniqid" name="uniqid" type="hidden" value="' . $_SESSION['uniqid'] . '">';
                 //Pour des raisons de sécurité, on acceptera que les post  renvoyant le token du formulaire de login
                 ?>
+                <label><input type="checkbox" id="stayConnected" name="stayConnected"> rester connecté</label>
                 <input type="submit" name="submit" value="Login">
             </form>
         </div>

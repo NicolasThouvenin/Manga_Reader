@@ -35,7 +35,12 @@
                 while ($line = $logger->fetch()) {
                     $authentified = new Authentified($line['Id'], $_SESSION['uniqid']);
                     $authentifiedSerialized = serialize($authentified);
-                    setcookie ('authentified', $authentifiedSerialized);
+
+                    if (isset($_POST['stayConnected'])) {
+                        setcookie ('authentified', $authentifiedSerialized, time()+86400*365); //expire au bout d'un an
+                    } else {
+                        setcookie ('authentified', $authentifiedSerialized, 0); //expire à la fin de la session
+                    }
                 }
 
                 $logger->closeCursor();
