@@ -14,6 +14,7 @@
         private $GenreIds = array();
         private $AuthorsLoaded = false;
         private $Authors = array();
+        private $ImagesFolder;
 
         public function __construct(int $Id) {
 
@@ -42,6 +43,7 @@
 
                 $this->SetGenreIds();
                 $this->SetAuthors();
+                $this->SetImagesFolder();
 
             }  catch (Exception $e) {
                 throw new Exception("\nErreur lors de la création de l'objet comic : ".$e->getMessage());
@@ -88,8 +90,21 @@
             $this->EndDate = $EndDate;
         }
 
-        function setCoverExt($CoverExt) {
-            $this->CoverExt = $CoverExt;
+        private function setCoverExt($CoverExt) {
+
+            try {
+
+                require('connection.php');
+                
+                $result = $db->prepare("UPDATE comics SET CoverExt = :CoverExt WHERE Id = :Id");
+                $result->execute(array('Id' => $this->Id, 'CoverExt' => $CoverExt));
+
+                $this->CoverExt = $CoverExt;
+
+            } catch (Exception $e) {
+                throw new Exception("\nErreur lors l'insertion de la nouvelle extension du cover dans la base de données : ".$e->getMessage());
+            }
+            
         }
 
         private function SetVolumes() {
@@ -196,10 +211,11 @@
         function AddCover($coverTmpName) {
             try {
 
-                $folderPath = 'comics\\'.$this->Id;
-                mkdir($folderPath);
+                $fileExt = $this->GetExtension($coverTmpName);
 
-                $FilePath = $folderPath.'\\cover.'.$GetExtension($coverTmpName);
+                $this->setCoverExt($fileExt);
+
+                $FilePath = $this->ImagesFolder.'\\cover.'.$fileExt;
                 if(!move_uploaded_file($coverTmpName, $FilePath)) {
                     throw new Exception("\nL'image du cover n'a pas pu être ajouté par move_uploaded_file : ".$e->getMessage());
                 }
@@ -207,6 +223,21 @@
                 throw new Exception("\nErreur lors de l'ajout du cover : ".$e->getMessage());
             }
 
+        }
+
+        function getCover() {
+            return $this->ImagesFolder.'\\cover.'.$this->CoverExt;
+        }
+
+        private function SetImagesFolder() {
+            try {
+                $this->ImagesFolder = 'comics\\'.$this->Id;
+                if (!file_exists($this->ImagesFolder)) {
+                    mkdir($this->ImagesFolder, 0777, true);
+                }
+            } catch (Exception $e) {
+                throw new Exception("\nErreur lors de la création du dossier d'image du comic : ".$e->getMessage());
+            }
         }
 
         private function GetExtension($tmpName) {
