@@ -1,3 +1,8 @@
+.login_logo {
+    margin: 50px auto;
+    width: 50px;
+}
+
 .bad-input {
     border: red 2px solid;
 }
@@ -5,7 +10,7 @@
 
 .form-div {
 	margin: auto;
-	width: 75%;
+	width: 810px;
 	padding: 5%;
 }
 
@@ -21,4 +26,3 @@ form > input {
 	padding: 10px;
 	border-radius: 10px
 }
-

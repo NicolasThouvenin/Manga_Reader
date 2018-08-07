@@ -8,7 +8,7 @@
     <body>
         <div class="page">
             <header>
-                <input class="add" type='button' onclick="location.href = 'designer.php';" value="Add Creation">
+                <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation">
 
                 <div class="displayUser">
                     <?php
