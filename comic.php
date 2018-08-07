@@ -2,8 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Comic  Page</title>
+        <title>Comic Page</title>
         <link rel="stylesheet" type="text/css" href="css\main_lg.css">
+        <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="script/bubbleBook.js"></script>
     </head>
@@ -43,32 +44,15 @@
                 <?php
                 if (isset($_GET["bookId"])) {
                     try {
-                        require('connection.php');
 
-                        echo "<p class='log'>Connection succeeded.</p>";
-
-                        $result = $db->prepare("SELECT * FROM comics WHERE id = :comicId");
-                        $result->execute(array('comicId' => $_GET["bookId"]));
-
-                        if ($result->rowCount() == 0) {
-                            echo "<p>Sorry, we haven't found any results matching this search.</p>";
-                        } else {
-                            $line = $result->fetch();
-
-                            if ($line['EndDate'] === null) {
-                                $endDate = '';
-                            } else {
-                                $endDate = $line['EndDate'];
-                            }
-                            $comic = new Comic($line['Id'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate, $line['CoverExt']);
-                            $serializedComic = serialize($comic);
-
+                            $comic = new Comic($_GET["bookId"]);
+                            
                             echo '<script>';
                             echo 'var title = "' . $comic->getTitle() . '";';
                             echo '</script>';
                             ?>
                             <div id="book_cover">
-                                <img title="<?php echo $comic->getTitle(); ?>" src="<?php echo "comics\\" . $_GET['bookId'] . "\\" . $_GET['bookId'] . "_cover." . $comic->getCoverExt(); ?>" alt="cover" height="375" width="250">
+                                <img title="<?php echo $comic->getTitle(); ?>" src="<?php echo "comics\\" . $_GET['bookId'] . "\\cover." . $comic->getCoverExt(); ?>" alt="cover" height="375" width="250">
                             </div> <!-- book_cover -->
                             <div id="book_meta">
                                 <p id="book_title"><?php echo $comic->getTitle(); ?></p>
@@ -121,7 +105,7 @@
 
                             </div> <!-- chapters -->
                             <?php
-                        }
+
                     } catch (Exception $e) {
                         die('Error : ' . $e->getMessage());
                     }
