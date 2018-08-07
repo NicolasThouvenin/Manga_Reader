@@ -245,7 +245,7 @@ class Comic {
         try {
             require('connection.php');
             $date = date("Y-m-d");
-            $addVolume = $db->prepare("CALL createVolume(:title, :synopsis, :date, :comicId, @lastVolumeId");
+            $addVolume = $db->prepare("CALL createVolume(:title, :synopsis, :date, :comicId, @lastVolumeId, @lastVolumeNumber");
             $addVolume->bindParam(':title', $title, PDO::PARAM_STR, 255);
             $addVolume->bindParam(':synopsis', $synopsis, PDO::PARAM_STR, 255);
             $addVolume->bindParam(':date', $date, PDO::PARAM_STR, 10);
@@ -253,9 +253,9 @@ class Comic {
             $addVolume->execute();
             $addVolume->closeCursor();
 
-            $result = $db->query("SELECT @lastVolumeId")->fetch(PDO::FETCH_ASSOC);
+            $result = $db->query("SELECT @lastVolumeId, @lastVolumeNumber")->fetch(PDO::FETCH_ASSOC);
 
-            $volume = new Volume($result['@lastVolumeId'], $Number, $title, $synopsis, $date, "");
+            $volume = new Volume($result['@lastVolumeId'], $result['@lastVolumeNumber'], $title, $synopsis, $date, "");
             $this->Volumes[$result['@lastVolumeId']] = $volume;
         } catch (Exception $e) {
             throw new Exception("\nError during new volume creation : " . $e->getMessage());
