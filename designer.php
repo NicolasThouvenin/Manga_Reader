@@ -43,8 +43,6 @@
 // Checking the extension of uploaded file
 			if(!empty($_FILES))
 			{
-
-    // IN CASE OF COVER  ------------------------------------------------------------------------->
 				if(isset($_FILES['coverNumber'])){
 					$coverName=($_FILES['coverNumber']['name']);
 					$coverFileExtension = strrchr($coverName, ".");
@@ -77,13 +75,10 @@
     }
 }
 ?><!-- End of checking $_FILES -->
-<!-- // end of cover case--------------------------------------------------------------- -->
-
 
 
 <div id="Page" align="center">
 	<h1>Designer</h1>
-
 
 
         <!-- HERE YOU WILL CREATE AND UPLOAD YOUR NEW BOOK -->
@@ -107,15 +102,9 @@
 
 
 
-
-<!-- BEGIN OF COVER UPLOAD --------------------------------------------------------------------------->
-        	<label for="icone">Upload a Cover (JPG, PNG or GIF | max. 10Mo per files) :</label><br />
+			<!-- COVER UPLOAD --------------------------------------------------------------------------->
+        	<label for="icone">Upload a Cover (JPG, PNG or GIF) :</label><br />
         	<input type="file" name="coverNumber" id="cover"/><br><br>
-        	<!-- <input type="submit" name="sendCover" value="Send cover" /> -->
-        	<!-- </form> -->
-
-
-        	<!-- END OF COVER UPLOAD ----------------------------------------------------------------------------->
 
 
 
@@ -141,7 +130,6 @@
 
 
     	<br><br>
-
     	<div class="bookInformation">
     		<fieldset>
     			<legend><h2>Uploaded Book information :</h2></legend>
@@ -194,11 +182,8 @@ echo '<br><img src="data:image/jpeg;base64,'.$imageData.'">
         </fieldset>
     </div>
     <br><br>
-
     <!-- END OF SUMMARIZE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
-    <?php
-// if(isset($_POST['confirmNewBook'])){header}
-    ?>
+
 <?php } ?>
 
 
