@@ -66,7 +66,7 @@
         }
 
         private function SetComicStrips() {
-            //$this->comicStrips 
+            $this->comicStrips = '';
         }
 
         function GetComicStrips() {
@@ -74,7 +74,7 @@
                 $this->SetComicStrips();
                 $this->ComicStripsLoaded = true;
             }
-            $this->comicStrips 
+            $this->comicStrips;
         }
 	}
 ?>
