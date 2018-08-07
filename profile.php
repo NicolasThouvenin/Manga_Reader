@@ -14,6 +14,7 @@ if (isset($_COOKIE['authentified'])) {
         <meta charset = "utf-8">
         <title><?php echo $user->getLogin(); ?></title>
         <link rel = "stylesheet" type = "text/css" href = "css\main_lg.css">
+        <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
     </head>
     <body>
         <div class="page">
@@ -21,13 +22,9 @@ if (isset($_COOKIE['authentified'])) {
             <!-- *********** Generating Page Header ******************* -->
             <header>
                 <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation">
-
                 <div class="displayUser">
-
                     <p class='userName'><a href='profile.php'><?php echo $user->getLogin(); ?></a></p>
-
                     <p><a class='userName' href='disconnect.php'>Log out</a></p>
-
                 </div> <!-- displayUser -->
                 <div class="logo"><a href="homePage.php">LOGO</a></div>
             </header>

@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>DesignerHome</title>
         <link rel="stylesheet" type="text/css" href="css\main_lg.css">
+        <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
     </head>
     <body>
         <div class="page">

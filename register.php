@@ -4,6 +4,7 @@
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="css/main_lg.css">
     <link rel="stylesheet" type="text/css" href="css/form.css">
+    <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
     <meta charset="utf-8">
 </head>
 <body>

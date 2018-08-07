@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <title>Comic Reader</title>
         <link rel="stylesheet" type="text/css" href="css\main_lg.css">
+        <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
     </head>
     <body>
         <div class="page">
@@ -21,7 +21,7 @@
                     if (isset($_COOKIE['authentified'])) {
                         $user = unserialize($_COOKIE['authentified']);
                         // if a user is connected
-                        echo "<p class='userName'>" . $user->getLogin() . "</p>";
+                        echo "<p class='userName'><a href='profile.php'>" . $user->getLogin() . "</a></p>";
                         echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
                     } else {
                         ?>

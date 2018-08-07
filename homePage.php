@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Home</title>
         <link rel="stylesheet" type="text/css" href="css\main_lg.css">
-        <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
     </head>
     <body>
         <div class="page">
@@ -52,12 +52,12 @@
                         while ($line = $stmt->fetch()) {
 
                             // Path to the comic cover
-                            $coverPath = "comics\\" . $line['Id'] . "\\" . $line['Id'] . "_cover" . "." . $line['CoverExt'];
+                            $coverPath = "comics\\" . $line['Id'] . "\\cover" . "." . $line['CoverExt'];
                             ?>
 
                             <article id="<?php echo $line['Id'] ?>">
-                                <a href="book.php?bookId=<?php echo $line['Id'] ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
-                                <p class="comics_name"><a href="book.php?bookId=<?php echo $line['Id'] ?>"><?php echo $line['Title'] ?></a><p>
+                                <a href="comic.php?bookId=<?php echo $line['Id'] ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
+                                <p class="comics_name"><a href="comic.php?bookId=<?php echo $line['Id'] ?>"><?php echo $line['Title'] ?></a><p>
                             </article>
 
                             <?php
