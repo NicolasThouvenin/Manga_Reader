@@ -17,10 +17,10 @@
 
                     session_start();
                     if (isset($_COOKIE['authentified'])) {
-                        $user = unserialize($_COOKIE['authentified']);
+                        $authentified = unserialize($_COOKIE['authentified']);
 
                         // if a user is connected
-                        echo "<p class='userName'><a href='profile.php'>" . $user->getLogin() . "</a></p>";
+                        echo "<p class='userName'><a href='profile.php'>" . $authentified->getLogin() . "</a></p>";
                         echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
                     } else {
                         header("Location:login.php");
@@ -49,7 +49,7 @@
                     </article>
 
                     <?php
-                    $author = new Author($user->getId());
+                    $author = new Author($authentified->getId());
 
                     foreach ($author->getComics() as $comic) {
                         $comicId = $comic->getId();
