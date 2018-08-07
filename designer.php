@@ -122,7 +122,7 @@
     </fieldset>
 
 
-    <!-- This block summarizes all the information provided by the user >>>>>>>>>>>>>>>>>>>>>>>-->
+    <!-- SUMMERIZE ALL INFO GATHERED TO RESUME FOR USER >>>>>>>>>>>>>>>>>>>>>>>-->
     <?php
     if(isset($_POST['validateNewBook'])){
     	?>
@@ -186,57 +186,6 @@ echo '<br><img src="data:image/jpeg;base64,'.$imageData.'">
 
 <?php } ?>
 
-
-
-
-
-<!-- BEGIN OF BUBBLE UPLOAD -------------------------------------------------------------------------->
-<!--            <br><br>
-            <form method="POST">
-                <input type="submit" value="Upload your bubbles" name="uploadBubble">
-            </form> -->
-
-            <!-- UPLOAD BOOKS -->
-<!--            <?php if(isset($_POST['uploadBubble']) or (isset($_POST['sendBubble']))){?>
-                <br>
-                <form method="POST" enctype="multipart/form-data">
-                    <label for="icone">Upload a Bubble (JPG, PNG or GIF | max. 10Mo per files) :</label><br />
-                    <input type="file" name="bubbleNumber" id="bubble"/><br><br>
-                    <input type="submit" name="sendBubble" value="Send Bubble" />
-                </form>
-
-                <?php if(isset($_POST['sendBubble'])){?>
-                	<!-- HERE YOU WILL HAVE A VIEW OF WHAT YOU HAVE JUST UPLOADED -->
-                	<h1>Uploaded bubbles</h1>
-                	<div class="scrollBubbles">
-
-
-
-
-<!--                        <?php 
-                        $req=$db->query('SELECT name,fileUrl FROM files');
-                        while($data=$req->fetch()){
-                            $imageData = base64_encode(file_get_contents($data['fileUrl']));
-                            echo '<br><img src="data:image/jpeg;base64,'.$imageData.'"> 
-                            <style>
-                            img{
-                                width:20%;
-                                height:auto;
-                            }
-                            .scrollBubbles{
-                                height:400px;
-                                overflow-y:scroll;
-                            }
-                            </style>
-                            ';
-                        }
-                        ?> -->
-
-
-                    </div>
-                <?php } ?>
-                <?php } ?> -->
-                <!-- END OF BUBBLE UPLOAD ----------------------------------------------------------------------------------------->
 
             </div><!-- End of page DIV -->
 
