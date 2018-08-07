@@ -46,7 +46,7 @@
                 header('Location: login.php');
             };
         } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
+            die("Erreur de l'auhtnetification: ". $e->getMessage());
         };
         ?>
     </body>

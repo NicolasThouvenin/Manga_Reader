@@ -46,22 +46,14 @@
 
             $result = $db->query("SELECT @lastUserId")->fetch(PDO::FETCH_ASSOC);
 
-
-            $token = hash('sha256', session_id().$_SESSION['uniqid'].$checkedData['login']);
-
-            $addToken = $db->prepare("CALL addToken(:token, :login)");
-            $addToken->bindParam(':token', $token, PDO::PARAM_STR, 64);
-            $addToken->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
-
-            $validated = false;              
-            $user = new User($result['@lastUserId'], $checkedData['login'], $checkedData['firstname'], $checkedData['surname'], $checkedData['birthDate'], $checkedData['email'], $validated, $token);
-            $userSerialized = serialize($user);
-            setcookie ('user', $userSerialized);
+            $authentified = new Authentified($result['@lastUserId'], $_SESSION['uniqid']);
+            $authentifiedSerialized = serialize($authentified);
+            setcookie ('authentified', $authentifiedSerialized);
 
             header('Location: homePage.php');
 
         } catch(Exception $e) {
-            die('Erreur : '.$e->getMessage());
+            die('Erreur de la création du nouvel utilisateur: '.$e->getMessage());
         };
     ?>
 </body>
