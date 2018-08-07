@@ -3,13 +3,13 @@
             
             /* Cette classe correspond aux informations sur un utilisateur */
 
-            private $Id;
-            private $Login;
-            private $Firstname;
-            private $Surname;
-            private $BirthDate;
-            private $Email;
-            private $EmailValidated;
+            protected $Id;
+            protected $Login;
+            protected $Firstname;
+            protected $Surname;
+            protected $BirthDate;
+            protected $Email;
+            protected $EmailValidated;
 
             public function __construct(int $Id) {
 
