@@ -69,7 +69,7 @@
             try {
                 require('connection.php');    
 
-                $result = $db->prepare("SELECT * FROM chapters WHERE volumeId = volumeId");
+                $result = $db->prepare("SELECT * FROM chapters WHERE volumeId = :volumeId");
                 $result->execute(array('volumeId' => $this->Id));
 
                 while ($line = $result->fetch()) {
