@@ -118,7 +118,7 @@
 
                 if(move_uploaded_file($bubbleTmpName, $FilePath)) {
 
-                    $addComicStrip = $db->prepare('CALL createComicStrip(:fileName, :chapterId, @lastComicStripId)');
+                    $addComicStrip = $db->prepare("CALL createComicStrip(:fileName, :chapterId, @lastComicStripId)");
                     $addComicStrip->bindParam(':fileName', $Filename, PDO::PARAM_STR, 75);
                     $addComicStrip->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
                     $addComicStrip->execute();
@@ -142,7 +142,7 @@
 
             try {
 
-                $getChapterImagesFolder = $db->prepare('CALL createComicStrip(:chapterId, @chapterFolderPath)';
+                $getChapterImagesFolder = $db->prepare("CALL createComicStrip(:chapterId, @chapterFolderPath");
                 $getChapterImagesFolder->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
                 $getChapterImagesFolder->execute();
 
