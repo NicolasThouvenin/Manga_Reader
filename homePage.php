@@ -9,7 +9,7 @@
     <body>
         <div class="page">
             <header>
-                <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation">
+                <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation" class="creationButton">
 
                 <div class="displayUser">
                     <?php
@@ -23,8 +23,8 @@
                         echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
                     } else {
                         ?>
-                        <input type='button' onclick="location.href = 'login.php';" value="Log in" >
-                        <input type='button' onclick="location.href = 'register.php';" value="Register" >
+                        <input type='button' onclick="location.href = 'login.php';" value="Log in" class="regularButton">
+                        <input type='button' onclick="location.href = 'register.php';" value="Register" class="registerButton">
                         <?php
                     }
                     ?>
