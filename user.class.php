@@ -13,7 +13,7 @@
 
             public function __construct(int $Id) {
 
-                $this->Id = $Id;
+                $this->Id = (int)$Id;
 
                 try {
 
