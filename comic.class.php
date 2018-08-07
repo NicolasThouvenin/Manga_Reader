@@ -196,7 +196,10 @@
         function AddCover($coverTmpName) {
             try {
 
-                $FilePath = 'comics\\'.$this->Id.'\\cover.'.$GetExtension($coverTmpName);
+                $folderPath = 'comics\\'.$this->Id;
+                mkdir($folderPath);
+
+                $FilePath = $folderPath.'\\cover.'.$GetExtension($coverTmpName);
                 if(!move_uploaded_file($coverTmpName, $FilePath)) {
                     throw new Exception("\nL'image du cover n'a pas pu être ajouté par move_uploaded_file : ".$e->getMessage());
                 }
