@@ -9,7 +9,7 @@ class Volume {
     private $StartDate;
     private $EndDate;
     private $Chapters = array();
-    private $lastChapterNumber = -1;
+    private $LastChapterNumber = -1;
 
     public function __construct(int $Id, int $Number, string $Title, string $Synopsis, string $StartDate, string $EndDate) {
         $this->Id = $Id;
@@ -86,9 +86,9 @@ class Volume {
                 $chapter = new Chapter($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $validated, $publicationDate);
 
                 $this->Chapters[$line['Number']] = $chapter;
-
-                $this->lastChapterNumber = $line['Number'];
+                $this->LastChapterNumber = $line['Number'];
             }
+            
         } catch (Exception $e) {
             throw new Exception("\nErreur lors de la création de la liste de d'objets chapitres : " . $e->getMessage());
         }
@@ -109,7 +109,7 @@ class Volume {
             $this->SetChapters();
             $this->ChaptersLoaded = true;
         }
-        return $this->lastChapterNumber;
+        return $this->LastChapterNumber;
     }
 
     public function getLastChapter() {
@@ -122,7 +122,7 @@ class Volume {
     }
 
     public function isEmpty() {
-        return $this->lastChapterNumber != -1;
+        return $this->LastChapterNumber != -1;
     }
 
 }
