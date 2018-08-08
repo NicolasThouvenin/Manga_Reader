@@ -15,6 +15,7 @@ class Comic {
     private $AuthorsLoaded = false;
     private $Authors = array();
     private $ImagesFolder;
+    private $lastVolumeNumber;
 
     public function __construct(int $Id) {
 
@@ -111,7 +112,7 @@ class Comic {
 
             require('connection.php');
 
-            $result = $db->prepare("SELECT * FROM volumes WHERE comicId = :comicId");
+            $result = $db->prepare("SELECT * FROM volumes WHERE comicId = :comicId ORDER BY Number");
             $result->execute(array('comicId' => $this->Id));
 
             while ($line = $result->fetch()) {
@@ -124,7 +125,7 @@ class Comic {
 
                 $volume = new Volume($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $line['StartDate'], $endDate);
 
-                $this->Volumes[$line['Id']] = $volume;
+                $this->Volumes[$line['Number']] = $volume;
             }
         } catch (Exception $e) {
             throw new Exception("\nErreur lors de la création de la liste de volumes : " . $e->getMessage());
@@ -141,6 +142,15 @@ class Comic {
             yield $volume;
         }
     }
+
+    public function getLasVolumeNumber() {
+    	if (!$this->volumesLoaded) {
+            $this->SetVolumes();
+            $this->volumesLoaded = true;
+       	}
+       	return $this->lastVolumeNumber;
+    }
+
 
     private function SetGenreIds() {
 
@@ -245,6 +255,12 @@ class Comic {
     function createVolume($title, $synopsis) {
         try {
             require('connection.php');
+
+            if (!$this->volumesLoaded) {
+            	$this->SetVolumes();
+            	$this->volumesLoaded = true;
+        	}
+
             $startDate = date('Y-m-d');
             $addVolume = $db->prepare("CALL createVolume(:title, :synopsis, :startDate, :comicId, @lastVolumeId, @lastVolumeNumber)");
             $addVolume->bindParam(':title', $title, PDO::PARAM_STR, 255);
@@ -259,7 +275,8 @@ class Comic {
             $endDate = '';
 
             $volume = new Volume($result['@lastVolumeId'], $result['@lastVolumeNumber'], $title, $synopsis, $endDate, $endDate);
-            $this->Volumes[$result['@lastVolumeId']] = $volume;
+            $this->Volumes[$result['@lastVolumeNumber']] = $volume;
+            $this->lastVolumeNumber = $result['@lastVolumeNumber'];
 
         } catch (Exception $e) {
             throw new Exception("\nError during new volume creation : ". $e->getMessage());
