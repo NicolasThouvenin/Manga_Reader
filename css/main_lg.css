@@ -131,10 +131,12 @@ header div, header input {
 
 
 .logo {
-    margin: auto;
-    width: 50px;
-    margin-top: -20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20em;
+    margin-top: -40px;
     display: block;
+
 }
 
 .displayUser {
@@ -177,6 +179,19 @@ main {
 /****************************/
 /*****   homePage.PHP   *****/
 /****************************/
+
+/*homePage 400px*/
+@media screen and (max-width: 800px) {
+.userName, input[type=button], input[type=search]{
+        display: none;
+    } 
+    article {
+    width: 80px;
+    padding: 10px 50px;
+    float: left;
+    font-size: 18px;
+}
+}
 
 article {
     width: 180px;
