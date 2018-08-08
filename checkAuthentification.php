@@ -18,28 +18,28 @@
             require('required.php');
             require('connection.php');
             session_start();
+            
+            $checkedData = checkData($_POST);
 
             if (!isset($_SESSION['uniqid'])) {
                 throw new Exception("La requête post d'authentification ne possède pas de token correspondant à un formulaire envoyé par le serveur");
-            } else if ($_SESSION['uniqid'] != $_POST['uniqid']) {
+            } else if ($_SESSION['uniqid'] != $checkedData['uniqid']) {
                 throw new Exception("La requête post n'indique pas pas le même token d'authentification que celui de la session du serveur");
             }
 
-            $checkedData = checkData($_POST);
-
             $logger = $db->prepare("SELECT users.* FROM users WHERE Login = :login AND password = PASSWORD(:password);");
 
-            $logger->execute(array('login' => $_POST['login'], 'password' => $_POST['password']));
+            $logger->execute(array('login' => $checkedData['login'], 'password' => $checkedData['password']));
 
             if ($logger->rowCount() == 1) {
                 while ($line = $logger->fetch()) {
                     $authentified = new Authentified($line['Id'], $_SESSION['uniqid']);
                     $authentifiedSerialized = serialize($authentified);
 
-                    if (isset($_POST['stayConnected'])) {
+                    if (isset($checkedData['stayConnected'])) {
                         setcookie ('authentified', $authentifiedSerialized, time()+86400*365); //expire au bout d'un an
                     } else {
-                        setcookie ('authentified', $authentifiedSerialized, 0); //expire à la fin de la session
+                        setcookie ('authentified', $authentifiedSerialized, time()-1); //expire à la fin de la session
                     }
                 }
 
