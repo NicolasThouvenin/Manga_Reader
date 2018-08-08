@@ -48,16 +48,25 @@
                     ?>
                     <div class="reader">
                         <?php
-                        for ($id = 1; $id < 97; $id++) {
-                            ?>
-                            <div class="bubble">
-                                <div class="bubble_number"><?php echo $id ?> / 96</div>
-                                <div class="strip_container">
-                                    <img class="comicstrip" src="<?php echo "comics\\1\\1\\" . ($id < 10 ? "0" . $id : $id) . ".jpg"; ?>">
+                        if (isset($_GET["chapterId"]) && isset($_GET["volumeId"]) && isset($_GET["comicId"])) {
+                            $path = "comics\\" . $_GET["comicId"] ."\\". $_GET["volumeId"] ."\\". $_GET["chapterId"]."\\";
+                            $chapterId = htmlentities($_GET["chapterId"]);
+                            $result = $db->prepare("SELECT Filename FROM comicstrips WHERE chapterId = :chapterId");
+                            $result->execute(array('chapterId' => $chapterId));
+                            $i = 1;
+                            while ($line = $result->fetch()) {
+                                ?>
+                                <div class="bubble">
+                                    <div class="bubble_number"><?php echo $i ?> </div>
+                                    <div class="strip_container">
+                                        <img class="comicstrip" src="<?php echo $path . $line["Filename"]; ?>">
+                                    </div>
+                                    <div class="text"><?php echo $i ?></div>
                                 </div>
-                                <div class="text"><?php echo $id ?></div>
-                            </div>
-                            <?php
+                                <?php
+                            }
+                        } else {
+                            header("Location:homePage.php");
                         }
                         ?>
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>

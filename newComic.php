@@ -22,7 +22,7 @@
                         echo "<p class='userName'>" . $user->getLogin() . "</p>";
                         echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
                     } else {
-                        header("Location:login.php");
+                        header("Location:homePage.php");
                     }
                     ?>
                 </div> <!-- displayUser -->

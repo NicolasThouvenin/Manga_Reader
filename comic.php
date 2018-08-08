@@ -133,7 +133,7 @@ if (isset($_POST["submit"])) {
                                     foreach ($volume->getChapters() as $chapter) {
                                         ?>
                                         <li>
-                                            <p class='chapter'><a href="comicsReader.php?chapterNumber=<?php echo $chapter->getNumber(); ?>&comicId=<?php echo $_GET["bookId"]; ?>">Chapter <?php echo $chapter->getNumber(); ?>
+                                            <p class='chapter'><a href="comicsReader.php?chapterId=<?php echo $chapter->getId()."&comicId=".$_GET["bookId"]."&volumeId=".$volume->getId(); ?>">Chapter <?php echo $chapter->getNumber(); ?>
                                                     <span class='chapter_title' title="<?php echo $chapter->getSynopsis() ?>"><?php echo $chapter->getTitle() ?></span>
                                                     <span class="chapter_release"><?php echo $chapter->getPublicationDate() ?></span>
                                                 </a></p>
