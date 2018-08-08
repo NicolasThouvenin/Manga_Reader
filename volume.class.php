@@ -8,7 +8,7 @@
 	    private $StartDate;
 	    private $EndDate;
 	    private $Chapters = array();
-        private $lastChapterNumber;
+        private $lastChapterNumber = -1;
 
 
 		public function __construct(int $Id, int $Number, string $Title, string $Synopsis, string $StartDate, string $EndDate) {
@@ -119,6 +119,10 @@
 
         public function getLastChapterId() {
             return $this->getLastChapter().Id;
+        }
+
+        public function isEmpty() {
+            return $this->lastChapterNumber != -1;
         }
 	}
 ?>

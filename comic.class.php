@@ -15,7 +15,7 @@ class Comic {
     private $AuthorsLoaded = false;
     private $Authors = array();
     private $ImagesFolder;
-    private $lastVolumeNumber;
+    private $lastVolumeNumber = -1;
 
     public function __construct(int $Id) {
 
@@ -160,6 +160,9 @@ class Comic {
     	return $this->getLastVolume().Id;
     }
 
+    public function isEmpty() {
+    	return $this->lastVolumeNumber != -1;
+    }
 
     private function SetGenreIds() {
 
@@ -291,7 +294,6 @@ class Comic {
             throw new Exception("\nError during new volume creation : ". $e->getMessage());
         }
     }
-
 }
 
 ?>
