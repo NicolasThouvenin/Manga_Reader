@@ -6,5 +6,5 @@ BEGIN
 	SET lastComicId = -1;
 	INSERT INTO comics (Title, Synopsis, StartDate, coverExt) VALUES (inTitle, inSynopsis, inStartDate, inCoverExt);
 	SET lastComicId = LAST_INSERT_ID();
-	INSERT INTO Authors (comicId, userId) VALUES (lastComicId, inAuthorId);
+	INSERT INTO authors (comicId, userId) VALUES (lastComicId, inAuthorId);
 END $$
