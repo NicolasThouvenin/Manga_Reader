@@ -42,7 +42,7 @@
 
 <main>
     <div class="banner">
-        <input id="searchbar" type="search" name="q" placeholder="search comic or author">
+        <input id="searchbar" type="search" name="q" placeholder="search comic or author" oninput="filter(this)">
     </div> <!-- banner -->
     <?php
     try {
@@ -61,7 +61,7 @@
                 $coverPath = "comics\\" . $line['Id'] . "\\cover" . "." . $line['CoverExt'];
                 ?>
 
-                <article id="comicId_<?php echo $line['Id'] ?>">
+                <article class="comic" id="comicId_<?php echo $line['Id'] ?>">
                     <a href="comic.php?bookId=<?php echo $line['Id'] ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
                     <p class="comics_name"><a href="comic.php?bookId=<?php echo $line['Id'] ?>"><?php echo $line['Title'] ?></a><p>
                     </article>
@@ -75,5 +75,8 @@
         ?>
     </main>
 </div> <!-- page -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script/filter.js"></script>
 </body>
 </html>

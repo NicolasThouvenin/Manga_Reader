@@ -1,8 +1,10 @@
 <?php
 
-	require('connection.php');
+	
 
 	function getComicsIdsByAuthors($keyWordLower) {
+
+		require('connection.php');
 
 		$param = "%{$keyWordLower}%";
 
@@ -13,9 +15,6 @@
 					ON authors.userId = users.Id
 					WHERE CONCAT(LOWER(users.Login), ' (', LOWER(users.Firstname), ' ', LOWER(users.Surname), ')') LIKE :param";
 
-
-					$query = "SELECT Id FROM comics WHERE Title LIKE :param";
-
 		$result = $db->prepare($query);
 		$result->execute(array('param' => $param));
 
@@ -25,6 +24,8 @@
 	}
 
 	function getComicsIdsByTitle($keyWordLower) {
+
+		require('connection.php');
 
 		$param = "%{$keyWordLower}%";
 
@@ -37,18 +38,20 @@
         }
 	}
 
-	$keyWordLower = LOWER($keyWord);
+	$keyWordLower = strtolower($_GET['keyword']);
 
 	$foundComics = array();
 
-	foreach ($getComicsIdsByTitle($keyWordLower) as $foundComic) {
+	foreach (getComicsIdsByTitle($keyWordLower) as $foundComic) {
 		$foundComics[$foundComic['Title']] = $foundComic['Id'];
 	}
 
-	foreach ($getComicsIdsByAuthors($keyWordLower) as $foundComic) {
+	foreach (getComicsIdsByAuthors($keyWordLower) as $foundComic) {
 		$foundComics[$foundComic['Author']] = $foundComic['Id'];
 	}
 
-	echo serialize($foundComics);
+	header('Content-type: application/json');
+
+	echo json_encode($foundComics);
 
 ?>
