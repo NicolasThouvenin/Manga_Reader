@@ -1,9 +1,9 @@
 <?php
+require('required.php');
 if (isset($_POST['settleChapter'])) {
     try {
 
         $nbr_file = count($_FILES["uploadedBubble"]["tmp_name"]);
-        echo $nbr_file;
 
         for ($i = 0; $i < $nbr_file; $i++) {
             $check = explode("/", mime_content_type($_FILES["uploadedBubble"]["tmp_name"][$i]));
@@ -16,24 +16,26 @@ if (isset($_POST['settleChapter'])) {
         }
         require('connection.php');
 
+
         $chapterTitle = htmlentities($_POST['chapterTitle']);
         $chapterSynopsis = htmlentities($_POST['chapterSynopsis']);
         $date = date("Y-m-d");
+        echo $date;
         $volumeId = htmlentities($_GET["volumeId"]);
-        $createChapter = $db->prepare("CALL createChapter(:Title, :Synopsis, :VolumeId, @lastChapterId)");
+        $createChapter = $db->prepare("CALL createChapter(:Title, :Synopsis, :VolumeId, @lastChapterId, @lastChapterNumber)");
         $createChapter->bindParam(':Title', $chapterTitle, PDO::PARAM_STR, 255);
         $createChapter->bindParam(':Synopsis', $chapterSynopsis, PDO::PARAM_STR, 255);
         $createChapter->bindParam(':VolumeId', $volumeId, PDO::PARAM_INT);
         $createChapter->execute();
         $createChapter->closeCursor();
-        $result = $db->query("SELECT @lastChapterId")->fetch(PDO::FETCH_ASSOC);
-        $chapter = new Chapter($result['@lastChapterId']);
+        $result = $db->query("SELECT @lastChapterId, @lastChapterNumber")->fetch(PDO::FETCH_ASSOC);
+        $chapter = new Chapter($result['@lastChapterId'], $result['@lastChapterNumber'], $chapterTitle, $chapterSynopsis, false, $date);
         
         foreach ($_FILES["uploadedBubble"]["tmp_name"] as $strip) {
             $chapter->AddComicStrip($strip);
         }
         
-          header("Location:homePage.php");
+          //header("Location:homePage.php");
     } catch (Exception $e) {
         die('Error during bubble creation : ' . $e->getMessage());
     }
@@ -55,8 +57,6 @@ if (isset($_POST['settleChapter'])) {
 
                 <div class="displayUser">
                     <?php
-                    require('required.php');
-
 
                     if (isset($_COOKIE['authentified'])) {
                         $user = unserialize($_COOKIE['authentified']);
@@ -74,7 +74,7 @@ if (isset($_POST['settleChapter'])) {
             <main>
                 <h1>New Chapter</h1>
                 <fieldset><legend>Bubbles Upload</legend>
-                    <form method="POST" enctype="multipart/form-data" action="newChapter.php">
+                    <form method="POST" enctype="multipart/form-data" action="newChapter.php?volumeId=<?php echo $_GET["volumeId"]; ?>">
                         <p id="first_chapter">Chapter Title : <input type="text" name="chapterTitle" placeholder="Chapter Title" required></p><br>
                         <p>Chapter Synopsis : <textarea name="chapterSynopsis" placeholder="Chapter Synopsis" cols="40" rows="3" required="required"></textarea></p><br>
                         <p>Upload your bubbles here, once you confirm you will settle your chapter.</p>

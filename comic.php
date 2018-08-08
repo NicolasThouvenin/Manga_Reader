@@ -95,11 +95,12 @@ if (isset($_POST["submit"])) {
                     <div id="add_new">
                         <?php
                         $lastVolume = $comic->getLastVolume();
+
                         ?>
                         <span id="add_volume" onclick="toggleForm()">Create New Volume</span>
-                        <span id="add_chapter"><a href="newChapter.php">Create New Chapter</a></span>
+                        <span id="add_chapter"><a href="newChapter.php?volumeId=<?php echo $lastVolume->getId(); ?>">Create New Chapter</a></span>
                         <?php
-                        if ($lastVolume->isEmpty()) {
+                        if ($lastVolume->isEmpty() == 1) {
                             ?>
                             <p id="new_volume_form">You can't create a new volume when the last one is empty.</p>
                             <?php
@@ -132,7 +133,7 @@ if (isset($_POST["submit"])) {
                                     foreach ($volume->getChapters() as $chapter) {
                                         ?>
                                         <li>
-                                            <p class='chapter'><a href="comicsReader.php">Chapter <?php echo $chapter->getNumber(); ?>
+                                            <p class='chapter'><a href="comicsReader.php?chapterNumber=<?php echo $chapter->getNumber(); ?>&comicId=<?php echo $_GET["bookId"]; ?>">Chapter <?php echo $chapter->getNumber(); ?>
                                                     <span class='chapter_title' title="<?php echo $chapter->getSynopsis() ?>"><?php echo $chapter->getTitle() ?></span>
                                                     <span class="chapter_release"><?php echo $chapter->getPublicationDate() ?></span>
                                                 </a></p>
