@@ -7,6 +7,7 @@ function filter(input) {
       success: function(result) {
 
         var visibleComics = [];
+        
         for (foundKeyWord in result) {
             visibleComics.push('comicId_' + result[foundKeyWord]);
         };
@@ -18,10 +19,15 @@ function filter(input) {
             element.classList.remove('comic-no-visible');
         });
 
+        if (visibleComics.length === 0 ) {
+            return;
+        }
+
 
         var elements = document.getElementsByClassName('comic');
 
         Array.prototype.forEach.call(elements, function(element) {
+            console.log(element.id);
             if (visibleComics.indexOf(element.id)  === -1) {
                 element.classList.add('comic-no-visible');
             };
