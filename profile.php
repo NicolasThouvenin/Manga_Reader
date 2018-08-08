@@ -53,8 +53,8 @@ if (isset($_COOKIE['authentified'])) {
                             <p>Login<input type="text" id="login" name="login" value="<?php echo $user->getLogin(); ?>"></p>
                             <p>Firstname<input type="text" id="firstname" name="firstname" value="<?php echo $user->getFirstname(); ?>"></p>
                             <p>Surname<input type="text" id="surname" name="surname" value="<?php echo $user->getSurname(); ?>"></p>
-                            <p>Birth Date<input type="date" id="date" name="date" value="<?php echo $user->getBirthDate(); ?>"></p>
-                            <p>Email<input type="email" id="email" name="email" value="<?php echo $user->getEmail(); ?>"></p>
+                            <p>Birth Date<input type="date" id="birthDate" name="birthDate" value="<?php echo $user->getBirthDate(); ?>"></p>
+                            <p>Email<input type="email" id="email" name="email" value="<?php echo $user->getEmail(); ?>" disabled></p>
                             <input type="submit" name="submit" value="Save" style="margin-top: 30px;">
                         </div>  <!-- book_meta -->
 

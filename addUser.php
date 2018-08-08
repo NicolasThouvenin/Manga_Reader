@@ -43,6 +43,7 @@
             $authentified = new Authentified($result['@lastUserId'], $_SESSION['uniqid']);
             $authentifiedSerialized = serialize($authentified);
             setcookie ('authentified', $authentifiedSerialized);
+            //mécanisme pour rester connecté à mettre ici
 
             header('Location: homePage.php');
 

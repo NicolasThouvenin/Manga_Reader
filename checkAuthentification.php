@@ -37,10 +37,12 @@
                     $authentifiedSerialized = serialize($authentified);
 
                     if (isset($checkedData['stayConnected'])) {
-                        setcookie ('authentified', $authentifiedSerialized, time()+86400*365); //expire au bout d'un an
+                        $expiry = time()+86400*365; //expire au bout d'un an
                     } else {
-                        setcookie ('authentified', $authentifiedSerialized, time()-1); //expire à la fin de la session
+                        $expiry = time()-1; //expire à la fin de la session
                     }
+                    setcookie ('authentified', $authentifiedSerialized, $expiry); //expire à la fin de la session
+                    setcookie('cookieExpiryDate', $expiry, $expiry);
                 }
 
                 $logger->closeCursor();

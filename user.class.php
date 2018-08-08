@@ -109,15 +109,12 @@
 
                     require('connection.php');
 
-                    $updatUser = $db->prepare("CALL updateUser(:Id, :Login, :Firstname, :Surname, :BirthDate, :Password, Email, :EmailValidated)");
+                    $updatUser = $db->prepare("CALL updateUser(:Id, :Login, :Firstname, :Surname, :BirthDate)");
                     $updatUser->bindParam(':Id', $this->Id, PDO::PARAM_INT);
                     $updatUser->bindParam(':Login', $this->Login, PDO::PARAM_STR, 255);
                     $updatUser->bindParam(':Firstname', $this->Firstname, PDO::PARAM_STR, 255);
                     $updatUser->bindParam(':Surname', $this->Surname, PDO::PARAM_STR, 255);
                     $updatUser->bindParam(':BirthDate', $this->BirthDate, PDO::PARAM_STR, 10);
-                    $updatUser->bindParam(':Password', $this->Password, PDO::PARAM_STR, 25);
-                    $updatUser->bindParam(':Email', $this->Email, PDO::PARAM_STR, 254);
-                    $updatUser->bindParam(':EmailValidated', $this->EmailValidated, PDO::PARAM_BOOL);
                     $updatUser->execute();
                     $updatUser->closeCursor();
 
