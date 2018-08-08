@@ -166,7 +166,7 @@ class Comic {
     }
 
     public function isEmpty() {
-        return $this->LastVolumeNumber != -1;
+        return ($this->LastVolumeNumber == -1);
     }
 
     private function SetGenreIds() {

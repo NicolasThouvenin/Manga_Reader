@@ -88,7 +88,6 @@ class Volume {
                 $this->Chapters[$line['Number']] = $chapter;
                 $this->LastChapterNumber = $line['Number'];
             }
-            
         } catch (Exception $e) {
             throw new Exception("\nErreur lors de la création de la liste de d'objets chapitres : " . $e->getMessage());
         }
@@ -122,7 +121,7 @@ class Volume {
     }
 
     public function isEmpty() {
-        return $this->LastChapterNumber != -1;
+        return ($this->LastChapterNumber == -1);
     }
 
 }

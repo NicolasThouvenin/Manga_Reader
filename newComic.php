@@ -37,7 +37,7 @@
                     try {
                         $check = explode("/", mime_content_type($_FILES["cover"]["tmp_name"]));
                         if ($check[0] !== "image") {
-                            throw new Exception("\nLe fichier n'est pas une image : " . $e->getMessage());
+                            throw new Exception("\nFile is not an image : " . $e->getMessage());
                         }
                         require('connection.php');
                         $comicTitle = htmlentities($_POST['comicTitle']);
@@ -58,8 +58,8 @@
                         $comic = new Comic($result['@lastComicId']);
                         $comic->AddCover($_FILES["cover"]["tmp_name"]);
                         $comic->createVolume(htmlentities($_POST['volumeTitle']), htmlentities($_POST['volumeSynopsis']));
-
-                        header("Location:newChapter.php");
+                        $volumeId = $comic->getLastVolumeId();
+                        header("Location:newChapter.php?volumeId=".$volumeId);
                     } catch (Exception $e) {
                         die('Error during Comic creation : ' . $e->getMessage());
                     }
