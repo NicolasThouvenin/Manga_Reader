@@ -55,7 +55,7 @@
                             $coverPath = "comics\\" . $line['Id'] . "\\cover" . "." . $line['CoverExt'];
                             ?>
 
-                            <article id="<?php echo $line['Id'] ?>">
+                            <article id="comicId_<?php echo $line['Id'] ?>">
                                 <a href="comic.php?bookId=<?php echo $line['Id'] ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
                                 <p class="comics_name"><a href="comic.php?bookId=<?php echo $line['Id'] ?>"><?php echo $line['Title'] ?></a><p>
                             </article>
