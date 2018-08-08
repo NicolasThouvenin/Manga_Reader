@@ -2,16 +2,16 @@
 
 	require('connection.php');
 
-	function getComicsIds($keyWord) {
+	function getComicsIdsByAuthors($keyWordLower) {
 
-		$param = "%{$keyWord}%";
+		$param = "%{$keyWordLower}%";
 
-		$query = "SELECT DISTINCT comics.Id FROM comics
+		$query = "SELECT DISTINCT comics.Id, CONCAT(users.Login, ' (', users.Firstname, ' ', users.Surname, ')') AS Author FROM comics
 					JOIN authors
 					ON authors.comicId = comics.Id
 					JOIN users
 					ON authors.userId = users.Id
-					WHERE LOWER(users.Login) LIKE :param OR LOWER(users.Firstname) LIKE :param OR LOWER(users.Surname) LIKE :param";
+					WHERE CONCAT(LOWER(users.Login), ' (', LOWER(users.Firstname), ' ', LOWER(users.Surname), ')') LIKE :param";
 
 
 					$query = "SELECT Id FROM comics WHERE Title LIKE :param";
@@ -20,22 +20,35 @@
 		$result->execute(array('param' => $param));
 
 	    while ($line = $result->fetch()) {
-        	yield $line['Id'];
+        	yield $line;
         }
 	}
 
-	function getComicsIdsByName($keyWord) {
+	function getComicsIdsByTitle($keyWordLower) {
 
-		$param = "%{$keyWord}%";
+		$param = "%{$keyWordLower}%";
 
-		$query = "SELECT Id FROM comics WHERE Title LIKE :param";
+		$query = "SELECT Id, Title FROM comics WHERE Title LIKE :param";
 		$result = $db->prepare($query);
 		$result->execute(array('param' => $param));
 
 		while ($line = $result->fetch()) {
-        	yield $line['Id'];
+        	yield $line;
         }
 	}
 
+	$keyWordLower = LOWER($keyWord);
+
+	$foundComics = array();
+
+	foreach ($getComicsIdsByTitle($keyWordLower) as $foundComic) {
+		$foundComics[$foundComic['Title']] = $foundComic['Id'];
+	}
+
+	foreach ($getComicsIdsByAuthors($keyWordLower) as $foundComic) {
+		$foundComics[$foundComic['Author']] = $foundComic['Id'];
+	}
+
+	echo serialize($foundComics);
 
 ?>
