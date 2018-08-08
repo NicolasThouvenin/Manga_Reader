@@ -5,4 +5,5 @@
     require('user.class.php');
     require('author.class.php');
     require('authentified.class.php');
+    require('comicStrip.class.php');
 ?>
