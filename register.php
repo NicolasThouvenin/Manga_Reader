@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="form-div">
+            <h2>Create your account</h2>
         <form id="register" name="register" method="post" action="addUser.php">
             <input type="text" id="login" name="login" placeholder="Login" required>
             <input type="text" id="firstname" name="firstname" placeholder="Prénom" required>
