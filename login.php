@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inscription</title>
+        <title>Sign In</title>
         <link rel="stylesheet" type="text/css" href="css/main_lg.css">
         <link rel="stylesheet" type="text/css" href="css/form.css">
         <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
@@ -10,6 +10,7 @@
     <body>
         <div class="form-div">
             <form id="authentification" name="authentification" method="post" action="checkAuthentification.php">
+                <h2>Sign in</h2>
                 <input type="text" id="login" name="login" placeholder="Login" required>
                 <input type="password" id="password" name="password" placeholder="Mot de passe" required>
                 <?php
