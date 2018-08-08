@@ -40,15 +40,18 @@
                             throw new Exception("\nLe fichier n'est pas une image : " . $e->getMessage());
                         }
                         require('connection.php');
-
+                        $comicTitle = htmlentities($_POST['comicTitle']);
+                        $comicSynopsis = htmlentities($_POST['synopsis']);
+                        $date = htmlentities($_POST['inStartDate']);
+                        $userId = $user->getId();
                         $createComic = $db->prepare("CALL createComic(:Title, :Synopsis, :StartDate, :AuthorId, :inCoverExt, @lastComicId)");
-                        $updatUser->bindParam(':Title', htmlentities($_POST['comicTitle']), PDO::PARAM_STR, 255);
-                        $updatUser->bindParam(':Synopsis', htmlentities($_POST['synopsis']), PDO::PARAM_STR, 255);
-                        $updatUser->bindParam(':StartDate', htmlentities($_POST['inStartDate']), PDO::PARAM_STR, 10);
-                        $updatUser->bindParam(':AuthorId', $user->getId(), PDO::PARAM_INT);
-                        $updatUser->bindParam(':inCoverExt', $check[1], PDO::PARAM_STR, 10);
-                        $updatUser->execute();
-                        $updatUser->closeCursor();
+                        $createComic->bindParam(':Title', $comicTitle, PDO::PARAM_STR, 255);
+                        $createComic->bindParam(':Synopsis', $comicSynopsis, PDO::PARAM_STR, 255);
+                        $createComic->bindParam(':StartDate',$date , PDO::PARAM_STR, 10);
+                        $createComic->bindParam(':AuthorId', $userId, PDO::PARAM_INT);
+                        $createComic->bindParam(':inCoverExt', $check[1], PDO::PARAM_STR, 10);
+                        $createComic->execute();
+                        $createComic->closeCursor();
 
 
                         $result = $db->query("SELECT @lastComicId")->fetch(PDO::FETCH_ASSOC);
@@ -57,7 +60,7 @@
                         $comic->createVolume(htmlentities($_POST['volumeTitle']), htmlentities($_POST['volumeSynopsis']));
 
                         header("Location:newChapter.php");
-                    } catch (Exception $ex) {
+                    } catch (Exception $e) {
                         die('Error during Comic creation : ' . $e->getMessage());
                     }
                 } else {
