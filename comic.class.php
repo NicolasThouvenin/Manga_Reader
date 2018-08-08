@@ -45,7 +45,6 @@ class Comic {
             $this->SetGenreIds();
             $this->SetAuthors();
             $this->SetImagesFolder();
-            
         } catch (Exception $e) {
             throw new Exception("\nErreur lors de la création de l'objet comic : " . $e->getMessage());
         }
@@ -144,24 +143,28 @@ class Comic {
     }
 
     public function getLastVolumeNumber() {
-    	if (!$this->volumesLoaded) {
+        if (!$this->volumesLoaded) {
             $this->SetVolumes();
             $this->volumesLoaded = true;
-       	}
-       	return $this->lastVolumeNumber;
+        }
+        return $this->lastVolumeNumber;
     }
 
     public function getLastVolume() {
-    	$volume = $this->Volumes[$this->getLastVolumeNumber()];
-    	return $volume;
+        if ($this->getLastVolumeNumber() === -1) {
+            return null;
+        } else {
+            $volume = $this->Volumes[$this->getLastVolumeNumber()];
+            return $volume;
+        }
     }
 
     public function getLastVolumeId() {
-    	return $this->getLastVolume()->Id;
+        return $this->getLastVolume()->Id;
     }
 
     public function isEmpty() {
-    	return $this->lastVolumeNumber != -1;
+        return $this->lastVolumeNumber != -1;
     }
 
     private function SetGenreIds() {
@@ -269,9 +272,9 @@ class Comic {
             require('connection.php');
 
             if (!$this->volumesLoaded) {
-            	$this->SetVolumes();
-            	$this->volumesLoaded = true;
-        	}
+                $this->SetVolumes();
+                $this->volumesLoaded = true;
+            }
 
             $startDate = date('Y-m-d');
             $addVolume = $db->prepare("CALL createVolume(:title, :synopsis, :startDate, :comicId, @lastVolumeId, @lastVolumeNumber)");
@@ -289,11 +292,11 @@ class Comic {
             $volume = new Volume($result['@lastVolumeId'], $result['@lastVolumeNumber'], $title, $synopsis, $endDate, $endDate);
             $this->Volumes[$result['@lastVolumeNumber']] = $volume;
             $this->lastVolumeNumber = $result['@lastVolumeNumber'];
-
         } catch (Exception $e) {
-            throw new Exception("\nError during new volume creation : ". $e->getMessage());
+            throw new Exception("\nError during new volume creation : " . $e->getMessage());
         }
     }
+
 }
 
 ?>

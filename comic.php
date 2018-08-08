@@ -14,11 +14,6 @@ if (isset($_POST["submit"])) {
         die('Error : ' . $e->getMessage());
     }
 }
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -95,14 +90,29 @@ if (isset($_POST["submit"])) {
                         <?php echo date("Y-m-d"); ?>
 
                     </div>  <!-- book_meta -->
+
+                    <!--Creation Links-->
                     <div id="add_new">
+                        <?php
+                        $lastVolume = $comic->getLastVolume();
+                        ?>
                         <span id="add_volume" onclick="toggleForm()">Create New Volume</span>
                         <span id="add_chapter"><a href="newChapter.php">Create New Chapter</a></span>
-                        <?php  echo '<form id="new_volume_form" method="POST" action="comic.php?bookId='.$_GET["bookId"].'">' ?>
-                            <p></p><input type="text" name="title" placeholder="Volume Title" required></p>
-                            <p><textarea name="synopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
-                            <input type="submit" name="submit" value="Create Volume">
-                        </form>
+                        <?php
+                        if ($lastVolume->isEmpty()) {
+                            ?>
+                            <p id="new_volume_form">You can't create a new volume when the last one is empty.</p>
+                            <?php
+                        } else {
+                            ?>
+                            <form id="new_volume_form" method="POST" action="comic.php?bookId=<?php echo $_GET["bookId"]; ?>">
+                                <p></p><input type="text" name="title" placeholder="Volume Title" required></p>
+                                <p><textarea name="synopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
+                                <input type="submit" name="submit" value="Create Volume">
+                            </form>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <div id="chapters">
                         <p id="chapters_header"><?php echo $comic->getTitle(); ?> Chapters</p>
