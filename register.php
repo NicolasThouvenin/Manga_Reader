@@ -22,7 +22,7 @@
                 echo '<input id="uniqid" name="uniqid" type="hidden" value="'.$_SESSION['uniqid'].'">';
                 //Pour des raisons de sécurité, on acceptera que les post d'inscription renvoyant le token d'inscription
             ?>
-            <input type="submit" name="submit" value="Créer un compte">
+            <input type="submit" name="submit" value="Créer un compte" class="registerButton">
         </form>
     </div>
 </body>
