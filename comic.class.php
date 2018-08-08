@@ -26,7 +26,7 @@ class Comic {
             require('connection.php');
 
             $result = $db->prepare("SELECT * FROM comics WHERE id = :comicId");
-            $result->execute(array('comicId' => 1));
+            $result->execute(array('comicId' => $this->Id));
 
             while ($line = $result->fetch()) {
 
