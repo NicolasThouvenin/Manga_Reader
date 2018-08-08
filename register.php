@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Inscription</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="css/main_lg.css">
     <link rel="stylesheet" type="text/css" href="css/form.css">
     <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
@@ -23,7 +23,7 @@
                 echo '<input id="uniqid" name="uniqid" type="hidden" value="'.$_SESSION['uniqid'].'">';
                 //Pour des raisons de sécurité, on acceptera que les post d'inscription renvoyant le token d'inscription
             ?>
-            <input type="submit" name="submit" value="Créer un compte" class="registerButton">
+            <input type="submit" name="submit" value="Create Account" class="registerButton">
         </form>
     </div>
 </body>
