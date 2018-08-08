@@ -113,7 +113,7 @@
         }
 
         public function getLastChapter() {
-            $chapter = $this->chapters[$this->getLastChapterNumber()]
+            $chapter = $this->chapters[$this->getLastChapterNumber()];
             return $chapter;
         }
 
