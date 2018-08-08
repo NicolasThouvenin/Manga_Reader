@@ -152,7 +152,7 @@ class Comic {
     }
 
     public function getLastVolume() {
-    	$volume = $this->volumes[$this->getLastVolumeNumber()]
+    	$volume = $this->volumes[$this->getLastVolumeNumber()];
     	return $volume;
     }
 
