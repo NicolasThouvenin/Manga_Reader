@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="form-div">
-        <form id="register" name="register" method="post" action="addUser.php">
+        <a href="homePage.php"><img src="ressources/bubbleSignLogo.png"></a>
             <h2>Create your account</h2>
             <input type="text" id="login" name="login" placeholder="Login" required>
             <input type="text" id="firstname" name="firstname" placeholder="Prénom" required>
