@@ -9,6 +9,7 @@
     </head>
     <body>
         <div class="form-div">
+            <img src="ressources/bubbleSignLogo.jpg">
             <form id="authentification" name="authentification" method="post" action="checkAuthentification.php">
                 <h2>Sign in</h2>
                 <input type="text" id="login" name="login" placeholder="Login" required>
