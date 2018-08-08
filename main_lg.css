@@ -2,47 +2,65 @@
 /***** Header & General  *****/
 /****************************/
 
+.comic-no-visible {
+    display:none;
+}
 
-
-.registerButton {
-  /** Font Style **/
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  text-transform:uppercase;
-  font-size:14px;
-    color:#fff;
-  text-decoration:none;
+button, input[type="button"]{
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-transform:uppercase;
+    font-size:14px;
+    text-decoration:none;
     font-weight:bold;
     text-transform:uppercase;
     text-shadow:rgba(0, 0, 0, 0.30) 0 -1.25px 0;
-  
-  /** Button Style **/ 
-  display:-moz-inline-stack;
-  -webkit-font-smoothing:antialiased;
+    color:#fff;
+    display:-moz-inline-stack;
+    -webkit-font-smoothing:antialiased;
     display:inline-block;
     vertical-align:middle;
     vertical-align:auto;
     zoom:1;
-  margin-top: 10px;
-  margin-bottom: 10px;
-    border:1px solid #13619f;
-    background: #00cc66;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border:1px solid silver;
     padding:3px 20px;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     -ms-border-radius:3px;
     -o-border-radius:3px;
     border-radius:3px;
+}
+
+
+/** Button Style **/
+.regularButton {
+    background: #5a5b5f;
     -webkit-box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
     -moz-box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
     box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
 }
 
 /** Active State Style **/
-.registerButton:active {
-    border-color:#083559;
+.regularButton:active {
+    border-color:#5a5b5f;
     -webkit-box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     -moz-box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+}
+
+.registerButton {
+    background: #00cc66;
+    -webkit-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179 0.3) 0 1px 0;
+    -moz-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+}
+
+/** Active State Style **/
+.registerButton:active {
+    -webkit-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    -moz-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
 }
 
 a {
@@ -73,15 +91,57 @@ header div, header input {
 }
 
 .add {
+    float: left;
     margin: 27px 0 0 40px;
     z-index: 150;
+    -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+    box-shadow:inset 0px 1px 0px 0px #f5978e;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f));
+    background:-moz-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-webkit-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-o-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-ms-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f',GradientType=0);
+    background-color:#f24537;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #d02718;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #810e05;
+}
+.add:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
+    background:-moz-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+    background:-webkit-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+    background:-o-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+    background:-ms-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+    background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537',GradientType=0);
+    background-color:#c62d1f;
+}
+.add:active {
+    position:relative;
+    top:1px;
 }
 
-.logo {
-    margin: auto;
-    width: 50px;
-    margin-top: -20px;
+
+#logo {
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+    margin-top: 0px;
     display: block;
+
 }
 
 .displayUser {
@@ -125,6 +185,174 @@ main {
 /*****   homePage.PHP   *****/
 /****************************/
 
+#menuToggle{
+    display: none;
+}
+
+
+/*homePage 800px*/
+@media screen and (max-width: 800px) {
+.userName, input[type=button], input[type=search]{
+        display: none;
+    } 
+
+    #logo{
+        display: none;
+    }
+
+body
+{
+  margin: 0;
+  padding: 0;
+  
+  /* make it look decent enough */
+  background: #232323;
+  color: #cdcdcd;
+  font-family: "Avenir Next", "Avenir", sans-serif;
+}
+
+a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
+}
+
+a:hover
+{
+  color: tomato;
+}
+
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #cdcdcd;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+}
+
 article {
     width: 180px;
     padding: 20px 10px;
@@ -133,21 +361,44 @@ article {
 }
 
 /****************************/
-/*****       book.PHP       *****/
+/***   book & profile.PHP   ***/
 /****************************/
 
-#book_cover {
+
+/****   comic meta & profile info ****/
+
+#book_cover, #avatar {
     padding: 20px;
     width: 250px;
     border: solid black 2px;
     display: inline-block;
 }
 
-#book_meta {
+#avatar > label > img {
+    max-height: 250px;
+    width: 250px;
+}
+
+#book_meta, #user_info {
     line-height: 1.6em;
     width: 476px;
     float: right;
     padding: 20px;
+}
+
+#user_info > p {
+    line-height: 2em;
+    font-size: 18px;
+}
+
+#user_info > p > input {
+    float: right;
+    padding-right: 180px;
+    width: 170px;
+    font-size: 18px;
+    border: none;
+    background-color: #616161;
+    color: rgb(189, 186, 172);
 }
 
 #synopsis {
@@ -155,13 +406,46 @@ article {
     line-height: 1.4em;
 }
 
+/****   New Volume & Chapter Form  ****/
+
+#add_new {
+    border-top: solid #414141 2px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px 0px 0px 0px;
+    
+}
+
+#add_volume, #add_chapter {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 5px 20px 0px 20px;
+    cursor: pointer;
+}
+
+#add_chapter {
+
+}
+
+#new_volume_form {
+    display: none;
+    padding: 20px;
+}
+
+#new_volume_form > p {
+    margin: 5px 0px;
+}
+
+
+/****   Chapters & Volumes  ****/
+
 #chapters_header {
     background: linear-gradient(to right, rgb(102,102,102) 10%, rgb(61,61,61) 100%);
     margin: 30px 0;
     height: 25px;
     line-height: 25px;
     width: 810px;
-    border: solid rgb(94, 94, 94) 1px;
+    /*border: solid rgb(94, 94, 94) 1px;*/
     font-size: 20px;
     font-weight: 500;
 }
@@ -297,4 +581,17 @@ ul {
     position: relative;
     left: 50px;
     top: 87px;
+    margin-left: auto;
+}
+
+/****************************/
+/*****      profile.PHP      *****/
+/****************************/
+
+.banner > span {
+    display: block;
+    text-align: center;
+    font-size: 28px;
+    line-height: 50px;
+    font-weight: 500;
 }
