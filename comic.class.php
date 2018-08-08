@@ -152,12 +152,12 @@ class Comic {
     }
 
     public function getLastVolume() {
-    	$volume = $this->volumes[$this->getLastVolumeNumber()];
+    	$volume = $this->Volumes[$this->getLastVolumeNumber()];
     	return $volume;
     }
 
     public function getLastVolumeId() {
-    	return $this->getLastVolume().Id;
+    	return $this->getLastVolume()->Id;
     }
 
     public function isEmpty() {
