@@ -8,6 +8,7 @@
 	    private $StartDate;
 	    private $EndDate;
 	    private $Chapters = array();
+        private $lastChapterNumber;
 
 
 		public function __construct(int $Id, int $Number, string $Title, string $Synopsis, string $StartDate, string $EndDate) {
@@ -69,7 +70,7 @@
             try {
                 require('connection.php');    
 
-                $result = $db->prepare("SELECT * FROM chapters WHERE volumeId = :volumeId");
+                $result = $db->prepare("SELECT * FROM chapters WHERE volumeId = :volumeId ORDER BY Number");
                 $result->execute(array('volumeId' => $this->Id));
 
                 while ($line = $result->fetch()) {
@@ -84,7 +85,9 @@
 
                     $chapter = new Chapter($line['Id'], $line['Number'], $line['Title'], $line['Synopsis'], $validated, $publicationDate);
 
-                    $this->Chapters[$line['Id']] = $chapter;
+                    $this->Chapters[$line['Number']] = $chapter;
+
+                    $this->lastChapterNumber = $line['Number'];
                 }
             } catch (Exception $e) {
                 throw new Exception("\nErreur lors de la création de la liste de d'objets chapitres : ".$e->getMessage());
@@ -98,8 +101,24 @@
             }
             foreach ($this->Chapters as $chapter) {
                 yield $chapter;
+            }
         }
-    }
 
+        public function getLastChapterNumber() {
+            if (!$this->ChaptersLoaded) {
+                $this->SetChapters();
+                $this->ChaptersLoaded = true;
+            }
+            return $this->lastChapterNumber;
+        }
+
+        public function getLastChapter() {
+            $chapter = $this->chapters[$this->getLastChapterNumber()]
+            return $chapter;
+        }
+
+        public function getLastChapterId() {
+            return $this->getLastChapter().Id;
+        }
 	}
 ?>
