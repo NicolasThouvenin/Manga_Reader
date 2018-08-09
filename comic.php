@@ -71,9 +71,11 @@ if (isset($_POST["submit"])) {
                         <p id="book_title"><?php echo $comic->getTitle(); ?></p>
                         <p id="book_author"><?php
                             foreach ($comic->getAuthors() as $author) {
-                                if ($author->getId() == $user->getId()) {
-                                    echo "<b>" . $author->getLogin() . "</b>, ";
-                                    $isAuthor = true;
+                                if (isset($_COOKIE['authentified'])) {
+                                    if ($author->getId() == $user->getId()) {
+                                        echo "<b>" . $author->getLogin() . "</b>, ";
+                                        $isAuthor = true;
+                                    }
                                 } else {
                                     echo $author->getLogin() . ", ";
                                 }
