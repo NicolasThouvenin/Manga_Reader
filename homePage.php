@@ -42,7 +42,7 @@
 
 <main>
     <div class="banner">
-        <input id="searchbar" type="search" name="q" placeholder="search comic or author" oninput="filter(this)">
+        <input id="searchbar" type="search" name="q" placeholder="filter by comic title or author" oninput="toFilterComic(this)">
     </div> <!-- banner -->
     <?php
     try {
@@ -77,6 +77,6 @@
 </div> <!-- page -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="script/filter.js"></script>
+    <script src="script/comicFilter.js"></script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <?php
 
-	
+	/* 
+		Cette page intérroge la base de données à partir d'un mot clé reçus en GET.
+		Elle regarde si le mot clé correspond partiellement à un nom d'auteur ou à un titre de comic.
+		Et renvoi un "JSON" avec comme clé le mot clé d'origine et comme valeur les identifiants de comic.
+	*/
 
 	function getComicsIdsByAuthors($keyWordLower) {
 
@@ -13,7 +17,7 @@
 					ON authors.comicId = comics.Id
 					JOIN users
 					ON authors.userId = users.Id
-					WHERE CONCAT(LOWER(users.Login), ' (', LOWER(users.Firstname), ' ', LOWER(users.Surname), ')') LIKE :param";
+					WHERE CONCAT(LOWER(users.Login), LOWER(users.Firstname), LOWER(users.Surname)) LIKE :param";
 
 		$result = $db->prepare($query);
 		$result->execute(array('param' => $param));
@@ -43,15 +47,28 @@
 	$foundComics = array();
 
 	foreach (getComicsIdsByTitle($keyWordLower) as $foundComic) {
-		$foundComics[$foundComic['Title']] = $foundComic['Id'];
+		$foundComics[$foundComic['Title']] = [$foundComic['Id']];
 	}
 
 	foreach (getComicsIdsByAuthors($keyWordLower) as $foundComic) {
-		$foundComics[$foundComic['Author']] = $foundComic['Id'];
+		//On gère le fait qu'un auteur peut avoir plusieurs comics
+		if (array_key_exists($foundComic['Author'], $foundComics)) {
+			$foundComics[$foundComic['Author']][] = $foundComic['Id'];
+		} else {
+			$foundComics[$foundComic['Author']] = [$foundComic['Id']];
+		};		
 	}
 
 	header('Content-type: application/json');
 
 	echo json_encode($foundComics);
+
+	/*
+		Structure du "JSON"
+		{ 	"nom d'auteur X" : [liste de comic Id],
+			"Titre de comic Y" : [liste de comic Id],
+			...
+		}
+	*/
 
 ?>
