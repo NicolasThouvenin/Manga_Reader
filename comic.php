@@ -74,7 +74,6 @@ if (isset($_POST["submit"])) {
                                 if (isset($_COOKIE['authentified'])) {
                                     if ($author->getId() == $user->getId()) {
                                         echo "<b>" . $author->getLogin() . "</b>, ";
-                                        $isAuthor = true;
                                     }
                                 } else {
                                     echo $author->getLogin() . ", ";
