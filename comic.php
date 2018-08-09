@@ -87,7 +87,6 @@ if (isset($_POST["submit"])) {
                             ?>
                         </p>
                         <p id="synopsis"><?php echo $comic->getSynopsis(); ?></p>
-                        <?php echo date("Y-m-d"); ?>
 
                     </div>  <!-- book_meta -->
 
