@@ -5,13 +5,18 @@ require('required.php');
 if (!isset($_GET["bookId"])) {
     header("Location:homePage.php");
 }
+$comic = new Comic($_GET["bookId"]);
+/**
+ *   New Volume Creation
+ * Create a new volume for the current comic
+ * then redirect on chapter creation
+ */
 if (isset($_POST["submit"])) {
     try {
-        $comic = new Comic($_GET["bookId"]);
         $comic->createVolume(htmlentities($_POST["title"]), htmlentities($_POST["synopsis"]));
-        //header("Location:newChapter.php");
+        header("Location:newChapter.php?volumeId=" . $comic->getLastVolumeId());
     } catch (Exception $e) {
-        die('Error : ' . $e->getMessage());
+        die('Error during volume creation.' . $e->getMessage());
     }
 }
 ?>
@@ -19,7 +24,7 @@ if (isset($_POST["submit"])) {
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Comic Page</title>
+        <title><?php echo $comic->getTitle(); ?></title>
         <link rel="stylesheet" type="text/css" href="css\main_lg.css">
         <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -57,12 +62,6 @@ if (isset($_POST["submit"])) {
                 <!-- *****************    Page Content ***************** -->
                 <?php
                 try {
-
-                    $comic = new Comic($_GET["bookId"]);
-
-                    echo '<script>';
-                    echo 'var title = "' . $comic->getTitle() . '";';
-                    echo '</script>';
                     ?>
                     <div id="book_cover">
                         <img title="<?php echo $comic->getTitle(); ?>" src="<?php echo "comics\\" . $_GET['bookId'] . "\\cover." . $comic->getCoverExt(); ?>" alt="cover" height="375" width="250">
@@ -70,6 +69,7 @@ if (isset($_POST["submit"])) {
                     <div id="book_meta">
                         <p id="book_title"><?php echo $comic->getTitle(); ?></p>
                         <p id="book_author"><?php
+                            // generate author list, in bold if it's the connected user
                             foreach ($comic->getAuthors() as $author) {
                                 if (isset($_COOKIE['authentified'])) {
                                     if ($author->getId() == $user->getId()) {
@@ -82,6 +82,7 @@ if (isset($_POST["submit"])) {
                             ?></p>
                         <p id="book_release"><?php echo $comic->getStartDate(); ?></p>
                         <p id="book_genre"><?php
+                            // generate genre list
                             foreach ($comic->getGenreIds() as $genreId) {
                                 echo $genreId . ", ";
                             }
@@ -90,38 +91,50 @@ if (isset($_POST["submit"])) {
                         <p id="synopsis"><?php echo $comic->getSynopsis(); ?></p>
 
                     </div>  <!-- book_meta -->
-
-                    <!--Creation Links-->
-                    <div id="add_new">
-                        <?php
-                        $lastVolume = $comic->getLastVolume();
-
-                        ?>
-                        <span id="add_volume" onclick="toggleForm()">Create New Volume</span>
-                        <span id="add_chapter"><a href="newChapter.php?volumeId=<?php echo $lastVolume->getId(); ?>">Create New Chapter</a></span>
-                        <?php
-                        if ($lastVolume->isEmpty() == 1) {
+                    <?php
+                    // If the user connected is the author, displays the creation links
+                    if (isset($_COOKIE['authentified'])) {
+                        if ($author->getId() == $user->getId()) {
                             ?>
-                            <p id="new_volume_form">You can't create a new volume when the last one is empty.</p>
-                            <?php
-                        } else {
-                            ?>
-                            <form id="new_volume_form" method="POST" action="comic.php?bookId=<?php echo $_GET["bookId"]; ?>">
-                                <p></p><input type="text" name="title" placeholder="Volume Title" required></p>
-                                <p><textarea name="synopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
-                                <input type="submit" name="submit" value="Create Volume">
-                            </form>
+
+                            <!--Creation Links-->
+                            <div id="add_new">
+                                <?php
+                                $lastVolume = $comic->getLastVolume();
+                                ?>
+                                <span id="add_volume" onclick="toggleForm()">Create New Volume</span>
+                                <span id="add_chapter"><a href="newChapter.php?volumeId=<?php echo $lastVolume->getId(); ?>">Create New Chapter</a></span>
+                                <?php
+                                if ($lastVolume->isEmpty() == 1) {
+                                    // If the last volume created is empty, the author can't create a new one
+                                    ?>
+                                    <p id="new_volume_form">You can't create a new volume when the last one is empty.</p>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <!-- New volume creation form-->
+                                    <form id="new_volume_form" method="POST" action="comic.php?bookId=<?php echo $_GET["bookId"]; ?>">
+                                        <p></p><input type="text" name="title" placeholder="Volume Title" required></p>
+                                        <p><textarea name="synopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
+                                        <input type="submit" name="submit" value="Create Volume">
+                                    </form>
+                                    <?php
+                                }
+                                ?>
+                            </div>
                             <?php
                         }
-                        ?>
-                    </div>
+                    }
+                    ?>
+
                     <div id="chapters">
                         <p id="chapters_header"><?php echo $comic->getTitle(); ?> Chapters</p>
 
-                        <!--   Generated Part    -->
+                        <!--   Generated volume and chapter list    -->
 
                         <?php
                         foreach ($comic->getVolumes() as $volume) {
+                            // generation of volume list
                             ?>
                             <div id='Volume <?php echo $volume->getNumber(); ?> '>
                                 <p class="volume">Volume <?php echo $volume->getNumber(); ?>
@@ -131,9 +144,10 @@ if (isset($_POST["submit"])) {
                                 <ul>
                                     <?php
                                     foreach ($volume->getChapters() as $chapter) {
+                                        // generation of chapter list
                                         ?>
                                         <li>
-                                            <p class='chapter'><a href="comicsReader.php?chapterId=<?php echo $chapter->getId()."&comicId=".$_GET["bookId"]."&volumeId=".$volume->getId(); ?>">Chapter <?php echo $chapter->getNumber(); ?>
+                                            <p class='chapter'><a href="comicsReader.php?chapterId=<?php echo $chapter->getId() . "&comicId=" . $_GET["bookId"] . "&volumeId=" . $volume->getId(); ?>">Chapter <?php echo $chapter->getNumber(); ?>
                                                     <span class='chapter_title' title="<?php echo $chapter->getSynopsis() ?>"><?php echo $chapter->getTitle() ?></span>
                                                     <span class="chapter_release"><?php echo $chapter->getPublicationDate() ?></span>
                                                 </a></p>
@@ -146,14 +160,12 @@ if (isset($_POST["submit"])) {
                             <?php
                         }
                         ?>
-
                     </div> <!-- chapters -->
                     <?php
                 } catch (Exception $e) {
-                    die('Error : ' . $e->getMessage());
+                    die('Error on comic page' . $e->getMessage());
                 }
                 ?>
-
             </main>
         </div> <!-- page -->
     </body>

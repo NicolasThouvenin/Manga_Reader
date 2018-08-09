@@ -121,7 +121,7 @@ class Volume {
     }
 
     public function isEmpty() {
-        return ($this->LastChapterNumber == -1);
+        return ($this->getLastChapterNumber() == -1);
     }
 
 }
