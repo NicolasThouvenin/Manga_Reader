@@ -27,7 +27,7 @@
                     ?>
                 </div> <!-- displayUser -->
 
-                <div class="logo"><a href="homePage.php">LOGO</a></div>
+                <div class="logo"><a href="homePage.php"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
 
             </header>
 
@@ -51,7 +51,7 @@
                         $createComic->bindParam(':AuthorId', $userId, PDO::PARAM_INT);
                         $createComic->bindParam(':inCoverExt', $check[1], PDO::PARAM_STR, 10);
                         $createComic->execute();
-                        $createComic->closeCursor();
+                        $createComic->closeCursor(); // helps for the statement to be executed again 
 
 
                         $result = $db->query("SELECT @lastComicId")->fetch(PDO::FETCH_ASSOC);
