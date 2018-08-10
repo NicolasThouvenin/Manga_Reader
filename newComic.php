@@ -65,12 +65,12 @@
                     }
                 } else {
                     ?>
-                    <div id="new_comic">
-                        <form method="POST" action="newComic.php" enctype="multipart/form-data">
+                    <div id="new_comic"> // <!--creating a bloc for the new book's form-->
+                        <form method="POST" action="newComic.php" enctype="multipart/form-data"> 
                             <p>Title : <input type="text" name="comicTitle" placeholder="New Comic Title" required></p>
-                            <p>Creation Date : <input type="date" name="inStartDate" value="<?php echo date("Y-m-d"); ?>" required"></p>
-                            <p>Comic Synopsis : <textarea name="synopsis" placeholder="Comic Synopsis" cols="40" rows="3" required></textarea></p>
-                            <label>Genres : <select id="genres" multiple name="genres[]" required="required">
+                            <p>Creation Date : <input type="date" name="inStartDate" value="<?php echo date("Y-m-d"); ?>" required></p> <!-- input for choose a date -->
+                            <p>Comic Synopsis : <textarea name="synopsis" placeholder="Comic Synopsis" cols="40" rows="3" required></textarea></p> <!-- input for comments area -->
+                            <label>Genres : <select id="genres" multiple name="genres[]" required="required"> <!-- input for selecting in a list of genres -->
                                     <option value="action">Action</option> 
                                     <option value="adventure">Adventure</option>
                                     <option value="comedy">Comedy</option>
@@ -80,7 +80,7 @@
                                     <option value="horror">Horror</option>
                                     <option value="scienceFiction">Sci-fi</option>
                                 </select></label>
-                            <p>Comic cover picture : <input type="file" name="cover" id="cover" required></p>
+                            <p>Comic cover picture : <input type="file" name="cover" id="cover" required></p> <!-- input for uploading files -->
                             <p id="first_volume">First Volume Title : <input type="text" name="volumeTitle" placeholder="Volume Title" required></p>
                             <p>Volume Synopsis : <textarea name="volumeSynopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
                             <input type="submit" name="submit" value="Create New Comic">
@@ -88,10 +88,9 @@
 
                     </div>
                     <?php
-                }
                 ?>
 
-            </main>
+            </main> 
 
 
         </div> <!-- page -->
