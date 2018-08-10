@@ -33,9 +33,9 @@
 
             <main>
                 <?php
-                if (isset($_POST['submit'])) {
+                if (isset($_POST['submit'])) { // if the form is validated, it will begin to check the files to upload
                     try {
-                        $check = explode("/", mime_content_type($_FILES["cover"]["tmp_name"]));
+                        $check = explode("/", mime_content_type($_FILES["cover"]["tmp_name"])); // checking content type
                         if ($check[0] !== "image") {
                             throw new Exception("\nFile is not an image : " . $e->getMessage());
                         }
