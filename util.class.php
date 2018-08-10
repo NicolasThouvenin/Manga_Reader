@@ -5,7 +5,8 @@
 	*/
 	class Util {
 		
-		public static function checkData($data) {
+		public static function checkPostData($data) {
+			/* Cette fonction utilise la function htmlentities sur les valeurs d'un array $_POST et renvoi un array sécurisé */
             foreach ($data as $key => $value) {
                 $data[$key] = htmlentities($value);
             }

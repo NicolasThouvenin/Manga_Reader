@@ -22,7 +22,7 @@
                 throw new Exception("<br>La requête post d'inscription n'indique pas pas le même token d'inscription que celui de la session du serveur");
             }
 
-            $checkedData = Util::checkData($_POST);
+            $checkedData = Util::checkPostData($_POST);
             $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId)");
 
             $addUser->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
