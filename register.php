@@ -10,7 +10,8 @@
 <body>
     <div class="form-div">
         <a href="homePage.php"><img src="ressources/bubbleSignLogo.png"></a> <!-- logo -->
-            <h2>Create your account</h2> <!-- form for sign up -->
+        <h2>Create your account</h2> <!-- form for sign up -->
+        <form id="register" name="register" method="post" action="addUser.php">
             <input type="text" id="login" name="login" placeholder="Login" required>
             <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
             <input type="text" id="surname" name="surname" placeholder="Last Name" required>
