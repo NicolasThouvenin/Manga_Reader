@@ -6,20 +6,13 @@
     </head>
     <body>
         <?php
-
-        function checkData($data) {
-            foreach ($data as $key => $value) {
-                $data[$key] = htmlentities($value);
-            }
-            return $data;
-        }
  
         try {
             require('required.php');
             require('connection.php');
             session_start();
             
-            $checkedData = checkData($_POST);
+            $checkedData = Util::checkPostData($_POST);
 
             if (!isset($_SESSION['uniqid'])) {
                 throw new Exception("La requête post d'authentification ne possède pas de token correspondant à un formulaire envoyé par le serveur");
