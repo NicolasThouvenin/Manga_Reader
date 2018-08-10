@@ -162,7 +162,8 @@ class Comic {
     }
 
     public function getLastVolumeId() {
-        return $this->getLastVolume()->Id;
+    	$volume = $this->getLastVolume();
+        return $volume->getId();
     }
 
     public function isEmpty() {
