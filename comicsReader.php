@@ -32,7 +32,7 @@
                     ?>
                 </div> <!-- displayUser -->
 
-                <div class="logo"><a href="homePage.php">LOGO</a></div>
+                <div class="logo"><a href="homePage.php"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
 
             </header>
 
@@ -48,11 +48,11 @@
                     ?>
                     <div class="reader">
                         <?php
-                        if (isset($_GET["chapterId"]) && isset($_GET["volumeId"]) && isset($_GET["comicId"])) {
+                        if (isset($_GET["chapterId"]) && isset($_GET["volumeId"]) && isset($_GET["comicId"])) { // checking the chapter,volume and comid Ids transfered by the last form get 
                             $path = "comics\\" . $_GET["comicId"] ."\\". $_GET["volumeId"] ."\\". $_GET["chapterId"]."\\";
                             $chapterId = htmlentities($_GET["chapterId"]);
-                            $result = $db->prepare("SELECT Filename FROM comicstrips WHERE chapterId = :chapterId");
-                            $result->execute(array('chapterId' => $chapterId));
+                            $result = $db->prepare("SELECT Filename FROM comicstrips WHERE chapterId = :chapterId"); 
+                            $result->execute(array('chapterId' => $chapterId)); // executing the chapterId's gotten by GET method as the chapter 
                             $i = 1;
                             while ($line = $result->fetch()) {
                                 ?>
