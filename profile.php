@@ -36,35 +36,39 @@ if (isset($_COOKIE['authentified'])) {
 
                 <!-- *****************    Page Content ***************** -->
                 <?php
-                try {
-                    require('connection.php');
-                    echo "<p class='log'>Connection succeeded.</p>";
+                    try {
+                        require('connection.php');
+                        echo "<p class='log'>Connection succeeded.</p>";
+                        ?>
+
+                        <form id="profile" name="profile" method="POST" action="updateProfile.php">
+                            <input type="file" id="avatar_form" name="avatar" style="display: none;">
+                            
+                            <div id="avatar" style="height: 250px;">
+                                <label for="avatar_form">
+                                <img title="<?php echo $user->getLogin(); ?>" src="ressources/avatar.jpg" alt="avatar">
+                                </label>
+                            </div> <!-- avatar -->
+
+                            <!-- All info about the user   -->
+                            <div id="user_info">
+                                <p>Login<input type="text" id="login" name="login" value="<?php echo $user->getLogin(); ?>"></p>
+                                <p>Firstname<input type="text" id="firstname" name="firstname" value="<?php echo $user->getFirstname(); ?>"></p>
+                                <p>Surname<input type="text" id="surname" name="surname" value="<?php echo $user->getSurname(); ?>"></p>
+                                <p>Birth Date<input type="date" id="birthDate" name="birthDate" value="<?php echo $user->getBirthDate(); ?>"></p>
+                                <p>Email<input type="email" id="email" name="email" value="<?php echo $user->getEmail(); ?>" disabled></p>
+                                <input type="submit" name="submit" value="Save" style="margin-top: 30px;">
+                            </div>  <!-- book_meta -->
+
+                            <?php
+                        } catch (Exception $e) {
+                            die('Error : ' . $e->getMessage());
+                        }
                     ?>
 
-                    <form id="profile" name="profile" method="POST" action="updateProfile.php">
-                        <input type="file" id="avatar_form" name="avatar" style="display: none;">
-                        
-                        <div id="avatar" style="height: 250px;">
-                            <label for="avatar_form">
-                            <img title="<?php echo $user->getLogin(); ?>" src="ressources/avatar.jpg" alt="avatar">
-                            </label>
-                        </div> <!-- avatar -->
-
-                        <!-- All info about the user   -->
-                        <div id="user_info">
-                            <p>Login<input type="text" id="login" name="login" value="<?php echo $user->getLogin(); ?>"></p>
-                            <p>Firstname<input type="text" id="firstname" name="firstname" value="<?php echo $user->getFirstname(); ?>"></p>
-                            <p>Surname<input type="text" id="surname" name="surname" value="<?php echo $user->getSurname(); ?>"></p>
-                            <p>Birth Date<input type="date" id="birthDate" name="birthDate" value="<?php echo $user->getBirthDate(); ?>"></p>
-                            <p>Email<input type="email" id="email" name="email" value="<?php echo $user->getEmail(); ?>" disabled></p>
-                            <input type="submit" name="submit" value="Save" style="margin-top: 30px;">
-                        </div>  <!-- book_meta -->
-
-                        <?php
-                    } catch (Exception $e) {
-                        die('Error : ' . $e->getMessage());
-                    }
-                    ?>
+                    <form id="unsubscribe" name="unsubscribe" method="post" action="unsubscribe.php">
+                        <input type="submit" name="submit" value="Unsubscribe" style="margin-top: 30px;">
+                    </form>
 
             </main>
 
