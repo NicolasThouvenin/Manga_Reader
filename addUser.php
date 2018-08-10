@@ -9,16 +9,10 @@
 
     	/* Cette page reçoit le post du formulaire d'incription des utilisateurs et pousse créer un utilisateur dans la base de données. */
 
-        function checkData($data) {
-            foreach ($data as $key => $value) {
-                $data[$key] = htmlentities($value);
-            }
-            return $data;
-        }
-
         try {
 
             require('required.php');
+            require('connection.php');
 
             session_start();
 
@@ -28,7 +22,7 @@
                 throw new Exception("<br>La requête post d'inscription n'indique pas pas le même token d'inscription que celui de la session du serveur");
             }
 
-            $checkedData = checkData($_POST);
+            $checkedData = Util::checkData($_POST);
             $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId)");
 
             $addUser->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
