@@ -24,17 +24,10 @@
                         }
                     ?>
                 </div> <!-- displayUser -->
-<<<<<<< HEAD
-                <div class="logo"><a href="homePage.php">LOGO</a></div>
-=======
-
                 <div class="logo"><a href="homePage.php"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
-
->>>>>>> 9bdccb9accf47332ec5f5ff76a4131dd80ea3492
             </header>
             <main>
                 <?php
-<<<<<<< HEAD
                     if (isset($_POST['submit'])) { // if the form is validated, it will begin to check the files to upload
                         try {
                             $check = explode("/", mime_content_type($_FILES["cover"]["tmp_name"])); // checking content type
@@ -54,7 +47,6 @@
                             $createComic->bindParam(':inCoverExt', $check[1], PDO::PARAM_STR, 10);
                             $createComic->execute();
                             $createComic->closeCursor();
-=======
                 if (isset($_POST['submit'])) { // if the form is validated, it will begin to check the files to upload
                     try {
                         $check = explode("/", mime_content_type($_FILES["cover"]["tmp_name"])); // checking content type
@@ -74,7 +66,6 @@
                         $createComic->bindParam(':inCoverExt', $check[1], PDO::PARAM_STR, 10);
                         $createComic->execute();
                         $createComic->closeCursor(); // helps for the statement to be executed again 
->>>>>>> 9bdccb9accf47332ec5f5ff76a4131dd80ea3492
 
                             $result = $db->query("SELECT @lastComicId")->fetch(PDO::FETCH_ASSOC);
                             $comic = new Comic($result['@lastComicId']);
