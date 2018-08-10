@@ -27,7 +27,7 @@ if (isset($_COOKIE['authentified'])) {
                     <p class='userName'><a href='profile.php'><?php echo $user->getLogin(); ?></a></p>
                     <p><a class='userName' href='disconnect.php'>Log out</a></p>
                 </div> <!-- displayUser -->
-                <div class="logo"><a href="homePage.php">LOGO</a></div>
+                <div class="logo"><a href="homePage.php"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
             </header>
             <main>
                 <div class="banner">
