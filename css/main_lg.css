@@ -185,22 +185,22 @@ main {
 /*****   homePage.PHP   *****/
 /****************************/
 
-#menuToggle{
+#menuToggle{  /* hidden menuToggle */
     display: none;
 }
 
 
-/*homePage 800px*/
+/*homePage style under 800px*/
 @media screen and (max-width: 800px) {
 .userName, input[type=button], input[type=search]{
         display: none;
     } 
 
-    #logo{
+    #logo{ /*logo will have no display */
         display: none;
     }
 
-    #logoInBurger{
+    #logoInBurger{ /* logo will be in the hamburger */
         margin-left: auto;
         width: 10px;
     }
@@ -229,7 +229,7 @@ a:hover
   color: tomato;
 }
 
-#menuToggle
+#menuToggle /* menu toggle will be visible now */
 {
   display: block;
   position: relative;
