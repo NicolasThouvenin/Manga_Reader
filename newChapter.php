@@ -17,21 +17,22 @@ if (isset($_POST['settleChapter'])) {
         require('connection.php');
 
 
-        $chapterTitle = htmlentities($_POST['chapterTitle']);
+        
+        Title = htmlentities($_POST['chapterTitle']); // Convert HTML entities to characters
         $chapterSynopsis = htmlentities($_POST['chapterSynopsis']);
         $date = date("Y-m-d");
         echo $date;
-        $volumeId = htmlentities($_GET["volumeId"]);
-        $createChapter = $db->prepare("CALL createChapter(:Title, :Synopsis, :VolumeId, @lastChapterId, @lastChapterNumber)");
-        $createChapter->bindParam(':Title', $chapterTitle, PDO::PARAM_STR, 255);
+        $volumeId = htmlentities($_GET["volumeId"]); // gathering volume id
+        $createChapter = $db->prepare("CALL createChapter(:Title, :Synopsis, :VolumeId, @lastChapterId, @lastChapterNumber)"); // calling the stored procedure createChapter
+        $createChapter->bindParam(':Title', $chapterTitle, PDO::PARAM_STR, 255); // binding all parameters
         $createChapter->bindParam(':Synopsis', $chapterSynopsis, PDO::PARAM_STR, 255);
         $createChapter->bindParam(':VolumeId', $volumeId, PDO::PARAM_INT);
-        $createChapter->execute();
-        $createChapter->closeCursor();
+        $createChapter->execute(); // executing 
+        $createChapter->closeCursor(); // enabling to be executed again
         $result = $db->query("SELECT @lastChapterId, @lastChapterNumber")->fetch(PDO::FETCH_ASSOC);
-        $chapter = new Chapter($result['@lastChapterId'], $result['@lastChapterNumber'], $chapterTitle, $chapterSynopsis, false, $date);
+        $chapter = new Chapter($result['@lastChapterId'], $result['@lastChapterNumber'], $chapterTitle, $chapterSynopsis, false, $date); // creating object $chapter
         
-        foreach ($_FILES["uploadedBubble"]["tmp_name"] as $strip) {
+        foreach ($_FILES["uploadedBubble"]["tmp_name"] as $strip) { // for each bubbles uploaded, it will add every strips to the chapter
             $chapter->AddComicStrip($strip);
         }
         
@@ -68,12 +69,12 @@ if (isset($_POST['settleChapter'])) {
                     }
                     ?>
                 </div> <!-- displayUser -->
-                <div class="logo"><a href="homePage.php">LOGO</a></div>
+                <div class="logo"><a href="homePage.php"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
             </header>
 
             <main>
                 <h1>New Chapter</h1>
-                <fieldset><legend>Bubbles Upload</legend>
+                <fieldset><legend>Bubbles Upload</legend> <!-- form for informations about the chapter and upload -->
                     <form method="POST" enctype="multipart/form-data" action="newChapter.php?volumeId=<?php echo $_GET["volumeId"]; ?>">
                         <p id="first_chapter">Chapter Title : <input type="text" name="chapterTitle" placeholder="Chapter Title" required></p><br>
                         <p>Chapter Synopsis : <textarea name="chapterSynopsis" placeholder="Chapter Synopsis" cols="40" rows="3" required="required"></textarea></p><br>
