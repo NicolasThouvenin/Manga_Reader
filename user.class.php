@@ -17,6 +17,8 @@
 
                 try {
 
+                	/* On utilise l'identifiant d'utilisateur pour intérroger le base et construire cette objet utilisateur avec toutes les informations d'un utilisateurs */
+
                     require('connection.php');
 
                     $user = $db->prepare("SELECT users.* FROM users WHERE Id = :id;");
@@ -37,7 +39,7 @@
                     $user->closeCursor();
 
                 } catch (Exception $e) {
-                    throw new Exception("\nErreur lors de la création de l'objet user : ".$e->getMessage());
+                    throw new Exception("<br>Erreur lors de la création de l'objet user : ".$e->getMessage());
                 } 
             }
             
@@ -99,12 +101,12 @@
             
             private function _validateLength(string $string, int $maxLength) {
                 if (strlen($string) > $maxLength) {
-                    throw new Exception('La longueur de la chaine de caractère est trop longue');
+                    throw new Exception('<br>La longueur de la chaine de caractère est trop longue.');
                 }
             }
 
             function updateUser() {
-
+            	/* Met à jour les informations non critiques ur un utilisateurs. */
                 try {
 
                     require('connection.php');
@@ -119,7 +121,7 @@
                     $updatUser->closeCursor();
 
                 } catch (Exception $e) {
-                    throw new Exception("\nErreur lors de la mise à jour de l'objet user : ".$e->getMessage());
+                    throw new Exception("<br>Erreur lors de la mise à jour de l'objet user : ".$e->getMessage());
                 } 
                 
             }
