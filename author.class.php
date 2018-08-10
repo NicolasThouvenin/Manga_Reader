@@ -12,6 +12,7 @@
 		}
 
 		private function SetComics() {
+			/* Cette fonction permet de créer un array d'objet comics à partir d'une sélection sur la base de données */
 			try {
 				require('connection.php');
 				$query = "SELECT comics.Id FROM comics
@@ -27,14 +28,15 @@
 	            	$this->Comics[$line['Id']] = $comic;
 	            }
 			}  catch (Exception $e) {
-                throw new Exception("\nErreur lors de la création du token dans la base de données : ".$e->getMessage());
+                throw new Exception("<br>Erreur lors de la création de la liste de comics : ".$e->getMessage());
             }
 
 		}
 
 		function getComics() {
+				/* Cette fonction est un générateur permettant d'accéder aux objets comic d'un auteur */
 			if (!$this->ComicsLoaded) {
-				//On ne crée la liste d'objet comic que si on en a besoin car l'objet Auther peut être utilisé sans qu'on ai besoin de ces comics
+				//On ne crée la liste d'objets comics que si on en a besoin car l'objet Author peut être utilisé sans qu'on ai besoin de ses comics
 				$this->SetComics();
 				$this->ComicsLoaded = true;
 			}
