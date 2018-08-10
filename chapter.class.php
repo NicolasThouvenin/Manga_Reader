@@ -1,175 +1,188 @@
 <?php
 
-class Chapter {
+    /*
+        Cette classe représente un chapitre de comic. Elle permet d'accéder et de modifier au information de celle-ci sur la base de données.
+    */
 
-    private $Id;
-    private $Number;
-    private $Title;
-    private $Synopsis;
-    private $Validated;
-    private $PublicationDate;
-    private $comicStrips = array();
-    private $comicStripsLoaded = false;
-    private $chapterImagesFolder;
+    class Chapter {
 
-    public function __construct(int $Id, int $Number, string $Title, string $Synopsis, bool $Validated, string $PublicationDate) {
-        $this->Id = $Id;
-        $this->Number = $Number;
-        $this->Title = $Title;
-        $this->Synopsis = $Synopsis;
-        $this->Validated = $Validated;
-        $this->PublicationDate = $PublicationDate;
-        $this->ComicStripsLoaded = false;
-        $this->ComicStrips = array();
-        $this->SetChapterImagesFolder();
-    }
+        private $Id;
+        private $Number;
+        private $Title;
+        private $Synopsis;
+        private $Validated;
+        private $PublicationDate;
+        private $comicStrips = array();
+        private $comicStripsLoaded = false;
+        private $chapterImagesFolder;
 
-    function getId() {
-        return $this->Id;
-    }
+        public function __construct(int $Id, int $Number, string $Title, string $Synopsis, bool $Validated, string $PublicationDate) {
+            $this->Id = $Id;
+            $this->Number = $Number;
+            $this->Title = $Title;
+            $this->Synopsis = $Synopsis;
+            $this->Validated = $Validated;
+            $this->PublicationDate = $PublicationDate;
+            $this->ComicStripsLoaded = false;
+            $this->ComicStrips = array();
+            $this->SetChapterImagesFolder();
+        }
 
-    function getNumber() {
-        return $this->Number;
-    }
+        function getId() {
+            return $this->Id;
+        }
 
-    function getTitle() {
-        return $this->Title;
-    }
+        function getNumber() {
+            return $this->Number;
+        }
 
-    function getSynopsis() {
-        return $this->Synopsis;
-    }
+        function getTitle() {
+            return $this->Title;
+        }
 
-    function getValidated() {
-        return $this->Validated;
-    }
+        function getSynopsis() {
+            return $this->Synopsis;
+        }
 
-    function getPublicationDate() {
-        return $this->PublicationDate;
-    }
+        function getValidated() {
+            return $this->Validated;
+        }
 
-    function setNumber($Number) {
-        $this->Number = $Number;
-    }
+        function getPublicationDate() {
+            return $this->PublicationDate;
+        }
 
-    function setTitle($Title) {
-        $this->Title = $Title;
-    }
+        function setNumber($Number) {
+            $this->Number = $Number;
+        }
 
-    function setSynopsis($Synopsis) {
-        $this->Synopsis = $Synopsis;
-    }
+        function setTitle($Title) {
+            $this->Title = $Title;
+        }
 
-    function setValidated($Validated) {
-        $this->Validated = $Validated;
-    }
+        function setSynopsis($Synopsis) {
+            $this->Synopsis = $Synopsis;
+        }
 
-    function setPublicationDate($PublicationDate) {
-        $this->PublicationDate = $PublicationDate;
-    }
+        function setValidated($Validated) {
+            $this->Validated = $Validated;
+        }
 
-    private function SetComicStrips() {
-        try {
+        function setPublicationDate($PublicationDate) {
+            $this->PublicationDate = $PublicationDate;
+        }
 
-            require('connection.php');
+        private function SetComicStrips() {
+            /* Cette fonction permet de créer une liste d'objet comicstrip (vignettes) d'un chapitre à partir de la base de données */
+            try {
 
-            $result = $db->prepare("SELECT * FROM comicstrips WHERE chapterId = :chapterId");
-            $result->execute(array('chapterId' => $this->Id));
+                require('connection.php');
 
-            while ($line = $result->fetch()) {
-                $comicStrip = new ComicStrip($line['Id'], $line['Number'], $line['fileName']);
-                $this->comicStrips[$line['Id']] = $comicStrip;
+                $result = $db->prepare("SELECT * FROM comicstrips WHERE chapterId = :chapterId");
+                $result->execute(array('chapterId' => $this->Id));
+
+                while ($line = $result->fetch()) {
+                    $comicStrip = new ComicStrip($line['Id'], $line['Number'], $line['fileName']);
+                    $this->comicStrips[$line['Id']] = $comicStrip;
+                }
+            } catch (Exception $e) {
+                throw new Exception("<br>Erreur lors de la création de la liste de d'objets comicStrip : ". $e->getMessage());
             }
-        } catch (Exception $e) {
-            throw new Exception("\nErreur lors de la création de la liste de d'objets comicStrip : " . $e->getMessage());
-        }
-    }
-
-    function GetComicStrips() {
-        /* cette function est un générateur renvyant tout les comicstrip d'un chapitre dans l'ordre des numéros */
-        if (!$this->ComicStripsLoaded) {
-            $this->SetComicStrips();
-            $this->ComicStripsLoaded = true;
         }
 
-        $sortedComicIds = array();
-        foreach ($this->ComicStrips as $comicStrip) {
-            $sortedComicIds[$comicStrip->Number] = $comicStrip->Id;
-        }
-        krsort($sortedComicIds);
-
-        foreach ($this->sortedComicIds as $comicStripId) {
-            yield $this->ComicStrips[$comicStripId];
-        }
-        $this->ComicStrips;
-    }
-
-    function AddComicStrip($comicStripTmpName) {
-
-        try {
-
+        function GetComicStrips() {
+            /* 
+                Cette function est un générateur renvoyant tout les comicstrips (vignettes) d'un chapitre dans l'ordre des numéros.
+                Les éléments sont renvoyés dans le bon ordre grâce aux numéros.
+             */
             if (!$this->ComicStripsLoaded) {
                 $this->SetComicStrips();
                 $this->ComicStripsLoaded = true;
             }
 
-            $Filename = hash('sha256', uniqid()) . '.' . $this->GetExtension($comicStripTmpName);
-            $FilePath = $this->chapterImagesFolder . '\\' . $Filename;
+            $sortedComicIds = array();
+            foreach ($this->ComicStrips as $comicStrip) {
+                $sortedComicIds[$comicStrip->getNumber()] = $comicStrip->getId();
+            }
+            krsort($sortedComicIds);
 
-            if (move_uploaded_file($comicStripTmpName, $FilePath)) {
+            foreach ($this->sortedComicIds as $comicStripId) {
+                yield $this->ComicStrips[$comicStripId];
+            }
+        }
+
+        function AddComicStrip($comicStripTmpName) {
+            /*
+                Cette fonction permet d'ajouter un nouveau comicStrip (vignette) dans la base de données et de chargé l'image sur le serveur d'image.
+                Afin de géner l'apiration des images par des robotsles images ont un nom aléatoire.
+            */
+            try {
+
+                if (!$this->ComicStripsLoaded) {
+                    $this->SetComicStrips();
+                    $this->ComicStripsLoaded = true;
+                }
+
+                $Filename = hash('sha256', uniqid()).'.'.$this->GetExtension($comicStripTmpName);
+                $FilePath = $this->chapterImagesFolder.'\\'. $Filename;
+
+                if (move_uploaded_file($comicStripTmpName, $FilePath)) {
+
+                    require('connection.php');
+
+                    $addComicStrip = $db->prepare("CALL createComicStrip(:fileName, :chapterId, @lastComicStripId, @lastComicStripNumber)");
+                    $addComicStrip->bindParam(':fileName', $Filename, PDO::PARAM_STR, 75);
+                    $addComicStrip->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
+                    $addComicStrip->execute();
+
+                    $addComicStrip->closeCursor();
+                    $result = $db->query("SELECT @lastComicStripId, @lastComicStripNumber")->fetch(PDO::FETCH_ASSOC);
+
+                    $comicStrip = new ComicStrip($result['@lastComicStripId'], $result['@lastComicStripNumber'], $Filename);
+                    $this->ComicStrips[$result['@lastComicStripId']] = $comicStrip;
+                } else {
+                    throw new Exception("<br>Le fichier n'a pas pu être poussé sur le serveur");
+                }
+            } catch (Exception $e) {
+                throw new Exception("<br>Erreur lors de l'ajout du nouveau comicStrip : " . $e->getMessage());
+            }
+        }
+
+        private function SetChapterImagesFolder() {
+            /* Cette fonction sert à créer le dossier sur le serveur d'image où les images d'un chapitre seront stockées */
+            try {
 
                 require('connection.php');
 
-                $addComicStrip = $db->prepare("CALL createComicStrip(:fileName, :chapterId, @lastComicStripId, @lastComicStripNumber)");
-                $addComicStrip->bindParam(':fileName', $Filename, PDO::PARAM_STR, 75);
-                $addComicStrip->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
-                $addComicStrip->execute();
+                $getChapterImagesFolder = $db->prepare("CALL getChapterFolderPath(:chapterId, @chapterFolderPath)");
+                $getChapterImagesFolder->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
+                $getChapterImagesFolder->execute();
 
-                $addComicStrip->closeCursor();
-                $result = $db->query("SELECT @lastComicStripId, @lastComicStripNumber")->fetch(PDO::FETCH_ASSOC);
+                $getChapterImagesFolder->closeCursor();
+                $result = $db->query("SELECT @chapterFolderPath")->fetch(PDO::FETCH_ASSOC);
 
-                $comicStrip = new ComicStrip($result['@lastComicStripId'], $result['@lastComicStripNumber'], $Filename);
-                $this->ComicStrips[$result['@lastComicStripId']] = $comicStrip;
+                $this->chapterImagesFolder = 'comics' . '\\' . $result['@chapterFolderPath'];
+
+                if (!file_exists($this->chapterImagesFolder)) {
+                    mkdir($this->chapterImagesFolder, 0777, true);
+                }
+            } catch (Exception $e) {
+                throw new Exception("<br>Erreur lors de la recherche du chemin du dossier image du chapitre : " . $e->getMessage());
+            }
+        }
+
+        private function GetExtension($tmpName) {
+            /*
+                Cette fonction permet de rechercher l'extension d'un fichier et de valider qu'il s'agisse bien d'une image.
+                Cela évite d'uploader des fichiers potentiellement dangereux sur le serveur.
+            */
+            $check = explode('/', mime_content_type($tmpName));
+            if ($check[0] !== 'image') {
+                throw new Exception("<br>Le fichier n'est pas une image : " . $e->getMessage());
             } else {
-                throw new Exception("\nLe fichier n'a pas pu être poussé sur le serveur");
+                return $check[1];
             }
-        } catch (Exception $e) {
-            throw new Exception("\nErreur lors de l'ajout du nouveau comicStrip : " . $e->getMessage());
         }
+
     }
-
-    private function SetChapterImagesFolder() {
-
-        try {
-
-            require('connection.php');
-
-            $getChapterImagesFolder = $db->prepare("CALL getChapterFolderPath(:chapterId, @chapterFolderPath)");
-            $getChapterImagesFolder->bindParam(':chapterId', $this->Id, PDO::PARAM_INT);
-            $getChapterImagesFolder->execute();
-
-            $getChapterImagesFolder->closeCursor();
-            $result = $db->query("SELECT @chapterFolderPath")->fetch(PDO::FETCH_ASSOC);
-
-            $this->chapterImagesFolder = 'comics' . '\\' . $result['@chapterFolderPath'];
-
-            if (!file_exists($this->chapterImagesFolder)) {
-                mkdir($this->chapterImagesFolder, 0777, true);
-            }
-        } catch (Exception $e) {
-            throw new Exception("\nErreur lors de la recherche du chemin du dossier image du chapitre : " . $e->getMessage());
-        }
-    }
-
-    private function GetExtension($tmpName) {
-        $check = explode('/', mime_content_type($tmpName));
-        if ($check[0] !== 'image') {
-            throw new Exception("\nLe fichier n'est pas une image : " . $e->getMessage());
-        } else {
-            return $check[1];
-        }
-    }
-
-}
-
 ?>
