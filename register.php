@@ -9,14 +9,14 @@
 </head>
 <body>
     <div class="form-div">
-        <a href="homePage.php"><img src="ressources/bubbleSignLogo.png"></a>
-            <h2>Create your account</h2>
+        <a href="homePage.php"><img src="ressources/bubbleSignLogo.png"></a> <!-- logo -->
+            <h2>Create your account</h2> <!-- form for sign up -->
             <input type="text" id="login" name="login" placeholder="Login" required>
-            <input type="text" id="firstname" name="firstname" placeholder="Prénom" required>
-            <input type="text" id="surname" name="surname" placeholder="Nom" required>
-            <input type="date" id="birthDate" name="birthDate" placeholder="Date de naissance" required>
-            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
-            <input type="email" id="email" name="email" placeholder="Entrez une adresse email valide" required>
+            <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
+            <input type="text" id="surname" name="surname" placeholder="Last Name" required>
+            <input type="date" id="birthDate" name="birthDate" placeholder="Birthdate" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="email" id="email" name="email" placeholder="E-mail" required>
             <?php
                 session_start();
                 $_SESSION['uniqid'] = uniqid();
