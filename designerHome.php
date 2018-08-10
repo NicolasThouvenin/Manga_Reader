@@ -48,7 +48,7 @@
                         <p class="comics_name"><a href="#">New Comic</a><p>
                     </article>
 
-                    <?php
+                    <?php // creating new object and getting its Id for the comics it owns and display it
                     $author = new Author($authentified->getId());
 
                     foreach ($author->getComics() as $comic) {
