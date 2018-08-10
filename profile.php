@@ -23,6 +23,7 @@ if (isset($_COOKIE['authentified'])) {
             <header>
                 <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation">
                 <div class="displayUser">
+                    <!--     if connected, user info clickable profile                 -->
                     <p class='userName'><a href='profile.php'><?php echo $user->getLogin(); ?></a></p>
                     <p><a class='userName' href='disconnect.php'>Log out</a></p>
                 </div> <!-- displayUser -->
@@ -49,6 +50,7 @@ if (isset($_COOKIE['authentified'])) {
                             </label>
                         </div> <!-- avatar -->
 
+                        <!-- All info about the user   -->
                         <div id="user_info">
                             <p>Login<input type="text" id="login" name="login" value="<?php echo $user->getLogin(); ?>"></p>
                             <p>Firstname<input type="text" id="firstname" name="firstname" value="<?php echo $user->getFirstname(); ?>"></p>
