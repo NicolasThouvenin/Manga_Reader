@@ -14,7 +14,7 @@
 
       <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation" class="creationButton">
 
-      <div class="displayUser">
+      <div class="displayUser"> <!--displayUser's block-->
         <?php
         require('required.php');
 
@@ -41,7 +41,7 @@
 </header>
 
 <main>
-    <div class="banner">
+    <div class="banner"> <!-- search block-->
         <input id="searchbar" type="search" name="q" placeholder="filter by comic title or author" oninput="toFilterComic(this)">
     </div> <!-- banner -->
     <?php
@@ -50,9 +50,9 @@
 
         echo "<p class='log'>Connection successful.<br>";
 
-        $stmt = $db->prepare('CALL getComicsWithValidatedChapter()');
+        $stmt = $db->prepare('CALL getComicsWithValidatedChapter()'); // checking for comics 
         $stmt->execute();
-        if ($stmt->rowCount() == 0) {
+        if ($stmt->rowCount() == 0) { // if no results, error
             echo "<p class='error'>Sorry we haven't found any results matching this search.</p>";
         } else {
             while ($line = $stmt->fetch()) {
