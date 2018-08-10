@@ -1,7 +1,7 @@
 <?php
 
 	/*
-		Cette classe à vocation à regrouper des méthodes utiles à diérentes pages.
+		Cette classe à vocation à regrouper des méthodes utiles à différentes pages.
 	*/
 	class Util {
 		
