@@ -1,14 +1,18 @@
 <?php
         class Authentified extends User {
             
-            /* Cette classe correspond aux informations sur un utilisateur authentifié. */
+            /* 
+                Cette classe correspond aux informations sur un utilisateur authentifié.
+                L'intérêt de la classe Authentified par rapport à ça classe parente User est qu'elle possède des méthodes pour créer
+                et gérer les token d'uahtneitifcation dans les cookie et la base de données.
+             */
 
             private $Token;
 
             public function __construct(int $Id, string $uniqid) {
 
             	try {
-            	    parent::__construct($Id);
+            	    parent::__construct($Id); // Construit toutes les valeurs utiles de la classe parente User
                 	$this->SetToken($uniqid);
 
             	} catch (Exception $e) {
