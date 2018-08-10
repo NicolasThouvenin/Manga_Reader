@@ -15,8 +15,8 @@
                 <input type="text" id="login" name="login" placeholder="Login" required>
                 <input type="password" id="password" name="password" placeholder="Mot de passe" required>
                 <?php
-                session_start();
-                $_SESSION['uniqid'] = uniqid();
+                session_start(); // session is starting here
+                $_SESSION['uniqid'] = uniqid(); // and it is based on the uniqid
                 echo '<input id="uniqid" name="uniqid" type="hidden" value="' . $_SESSION['uniqid'] . '">';
                 //Pour des raisons de sécurité, on acceptera que les post  renvoyant le token du formulaire de login
                 ?>
