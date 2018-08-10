@@ -1,4 +1,4 @@
-<?php 
+<?php // it contains all the other classes
     require('comic.class.php');
     require('volume.class.php');
     require('chapter.class.php');
