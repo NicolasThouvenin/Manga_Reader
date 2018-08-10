@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up</title>
+    <title>Register</title>
     <link rel="stylesheet" type="text/css" href="css/main_lg.css">
     <link rel="stylesheet" type="text/css" href="css/form.css">
     <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
