@@ -52,7 +52,7 @@ if (isset($_POST["submit"])) {
                     }
                     ?>
                 </div> <!-- displayUser -->
-                <div class="logo"><a href="homePage.php">LOGO</a></div>
+                <div class="logo"><a href="homePage.php"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
             </header>
             <main>
                 <div class="banner">
