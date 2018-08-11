@@ -18,7 +18,7 @@ if (isset($_POST['settleChapter'])) {
 
 
         
-        Title = htmlentities($_POST['chapterTitle']); // Convert HTML entities to characters
+        $Title = htmlentities($_POST['chapterTitle']); // Convert HTML entities to characters
         $chapterSynopsis = htmlentities($_POST['chapterSynopsis']);
         $date = date("Y-m-d");
         echo $date;
