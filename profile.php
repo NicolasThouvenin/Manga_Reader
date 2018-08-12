@@ -67,6 +67,11 @@ if (isset($_COOKIE['authentified'])) {
                     ?>
 
                     <form id="unsubscribe" name="unsubscribe" method="post" action="unsubscribe.php">
+                        <?php
+                            $_SESSION['uniqidUnsubscribe'] = uniqid(); // and it is based on the uniqid
+                            echo '<input id="uniqidUnsubscribe" name="uniqidUnsubscribe" type="hidden" value="'.$_SESSION['uniqidUnsubscribe'].'">';
+                            //Pour des raisons de sécurité, on acceptera que les post renvoyant le token du formulaire de login
+                        ?>
                         <input type="submit" name="submit" value="Unsubscribe" style="margin-top: 30px;">
                     </form>
 

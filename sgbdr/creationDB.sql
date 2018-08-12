@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `bubbleUpDB`.`users` (
   `Password` VARCHAR(41) NOT NULL,
   `Email` VARCHAR(254) NOT NULL,
   `EmailValidated` TINYINT NOT NULL DEFAULT 0,
+  `Unsubscribed` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Login_UNIQUE` (`Login` ASC),
   UNIQUE INDEX `Email_UNIQUE` (`Email` ASC))
