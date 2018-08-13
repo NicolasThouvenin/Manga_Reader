@@ -30,6 +30,13 @@
                 <?php
                     if (isset($_POST['submit'])) { // if the form is validated, it will begin to check the files to upload
                         try {
+
+                            if (!isset($_SESSION['uniqidNewComic'])) {
+                                throw new Exception("La requête post de création de comic ne possède pas de token correspondant à un formulaire envoyé par le serveur");
+                            } else if ($_SESSION['uniqidNewComic'] != $checkedData['uniqidNewComic']) {
+                                throw new Exception("La requête post de création de comic n'indique pas pas le même token d'authentification que celui de la session du serveur");
+                            }
+
                             $check = explode("/", mime_content_type($_FILES["cover"]["tmp_name"])); // checking content type
                             if ($check[0] !== "image") {
                                 throw new Exception("\nFile is not an image : " . $e->getMessage());
@@ -77,6 +84,7 @@
                             die('Error during Comic creation : '.$e->getMessage());
                         }
                     } else {
+                        $_SESSION['uniqidNewComic'] = uniqid(); // and it is based on the uniqid
                         echo '<div id="new_comic"> // <!--creating a bloc for the new book\'s form-->
                             <form method="POST" action="newComic.php" enctype="multipart/form-data"> 
                                 <p>Title : <input type="text" name="comicTitle" placeholder="New Comic Title" required></p>
@@ -94,7 +102,8 @@
                                     </select></label>
                                 <p>Comic cover picture : <input type="file" name="cover" id="cover" required></p> <!-- input for uploading files -->
                                 <p id="first_volume">First Volume Title : <input type="text" name="volumeTitle" placeholder="Volume Title" required></p>
-                                <p>Volume Synopsis : <textarea name="volumeSynopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
+                                <p>Volume Synopsis : <textarea name="volumeSynopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>  
+                                <input id="uniqidNewComic" name="uniqidNewComic" type="hidden" value="'.$_SESSION['uniqidNewComic'].'">
                                 <input type="submit" name="submit" value="Create New Comic">
                             </form>
                         </div>';
