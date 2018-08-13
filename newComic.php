@@ -54,25 +54,6 @@
                             $createComic->bindParam(':inCoverExt', $check[1], PDO::PARAM_STR, 10);
                             $createComic->execute();
                             $createComic->closeCursor();
-                if (isset($_POST['submit'])) { // if the form is validated, it will begin to check the files to upload
-                    try {
-                        $check = explode("/", mime_content_type($_FILES["cover"]["tmp_name"])); // checking content type
-                        if ($check[0] !== "image") {
-                            throw new Exception("\nFile is not an image : " . $e->getMessage());
-                        }
-                        require('connection.php');
-                        $comicTitle = htmlentities($_POST['comicTitle']);
-                        $comicSynopsis = htmlentities($_POST['synopsis']);
-                        $date = htmlentities($_POST['inStartDate']);
-                        $userId = $user->getId();
-                        $createComic = $db->prepare("CALL createComic(:Title, :Synopsis, :StartDate, :AuthorId, :inCoverExt, @lastComicId)");
-                        $createComic->bindParam(':Title', $comicTitle, PDO::PARAM_STR, 255);
-                        $createComic->bindParam(':Synopsis', $comicSynopsis, PDO::PARAM_STR, 255);
-                        $createComic->bindParam(':StartDate',$date , PDO::PARAM_STR, 10);
-                        $createComic->bindParam(':AuthorId', $userId, PDO::PARAM_INT);
-                        $createComic->bindParam(':inCoverExt', $check[1], PDO::PARAM_STR, 10);
-                        $createComic->execute();
-                        $createComic->closeCursor(); // helps for the statement to be executed again 
 
                             $result = $db->query("SELECT @lastComicId")->fetch(PDO::FETCH_ASSOC);
                             $comic = new Comic($result['@lastComicId']);
@@ -91,14 +72,7 @@
                                 <p>Creation Date : <input type="date" name="inStartDate" value="<?php echo date("Y-m-d"); ?>" required></p> <!-- input for choose a date -->
                                 <p>Comic Synopsis : <textarea name="synopsis" placeholder="Comic Synopsis" cols="40" rows="3" required></textarea></p> <!-- input for comments area -->
                                 <label>Genres : <select id="genres" multiple name="genres[]" required="required"> <!-- input for selecting in a list of genres -->
-                                        <option value="action">Action</option> 
-                                        <option value="adventure">Adventure</option>
-                                        <option value="comedy">Comedy</option>
-                                        <option value="drama">Drama</option>
-                                        <option value="fantasy">Fantasy</option>
-                                        <option value="historical">Historical</option>
-                                        <option value="horror">Horror</option>
-                                        <option value="scienceFiction">Sci-fi</option>
+                                    '.Util::getGenreOptions().'
                                     </select></label>
                                 <p>Comic cover picture : <input type="file" name="cover" id="cover" required></p> <!-- input for uploading files -->
                                 <p id="first_volume">First Volume Title : <input type="text" name="volumeTitle" placeholder="Volume Title" required></p>
