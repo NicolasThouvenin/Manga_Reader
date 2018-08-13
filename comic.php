@@ -13,6 +13,11 @@ $comic = new Comic($_GET["bookId"]);
  */
 if (isset($_POST["submit"])) {
     try {
+        if (!isset($_SESSION['uniqidNewVolume'])) {
+            throw new Exception("La requête post de création de volume ne possède pas de token correspondant à un formulaire envoyé par le serveur");
+        } else if ($_SESSION['uniqidNewVolume'] != htmlentities($_POST['uniqidNewVolume'])) {
+            throw new Exception("La requête post de création de volume n'indique pas le même token d'authentification que celui de la session du serveur");
+        }
         $comic->createVolume(htmlentities($_POST["title"]), htmlentities($_POST["synopsis"]));
         header("Location:newChapter.php?volumeId=" . $comic->getLastVolumeId());
     } catch (Exception $e) {
@@ -116,6 +121,11 @@ if (isset($_POST["submit"])) {
                                     <form id="new_volume_form" method="POST" action="comic.php?bookId=<?php echo $_GET["bookId"]; ?>">
                                         <p></p><input type="text" name="title" placeholder="Volume Title" required></p>
                                         <p><textarea name="synopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
+                                        <?php
+                                            $_SESSION['uniqidNewVolume'] = uniqid(); // and it is based on the uniqid
+                                            echo '<input id="uniqidNewVolume" name="uniqidNewVolume" type="hidden" value="'.$_SESSION['uniqidNewVolume'].'">';
+                                            //Pour des raisons de sécurité, on acceptera que les post renvoyant le token du formulaire de login
+                                        ?>
                                         <input type="submit" name="submit" value="Create Volume">
                                     </form>
                                     <?php
