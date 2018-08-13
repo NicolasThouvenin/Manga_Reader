@@ -7,13 +7,13 @@
 
             session_start();
 
+            $checkedData = Util::checkPostData($_POST);
+
             if (!isset($_SESSION['uniqidProfil'])) {
                 throw new Exception("La requête post de mise à jour du profil ne possède pas de token correspondant à un formulaire envoyé par le serveur");
             } else if ($_SESSION['uniqidProfil'] != $checkedData['uniqidProfil']) {
                 throw new Exception("La requête post de mise à jour du profil n'indique pas le même token d'authentification que celui de la session du serveur");
             }
-
-            $checkedData = Util::checkPostData($_POST);
 
             $authentified = unserialize($_COOKIE['authentified']);
 
