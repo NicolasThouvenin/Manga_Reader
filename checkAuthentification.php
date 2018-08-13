@@ -14,9 +14,9 @@
             
             $checkedData = Util::checkPostData($_POST);
 
-            if (!isset($_SESSION['uniqid'])) {
+            if (!isset($_SESSION['uniqidLogin'])) {
                 throw new Exception("La requête post d'authentification ne possède pas de token correspondant à un formulaire envoyé par le serveur");
-            } else if ($_SESSION['uniqid'] != $checkedData['uniqid']) {
+            } else if ($_SESSION['uniqidLogin'] != $checkedData['uniqidLogin']) {
                 throw new Exception("La requête post n'indique pas pas le même token d'authentification que celui de la session du serveur");
             }
 
@@ -26,8 +26,9 @@
 
             if ($logger->rowCount() == 1) {
                 while ($line = $logger->fetch()) {
-                    if ($line['Unsubscribed'] === 0) {
-                        $authentified = new Authentified($line['Id'], $_SESSION['uniqid']);
+                    if ($line['Unsubscribed'] == 0) {
+                    	print_r($line);
+                        $authentified = new Authentified($line['Id'], $_SESSION['uniqidLogin']);
                         $authentifiedSerialized = serialize($authentified);
 
                         if (isset($checkedData['stayConnected'])) {
