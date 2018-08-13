@@ -57,6 +57,11 @@ if (isset($_COOKIE['authentified'])) {
                                 <p>Surname<input type="text" id="surname" name="surname" value="<?php echo $user->getSurname(); ?>"></p>
                                 <p>Birth Date<input type="date" id="birthDate" name="birthDate" value="<?php echo $user->getBirthDate(); ?>"></p>
                                 <p>Email<input type="email" id="email" name="email" value="<?php echo $user->getEmail(); ?>" disabled></p>
+                                <?php
+                                    $_SESSION['uniqidProfil'] = uniqid(); // and it is based on the uniqid
+                                    echo '<input id="uniqidProfil" name="uniqidProfil" type="hidden" value="'.$_SESSION['uniqidProfil'].'">';
+                                    //Pour des raisons de sécurité, on acceptera que les post renvoyant le token du formulaire de login
+                                ?>
                                 <input type="submit" name="submit" value="Save" style="margin-top: 30px;">
                             </div>  <!-- book_meta -->
                         </form>
