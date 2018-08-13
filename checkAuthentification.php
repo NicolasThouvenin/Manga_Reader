@@ -26,16 +26,20 @@
 
             if ($logger->rowCount() == 1) {
                 while ($line = $logger->fetch()) {
-                    $authentified = new Authentified($line['Id'], $_SESSION['uniqid']);
-                    $authentifiedSerialized = serialize($authentified);
+                    if ($line['Unsubscribed'] === 0) {
+                        $authentified = new Authentified($line['Id'], $_SESSION['uniqid']);
+                        $authentifiedSerialized = serialize($authentified);
 
-                    if (isset($checkedData['stayConnected'])) {
-                        $expiry = time()+86400*365; //expire au bout d'un an
+                        if (isset($checkedData['stayConnected'])) {
+                            $expiry = time()+86400*365; //expire au bout d'un an
+                        } else {
+                            $expiry = 0; //expire à la fin de la session
+                        }
+                        setcookie ('authentified', $authentifiedSerialized, $expiry); //expire à la fin de la session
+                        setcookie('cookieExpiryDate', $expiry, $expiry);
                     } else {
-                        $expiry = 0; //expire à la fin de la session
+                        header('Location: register.php');
                     }
-                    setcookie ('authentified', $authentifiedSerialized, $expiry); //expire à la fin de la session
-                    setcookie('cookieExpiryDate', $expiry, $expiry);
                 }
 
                 $logger->closeCursor();
