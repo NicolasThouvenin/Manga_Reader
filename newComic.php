@@ -33,7 +33,7 @@
 
                             if (!isset($_SESSION['uniqidNewComic'])) {
                                 throw new Exception("La requête post de création de comic ne possède pas de token correspondant à un formulaire envoyé par le serveur");
-                            } else if ($_SESSION['uniqidNewComic'] != $checkedData['uniqidNewComic']) {
+                            } else if ($_SESSION['uniqidNewComic'] != htmlentities($_POST['uniqidNewComic'])) {
                                 throw new Exception("La requête post de création de comic n'indique pas pas le même token d'authentification que celui de la session du serveur");
                             }
 
