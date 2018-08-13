@@ -23,6 +23,7 @@
                 <label><input type="checkbox" id="stayConnected" name="stayConnected"> rester connecté</label>
                 <input type="submit" name="submit" value="Login" class="regularButton">
             </form>
+            <a href="register.php">S'inscrire</a>
         </div>
     </body>
 </html>
