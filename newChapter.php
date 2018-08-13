@@ -3,6 +3,12 @@ require('required.php');
 if (isset($_POST['settleChapter'])) {
     try {
 
+        if (!isset($_SESSION['uniqidNewChapter'])) {
+            throw new Exception("La requête post de création de chapitre ne possède pas de token correspondant à un formulaire envoyé par le serveur");
+        } else if ($_SESSION['uniqidNewChapter'] != htmlentities($_POST['uniqidNewChapter'])) {
+            throw new Exception("La requête post de création de chapitre n'indique pas le même token d'authentification que celui de la session du serveur");
+        }
+
         $nbr_file = count($_FILES["uploadedBubble"]["tmp_name"]);
 
         for ($i = 0; $i < $nbr_file; $i++) {
@@ -81,6 +87,11 @@ if (isset($_POST['settleChapter'])) {
                         <p>Upload your bubbles here, once you confirm you will settle your chapter.</p>
                         <label for="gallery-photo-add">Upload a file (JPG, PNG or GIF) :</label><br>
                         <input type="file" accept="image/*"  multiple id="gallery-photo-add" name="uploadedBubble[]" required>
+                        <?php
+                            $_SESSION['uniqidNewChapter'] = uniqid(); // and it is based on the uniqid
+                            echo '<input id="uniqidNewChapter" name="uniqidNewChapter" type="hidden" value="'.$_SESSION['uniqidNewChapter'].'">';
+                            //Pour des raisons de sécurité, on acceptera que les post renvoyant le token du formulaire de login
+                        ?>
                         <!-- <input type="submit" name="sendBubble" value="upload this bubble" /> -->
                         <input type="submit" value="Settle Chapter" name="settleChapter">
 
