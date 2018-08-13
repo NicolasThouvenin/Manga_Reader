@@ -1,6 +1,7 @@
 <?php
     try {
         require('connection.php');
+        require('required.php');
         session_start();
 
         if (!isset($_SESSION['uniqidUnsubscribe'])) {
@@ -16,7 +17,8 @@
             if ($authentified->CheckToken()) {
 
                 $deleteUser = $db->prepare("UPDATE users SET Unsubscribed = 1 where Id = :Id;");
-                $deleteUser->bindParam(':Id', $authentified->getId(), PDO::PARAM_INT);
+                $id = $authentified->getId();
+                $deleteUser->bindParam(':Id', $id, PDO::PARAM_INT);
                 $deleteUser->execute();
 
             } else {

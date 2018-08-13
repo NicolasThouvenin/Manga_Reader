@@ -46,10 +46,11 @@
         		C'est notamment utile pour vérifié l'objet générer à partir du cookie
         	*/
         	try {
-        	    require('connection');
-                $checkToken = $db->prepare("CALL checkUserToken(:token, :login, @isAuthentified)");
+        	    require('connection.php');
+                $checkToken = $db->prepare("CALL checkUserToken(:login, :token, @isAuthentified)");
+                $login = $this->getLogin();
+                $checkToken->bindParam(':login', $login, PDO::PARAM_STR, 255);
                 $checkToken->bindParam(':token', $this->Token, PDO::PARAM_STR, 64);
-                $checkToken->bindParam(':login', $this->getLogin(), PDO::PARAM_STR, 255);
                 $checkToken->execute();
                 $checkToken->closeCursor();
                 $result = $db->query("SELECT @isAuthentified")->fetch(PDO::FETCH_ASSOC);

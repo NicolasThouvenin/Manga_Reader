@@ -59,7 +59,7 @@ if (isset($_COOKIE['authentified'])) {
                                 <p>Email<input type="email" id="email" name="email" value="<?php echo $user->getEmail(); ?>" disabled></p>
                                 <input type="submit" name="submit" value="Save" style="margin-top: 30px;">
                             </div>  <!-- book_meta -->
-
+                        </form>
                             <?php
                         } catch (Exception $e) {
                             die('Error : ' . $e->getMessage());
