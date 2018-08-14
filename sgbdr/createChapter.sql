@@ -8,6 +8,6 @@ BEGIN
 	JOIN comics
 	ON comics.Id = volumes.comicId;
 	SET lastChapterId = -1;
-	INSERT INTO chapters (Title, Number, Synopsis, StartDate, volumeId) VALUES (inTitle, lastChapterNumber, inSynopsis, inStartDate, inVolumeId);
+	INSERT INTO chapters (Title, Number, Synopsis, PublicationDate, volumeId) VALUES (inTitle, lastChapterNumber, inSynopsis, inStartDate, inVolumeId);
 	SET lastChapterId = LAST_INSERT_ID();
 END ;;

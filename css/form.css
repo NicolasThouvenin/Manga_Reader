@@ -9,20 +9,30 @@
 
 
 .form-div {
-	margin: auto;
-	width: 810px;
-	padding: 5%;
+    padding: 30px 10px;
+    margin: auto;
+    width: 400px;
+
 }
 
 form {
-	margin: auto;
-	padding: 10px;
+    margin: auto;
+    padding: 10px;
 }
 
 form > input {
-	display: block;
-	border: 1px solid;
-	margin: 5px;
-	padding: 10px;
-	border-radius: 10px
+    display: block;
+    border: 1px solid;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px
+}
+
+#authentification {
+    width: 180px;
+    margin: auto;
+}
+
+form > h2 {
+    text-align: center;
 }

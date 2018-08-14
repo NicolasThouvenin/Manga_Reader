@@ -3,143 +3,145 @@
 /****************************/
 
 .comic-no-visible {
-	display:none;
+    display:none;
 }
 
 button, input[type="button"]{
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	text-transform:uppercase;
-	font-size:14px;
-	text-decoration:none;
-	font-weight:bold;
-	text-transform:uppercase;
-	text-shadow:rgba(0, 0, 0, 0.30) 0 -1.25px 0;
-	color:#fff;
-	display:-moz-inline-stack;
-	-webkit-font-smoothing:antialiased;
-	display:inline-block;
-	vertical-align:middle;
-	vertical-align:auto;
-	zoom:1;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	border:1px solid silver;
-	padding:3px 20px;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
-	-ms-border-radius:3px;
-	-o-border-radius:3px;
-	border-radius:3px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-transform:uppercase;
+    font-size:14px;
+    text-decoration:none;
+    font-weight:bold;
+    text-transform:uppercase;
+    text-shadow:rgba(0, 0, 0, 0.30) 0 -1.25px 0;
+    color:#fff;
+    display:-moz-inline-stack;
+    -webkit-font-smoothing:antialiased;
+    display:inline-block;
+    vertical-align:middle;
+    vertical-align:auto;
+    zoom:1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border:1px solid silver;
+    padding:3px 20px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -ms-border-radius:3px;
+    -o-border-radius:3px;
+    border-radius:3px;
 }
 
 
 /** Button Style **/
 .regularButton {
-	background: #5a5b5f;
-	-webkit-box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
-	-moz-box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
-	box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+    cursor: pointer;
+    background: #5a5b5f;
+    -webkit-box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+    -moz-box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+    box-shadow:rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
 }
 
 /** Active State Style **/
 .regularButton:active {
-	border-color:#5a5b5f;
-	-webkit-box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
-	-moz-box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
-	box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    border-color:#5a5b5f;
+    -webkit-box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    -moz-box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
 }
 
 .registerButton {
-	background: #00cc66;
-	-webkit-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179 0.3) 0 1px 0;
-	-moz-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
-	box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+    cursor: pointer;
+    background: #00cc66;
+    -webkit-box-shadow: rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    -moz-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
 }
 
 /** Active State Style **/
 .registerButton:active {
-	-webkit-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
-	-moz-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
-	box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    -webkit-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    -moz-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
 }
 
 a {
-	color: rgb(189, 186, 172);
-	text-decoration: none;
+    color: rgb(189, 186, 172);
+    text-decoration: none;
 }
 
 html {
-	background-color: rgb(61, 61, 61);
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	color: rgb(189, 186, 172);
+    background-color: rgb(61, 61, 61);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(189, 186, 172);
 }
 
 body, p {
-	margin: 0;
+    margin: 0;
 }
 
 header {
-	position: fixed;
-	top: 0px;
-	width: 100%;
-	height: 82px;
-	background-color: rgb(41, 41, 41)
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 82px;
+    background-color: rgb(41, 41, 41)
 }
 
 header div, header input {
-	display: inline-grid;
+    display: inline-grid;
 }
 
 .add {
-	float: left;
-	margin: 27px 0 0 40px;
-	z-index: 150;
-	-moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
-	box-shadow:inset 0px 1px 0px 0px #f5978e;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f));
-	background:-moz-linear-gradient(top, #f24537 5%, #c62d1f 100%);
-	background:-webkit-linear-gradient(top, #f24537 5%, #c62d1f 100%);
-	background:-o-linear-gradient(top, #f24537 5%, #c62d1f 100%);
-	background:-ms-linear-gradient(top, #f24537 5%, #c62d1f 100%);
-	background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f',GradientType=0);
-	background-color:#f24537;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #d02718;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #810e05;
+    float: left;
+    margin: 27px 0 0 40px;
+    z-index: 150;
+    -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+    box-shadow:inset 0px 1px 0px 0px #f5978e;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f));
+    background:-moz-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-webkit-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-o-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-ms-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f',GradientType=0);
+    background-color:#f24537;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #d02718;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #810e05;
 }
 .add:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
-	background:-moz-linear-gradient(top, #c62d1f 5%, #f24537 100%);
-	background:-webkit-linear-gradient(top, #c62d1f 5%, #f24537 100%);
-	background:-o-linear-gradient(top, #c62d1f 5%, #f24537 100%);
-	background:-ms-linear-gradient(top, #c62d1f 5%, #f24537 100%);
-	background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537',GradientType=0);
-	background-color:#c62d1f;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537));
+    background:-moz-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+    background:-webkit-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+    background:-o-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+    background:-ms-linear-gradient(top, #c62d1f 5%, #f24537 100%);
+    background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537',GradientType=0);
+    background-color:#c62d1f;
 }
 .add:active {
-	position:relative;
-	top:1px;
+    position:relative;
+    top:1px;
 }
 
 
 .logo { /* display logo in center */
-/*    margin-left: auto;
-    margin-right: auto;
-    width: 10%;
-    margin-top: 0px;*/
+    /*    margin-left: auto;
+        margin-right: auto;
+        width: 10%;
+        margin-top: 0px;*/
     display:block;
     max-width: 300px;
     margin: 0 auto;
@@ -147,39 +149,39 @@ header div, header input {
 }
 
 .displayUser {
-	float: right;
-	margin-right: 40px;
+    float: right;
+    margin-right: 40px;
 }
 
 .userName {
-	font-size: 18px;
-	margin: 12px 0 2px 0;
+    font-size: 18px;
+    margin: 12px 0 2px 0;
 }
 .displayUser input {
-	margin: 12px 0 2px 0;
+    margin: 12px 0 2px 0;
 }
 
 main {
-	padding: 82px 0px 10px 0;
-	width: 810px;
-	margin: auto;
+    padding: 82px 0px 10px 0;
+    width: 810px;
+    margin: auto;
 }
 
 .banner {
 
-	width: 100%;
-	height: 50px;
-	background-color: dimgray;
-	margin-bottom: 20px;
+    width: 100%;
+    height: 50px;
+    background-color: dimgray;
+    margin-bottom: 20px;
 }
 
 #searchbar {
-	float: right;
-	margin: 10px 10px 0 0;
+    float: right;
+    margin: 10px 10px 0 0;
 }
 
 .log {
-	display: none;
+    display: none;
 }
 
 
@@ -188,184 +190,187 @@ main {
 /****************************/
 
 #menuToggle{  /* hidden menuToggle */
-	display: none;
+    display: none;
 }
 
 
 /*homePage style under 800px*/
 @media screen and (max-width: 800px) {
-	.userName, input[type=button], input[type=search]{
-		display: none;
-	} 
+    .userName, input[type=button], input[type=search]{
+        display: none;
+    } 
 
-	.logo{ /*logo will have no display */
-		display: none;
-	}
+    .logo { /*logo will have no display */
+        display: none;
+    }
 
-	#logoInBurger{ /* logo will be in the hamburger */
-		margin-left: auto;
-		width: 10px;
-	}
+    #logoInBurger { /* logo will be in the hamburger */
+        margin-left: auto;
+        width: 10px;
+    }
 
-	.banner{display: none;}
-	body
-	{
-		margin: 0;
-		padding: 0;
+    .banner{ 
+        display: none;
+    }
 
-		/* make it look decent enough */
-		background: #232323;
-		color: #cdcdcd;
-		font-family: "Avenir Next", "Avenir", sans-serif;
-	}
+    body
+    {
+        margin: 0;
+        padding: 0;
 
-	a
-	{
-		text-decoration: none;
-		color: #232323;
+        /* make it look decent enough */
+        background: #232323;
+        color: #cdcdcd;
+        font-family: "Avenir Next", "Avenir", sans-serif;
+    }
 
-		transition: color 0.3s ease;
-	}
+    a
+    {
+        text-decoration: none;
+        color: #232323;
 
-	a:hover
-	{
-		color: tomato;
-	}
+        transition: color 0.3s ease;
+    }
 
-	#menuToggle /* menu toggle will be visible now */
-	{
-		display: block;
-		position: relative;
-		top: 50px;
-		left: 50px;
+    a:hover
+    {
+        color: tomato;
+    }
 
-		z-index: 1;
+    #menuToggle /* menu toggle will be visible now */
+    {
+        display: block;
+        position: relative;
+        top: 50px;
+        left: 50px;
 
-		-webkit-user-select: none;
-		user-select: none;
-	}
+        z-index: 1;
 
-	#menuToggle input
-	{
-		display: block;
-		width: 40px;
-		height: 32px;
-		position: absolute;
-		top: -7px;
-		left: -5px;
+        -webkit-user-select: none;
+        user-select: none;
+    }
 
-		cursor: pointer;
+    #menuToggle input
+    {
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        left: -5px;
 
-		opacity: 0; /* hide this */
-		z-index: 2; /* and place it over the hamburger */
+        cursor: pointer;
 
-		-webkit-touch-callout: none;
-	}
+        opacity: 0; /* hide this */
+        z-index: 2; /* and place it over the hamburger */
 
-/*
- * Just a quick hamburger
- */
- #menuToggle span
- {
- 	display: block;
- 	width: 33px;
- 	height: 4px;
- 	margin-bottom: 5px;
- 	position: relative;
+        -webkit-touch-callout: none;
+    }
 
- 	background: #cdcdcd;
- 	border-radius: 3px;
+    /*
+     * Just a quick hamburger
+     */
+    #menuToggle span
+    {
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        position: relative;
 
- 	z-index: 1;
+        background: #cdcdcd;
+        border-radius: 3px;
 
- 	transform-origin: 4px 0px;
+        z-index: 1;
 
- 	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
- 	background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
- 	opacity 0.55s ease;
- }
+        transform-origin: 4px 0px;
 
- #menuToggle span:first-child
- {
- 	transform-origin: 0% 0%;
- }
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+            background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+            opacity 0.55s ease;
+    }
 
- #menuToggle span:nth-last-child(2)
- {
- 	transform-origin: 0% 100%;
- }
+    #menuToggle span:first-child
+    {
+        transform-origin: 0% 0%;
+    }
 
-/* 
- * Transform all the slices of hamburger
- * into a crossmark.
- */
- #menuToggle input:checked ~ span
- {
- 	opacity: 1;
- 	transform: rotate(45deg) translate(-2px, -1px);
- 	background: #232323;
- }
+    #menuToggle span:nth-last-child(2)
+    {
+        transform-origin: 0% 100%;
+    }
 
-/*
- * But let's hide the middle one.
- */
- #menuToggle input:checked ~ span:nth-last-child(3)
- {
- 	opacity: 0;
- 	transform: rotate(0deg) scale(0.2, 0.2);
- }
+    /* 
+     * Transform all the slices of hamburger
+     * into a crossmark.
+     */
+    #menuToggle input:checked ~ span
+    {
+        opacity: 1;
+        transform: rotate(45deg) translate(-2px, -1px);
+        background: #232323;
+    }
 
-/*
- * Ohyeah and the last one should go the other direction
- */
- #menuToggle input:checked ~ span:nth-last-child(2)
- {
- 	transform: rotate(-45deg) translate(0, -1px);
- }
+    /*
+     * But let's hide the middle one.
+     */
+    #menuToggle input:checked ~ span:nth-last-child(3)
+    {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+    }
 
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
- #menu
- {
- 	position: absolute;
- 	width: 300px;
- 	margin: -100px 0 0 -50px;
- 	padding: 50px;
- 	padding-top: 125px;
+    /*
+     * Ohyeah and the last one should go the other direction
+     */
+    #menuToggle input:checked ~ span:nth-last-child(2)
+    {
+        transform: rotate(-45deg) translate(0, -1px);
+    }
 
- 	background: grey;
- 	list-style-type: none;
- 	-webkit-font-smoothing: antialiased;
- 	/* to stop flickering of text in safari */
+    /*
+     * Make this absolute positioned
+     * at the top left of the screen
+     */
+    #menu
+    {
+        position: absolute;
+        width: 300px;
+        margin: -100px 0 0 -50px;
+        padding: 50px;
+        padding-top: 125px;
 
- 	transform-origin: 0% 0%;
- 	transform: translate(-100%, 0);
+        background: grey;
+        list-style-type: none;
+        -webkit-font-smoothing: antialiased;
+        /* to stop flickering of text in safari */
 
- 	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
- }
+        transform-origin: 0% 0%;
+        transform: translate(-100%, 0);
 
- #menu li
- {
- 	padding: 10px 0;
- 	font-size: 22px;
- }
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    }
 
-/*
- * And let's slide it in from the left
- */
- #menuToggle input:checked ~ ul
- {
- 	transform: none;
- }
+    #menu li
+    {
+        padding: 10px 0;
+        font-size: 22px;
+    }
+
+    /*
+     * And let's slide it in from the left
+     */
+    #menuToggle input:checked ~ ul
+    {
+        transform: none;
+    }
 }
 
 article {
-	width: 180px;
-	padding: 20px 10px;
-	float: left;
-	font-size: 18px;
+    width: 180px;
+    padding: 20px 10px;
+    float: left;
+    font-size: 18px;
 }
 
 /****************************/
@@ -376,59 +381,59 @@ article {
 /****   comic meta & profile info ****/
 
 #book_cover, #avatar {
-	padding: 20px;
-	width: 250px;
-	border: solid black 2px;
-	display: inline-block;
+    padding: 20px;
+    width: 250px;
+    border: solid black 2px;
+    display: inline-block;
 }
 
 #avatar > label > img {
-	max-height: 250px;
-	width: 250px;
+    max-height: 250px;
+    width: 250px;
 }
 
 #book_meta, #user_info {
-	line-height: 1.6em;
-	width: 476px;
-	float: right;
-	padding: 20px;
+    line-height: 1.6em;
+    width: 476px;
+    float: right;
+    padding: 20px;
 }
 
 #user_info > p {
-	line-height: 2em;
-	font-size: 18px;
+    line-height: 2em;
+    font-size: 18px;
 }
 
 #user_info > p > input {
-	float: right;
-	padding-right: 180px;
-	width: 170px;
-	font-size: 18px;
-	border: none;
-	background-color: #616161;
-	color: rgb(189, 186, 172);
+    float: right;
+    padding-right: 180px;
+    width: 170px;
+    font-size: 18px;
+    border: none;
+    background-color: #616161;
+    color: rgb(189, 186, 172);
 }
 
 #synopsis {
-	padding-top: 30px;
-	line-height: 1.4em;
+    padding-top: 30px;
+    line-height: 1.4em;
 }
 
 /****   New Volume & Chapter Form  ****/
 
 #add_new {
-	border-top: solid #414141 2px;
-	width: 100%;
-	margin-top: 20px;
-	padding: 20px 0px 0px 0px;
+    border-top: solid #414141 2px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px 0px 0px 0px;
 
 }
 
 #add_volume, #add_chapter {
-	font-weight: 500;
-	font-size: 18px;
-	margin: 5px 20px 0px 20px;
-	cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 5px 20px 0px 20px;
+    cursor: pointer;
 }
 
 #add_chapter {
@@ -436,45 +441,45 @@ article {
 }
 
 #new_volume_form {
-	display: none;
-	padding: 20px;
+    display: none;
+    padding: 20px;
 }
 
 #new_volume_form > p {
-	margin: 5px 0px;
+    margin: 5px 0px;
 }
 
 
 /****   Chapters & Volumes  ****/
 
 #chapters_header {
-	background: linear-gradient(to right, rgb(102,102,102) 10%, rgb(61,61,61) 100%);
-	margin: 30px 0;
-	height: 25px;
-	line-height: 25px;
-	width: 810px;
-	/*border: solid rgb(94, 94, 94) 1px;*/
-	font-size: 20px;
-	font-weight: 500;
+    background: linear-gradient(to right, rgb(102,102,102) 10%, rgb(61,61,61) 100%);
+    margin: 30px 0;
+    height: 25px;
+    line-height: 25px;
+    width: 810px;
+    /*border: solid rgb(94, 94, 94) 1px;*/
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .volume {
-	font-weight: 500;
+    font-weight: 500;
 }
 
 .volume_synopsis {
-	font-weight: normal;
-	font-size: 14px;
-	font-style: italic;
+    font-weight: normal;
+    font-size: 14px;
+    font-style: italic;
 }
 
 .volume_release, .chapter_release {
-	font-weight: normal;
-	float: right;
+    font-weight: normal;
+    float: right;
 }
 
 ul {
-	list-style: none;
+    list-style: none;
 }
 
 /****************************/
@@ -482,87 +487,87 @@ ul {
 /****************************/
 
 .reader {
-	max-width: 1000px;
-	position: relative;
-	margin: auto;
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
 }
 
 
 .bubble {
-	margin: auto;
-	display: none;
+    margin: auto;
+    display: none;
 }
 
 .prev, .next {
-	cursor: pointer;
-	position: absolute;
-	top: 50%;
-	width: auto;
-	margin-top: -22px;
-	padding: 16px;
-	color: white;
-	font-weight: bold;
-	font-size: 18px;
-	transition: 0.6s ease;
-	border-radius: 0 3px 3px 0;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
 }
 
 /* Position the "next button" to the right */
 .next {
-	right: 0;
-	border-radius: 3px 0 0 3px;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-	background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.8);
 }
 
 /* Caption text */
 .text {
-	font-size: 15px;
-	padding: 8px 12px;
-	position: absolute;
-	bottom: -25px;
-	width: 100%;
-	text-align: center;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+    text-align: center;
 }
 
 /* Number text (1/3 etc) */
 .bubble_number {
-	color: #000;
-	font-size: 12px;
-	padding: 8px 12px;
-	position: absolute;
-	top: 0;
+    color: #000;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
 }
 
 /* Fading animation */
 .fade {
-	-webkit-animation-name: fade;
-	-webkit-animation-duration: 1.5s;
-	animation-name: fade;
-	animation-duration: 1.5s;
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
 @-webkit-keyframes fade {
-	from {opacity: .4} 
-	to {opacity: 1}
+    from {opacity: .4} 
+    to {opacity: 1}
 }
 
 @keyframes fade {
-	from {opacity: .4} 
-	to {opacity: 1}
+    from {opacity: .4} 
+    to {opacity: 1}
 }
 
 .strip_container {
-	margin: auto;
-	width: fit-content;
+    margin: auto;
+    width: fit-content;
 }
 
 .comicstrip {
-	max-height: 600px;
-	max-width: 100%;
+    max-height: 600px;
+    max-width: 100%;
 }
 
 /****************************/
@@ -570,26 +575,26 @@ ul {
 /****************************/
 
 .banner > p {
-	text-align: center;
-	font-size: 28px;
-	line-height: 50px;
-	padding-left: 170px;
-	font-weight: 500;
+    text-align: center;
+    font-size: 28px;
+    line-height: 50px;
+    padding-left: 170px;
+    font-weight: 500;
 }
 
 #new_icon {
-	background-color: rgb(181, 173, 144);
-	height: 225px;
-	width: 150px;
+    background-color: rgb(181, 173, 144);
+    height: 225px;
+    width: 150px;
 }
 
 #new_icon > img {
-	height: 50px;
-	width: 50px;
-	position: relative;
-	left: 50px;
-	top: 87px;
-	margin-left: auto;
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 50px;
+    top: 87px;
+    margin-left: auto;
 }
 
 /****************************/
@@ -597,9 +602,9 @@ ul {
 /****************************/
 
 .banner > span {
-	display: block;
-	text-align: center;
-	font-size: 28px;
-	line-height: 50px;
-	font-weight: 500;
+    display: block;
+    text-align: center;
+    font-size: 28px;
+    line-height: 50px;
+    font-weight: 500;
 }

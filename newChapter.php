@@ -1,48 +1,50 @@
 <?php
 require('required.php');
 if (isset($_POST['settleChapter'])) {
+/**
+ * Check the type of every image uploaded
+ */
     try {
-
-        if (!isset($_SESSION['uniqidNewChapter'])) {
-            throw new Exception("La requête post de création de chapitre ne possède pas de token correspondant à un formulaire envoyé par le serveur");
-        } else if ($_SESSION['uniqidNewChapter'] != htmlentities($_POST['uniqidNewChapter'])) {
-            throw new Exception("La requête post de création de chapitre n'indique pas le même token d'authentification que celui de la session du serveur");
-        }
-
         $nbr_file = count($_FILES["uploadedBubble"]["tmp_name"]);
 
         for ($i = 0; $i < $nbr_file; $i++) {
             $check = explode("/", mime_content_type($_FILES["uploadedBubble"]["tmp_name"][$i]));
             if ($check[0] !== "image") {
+                // The file isn't an valid image
                 echo "<script>alert('Error : File " . $_FILES["uploadedBubble"]["name"][$i] . " is not a valid image.');</script>";
                 unset($_POST['settleChapter']);
-                //echo "<script>location.href = 'newChapter.php'</script>";
-                //header("Location:login.php");
             }
         }
         require('connection.php');
 
 
-        
-        $Title = htmlentities($_POST['chapterTitle']); // Convert HTML entities to characters
+        /* Set the parameters for createChapter.sql */
+        $chapterTitle = htmlentities($_POST['chapterTitle']);
         $chapterSynopsis = htmlentities($_POST['chapterSynopsis']);
         $date = date("Y-m-d");
-        echo $date;
-        $volumeId = htmlentities($_GET["volumeId"]); // gathering volume id
-        $createChapter = $db->prepare("CALL createChapter(:Title, :Synopsis, :VolumeId, @lastChapterId, @lastChapterNumber)"); // calling the stored procedure createChapter
+        $volumeId = htmlentities($_GET["volumeId"]);
+        
+        /* Prepare and execute the stored procedure createChapter */
+        $createChapter = $db->prepare("CALL createChapter(:Title, :Synopsis, :Date, :VolumeId, @lastChapterId, @lastChapterNumber)");
         $createChapter->bindParam(':Title', $chapterTitle, PDO::PARAM_STR, 255); // binding all parameters
         $createChapter->bindParam(':Synopsis', $chapterSynopsis, PDO::PARAM_STR, 255);
+        $createChapter->bindParam(':Date', $date, PDO::PARAM_STR, 10);
         $createChapter->bindParam(':VolumeId', $volumeId, PDO::PARAM_INT);
-        $createChapter->execute(); // executing 
-        $createChapter->closeCursor(); // enabling to be executed again
-        $result = $db->query("SELECT @lastChapterId, @lastChapterNumber")->fetch(PDO::FETCH_ASSOC);
-        $chapter = new Chapter($result['@lastChapterId'], $result['@lastChapterNumber'], $chapterTitle, $chapterSynopsis, false, $date); // creating object $chapter
+        $createChapter->execute();
+        $createChapter->closeCursor();
         
-        foreach ($_FILES["uploadedBubble"]["tmp_name"] as $strip) { // for each bubbles uploaded, it will add every strips to the chapter
+        /* Fetch the result of the procedure */
+        $result = $db->query("SELECT @lastChapterId, @lastChapterNumber")->fetch(PDO::FETCH_ASSOC);
+        
+        /* Create the Chapter object corresponding to the chapter inserted */
+        $chapter = new Chapter($result['@lastChapterId'], $result['@lastChapterNumber'], $chapterTitle, $chapterSynopsis, false, $date);
+        
+        foreach ($_FILES["uploadedBubble"]["tmp_name"] as $strip) {
+            /* Add each strip to the Chapter object */
             $chapter->AddComicStrip($strip);
         }
-        
-          //header("Location:homePage.php");
+        /* Redirect to the comic page*/
+          header("Location:comic.php");
     } catch (Exception $e) {
         die('Error during bubble creation : ' . $e->getMessage());
     }
@@ -67,10 +69,11 @@ if (isset($_POST['settleChapter'])) {
 
                     if (isset($_COOKIE['authentified'])) {
                         $user = unserialize($_COOKIE['authentified']);
-                        // if a user is connected
+                        // Only a connected user can upload
                         echo "<p class='userName'>" . $user->getLogin() . "</p>";
                         echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
                     } else {
+                        // Redirect to Login
                         header("Location:login.php");
                     }
                     ?>
@@ -87,12 +90,6 @@ if (isset($_POST['settleChapter'])) {
                         <p>Upload your bubbles here, once you confirm you will settle your chapter.</p>
                         <label for="gallery-photo-add">Upload a file (JPG, PNG or GIF) :</label><br>
                         <input type="file" accept="image/*"  multiple id="gallery-photo-add" name="uploadedBubble[]" required>
-                        <?php
-                            $_SESSION['uniqidNewChapter'] = uniqid(); // and it is based on the uniqid
-                            echo '<input id="uniqidNewChapter" name="uniqidNewChapter" type="hidden" value="'.$_SESSION['uniqidNewChapter'].'">';
-                            //Pour des raisons de sécurité, on acceptera que les post renvoyant le token du formulaire de login
-                        ?>
-                        <!-- <input type="submit" name="sendBubble" value="upload this bubble" /> -->
                         <input type="submit" value="Settle Chapter" name="settleChapter">
 
                     </form>
