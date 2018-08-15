@@ -4,7 +4,7 @@ $(document).ready(function () {
      *  Convert the genre Ids to their full names
      * 
      */
-    genres = ["Action", "Adventure", "Comedy", "Drama", "Fantasy", "Historical", "Horror", "Sci-fi"];
+    genres = ["listOfGenre", "Action", "Adventure", "Comedy", "Drama", "Fantasy", "Historical", "Horror", "Sci-fi"];
 
     genreIds = $("#book_genre")[0].innerHTML;
     listGenre = "";
