@@ -17,9 +17,9 @@
             session_start();
 
             if (!isset($_SESSION['uniqid'])) {
-                throw new Exception("<br>La requête post d'inscription ne possède pas de token correspondant à un formulaire d'inscription envoyé par le serveur");
+                throw new Exception("<br>The session doesn't have a form token from a server form");
             } else if ($_SESSION['uniqid'] != $_POST['uniqid']) {
-                throw new Exception("<br>La requête post d'inscription n'indique pas pas le même token d'inscription que celui de la session du serveur");
+                throw new Exception("<br>The post request form token as different as session token");
             }
 
             $checkedData = Util::checkPostData($_POST);
@@ -37,10 +37,10 @@
 
             $result = $db->query("SELECT @lastUserId, @lastUserEmailKey")->fetch(PDO::FETCH_ASSOC);
 
-            $subject = "confirmation d'inscription bubbleup";
-            $message = "Bonjour,\nMerci de votre inscription sur bubbleup. Pour confirmer votre inscription, merci de cliquer sur l'url suivante :\n
+            $subject = "Inscription confirmation to bubbleUp";
+            $message = "Hello,\nThanks you for your inscription to bubbleUp. Please, click to follow link to confirm your inscription :\n
             http://localhost/projetWeb1/emailValidation.php?userid=".$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'];
-            
+
             mail($checkedData['email'], $subject, $message);
 
             header('Location: emailValidation.php?');
