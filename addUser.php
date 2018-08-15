@@ -37,13 +37,7 @@
 
             $result = $db->query("SELECT @lastUserId, @lastUserEmailKey")->fetch(PDO::FETCH_ASSOC);
 
-            $subject = "Inscription confirmation to bubbleUp";
-            $message = "Hello,\nThanks you for your inscription to bubbleUp. Please, click to follow link to confirm your inscription :\n
-            http://localhost/projetWeb1/emailValidation.php?userid=".$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey']."\nRegards";
-
-            mail($checkedData['email'], $subject, $message);
-
-            header('Location: emailValidation.php?');
+            header('Location: emailValidation.php?userid'.$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'].'&sendemail=true');
 
         } catch(Exception $e) {
             die('<br>Erreur de la création du nouvel utilisateur: '.$e->getMessage());
