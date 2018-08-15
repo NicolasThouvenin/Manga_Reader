@@ -39,7 +39,7 @@
 
             $subject = "Inscription confirmation to bubbleUp";
             $message = "Hello,\nThanks you for your inscription to bubbleUp. Please, click to follow link to confirm your inscription :\n
-            http://localhost/projetWeb1/emailValidation.php?userid=".$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'];
+            http://localhost/projetWeb1/emailValidation.php?userid=".$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey']."\nRegards";
 
             mail($checkedData['email'], $subject, $message);
 
