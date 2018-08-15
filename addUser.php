@@ -23,7 +23,7 @@
             }
 
             $checkedData = Util::checkPostData($_POST);
-            $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId)");
+            $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId, @lastUserEmailKey)");
 
             $addUser->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
             $addUser->bindParam(':firstname', $checkedData['firstname'], PDO::PARAM_STR, 255);
@@ -35,14 +35,15 @@
             $addUser->execute();
             $addUser->closeCursor();
 
-            $result = $db->query("SELECT @lastUserId")->fetch(PDO::FETCH_ASSOC);
+            $result = $db->query("SELECT @lastUserId, @lastUserEmailKey")->fetch(PDO::FETCH_ASSOC);
 
-            $authentified = new Authentified($result['@lastUserId'], $_SESSION['uniqid']);
-            $authentifiedSerialized = serialize($authentified);
-            setcookie ('authentified', $authentifiedSerialized);
-            //mécanisme pour rester connecté à mettre ici
+            $subject = "confirmation d'inscription bubbleup";
+            $message = "Bonjour,\nMerci de votre inscription sur bubbleup. Pour confirmer votre inscription, merci de cliquer sur l'url suivante :\n
+            http://localhost/projetWeb1/emailValidation.php?userid=".$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'];
+            
+            mail($checkedData['email'], $subject, $message);
 
-            header('Location: homePage.php');
+            header('Location: emailValidation.php?');
 
         } catch(Exception $e) {
             die('<br>Erreur de la création du nouvel utilisateur: '.$e->getMessage());
