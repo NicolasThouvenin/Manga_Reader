@@ -1,9 +1,9 @@
 <?php
 require('required.php');
 if (isset($_POST['settleChapter'])) {
-/**
- * Check the type of every image uploaded
- */
+    /**
+     * Check the type of every image uploaded
+     */
     try {
         $nbr_file = count($_FILES["uploadedBubble"]["tmp_name"]);
 
@@ -23,30 +23,41 @@ if (isset($_POST['settleChapter'])) {
         $chapterSynopsis = htmlentities($_POST['chapterSynopsis']);
         $date = date("Y-m-d");
         $volumeId = htmlentities($_GET["volumeId"]);
-        
+
         /* Prepare and execute the stored procedure createChapter */
-        $createChapter = $db->prepare("CALL createChapter(:Title, :Synopsis, :Date, :VolumeId, @lastChapterId, @lastChapterNumber)");
-        $createChapter->bindParam(':Title', $chapterTitle, PDO::PARAM_STR, 255); // binding all parameters
-        $createChapter->bindParam(':Synopsis', $chapterSynopsis, PDO::PARAM_STR, 255);
-        $createChapter->bindParam(':Date', $date, PDO::PARAM_STR, 10);
-        $createChapter->bindParam(':VolumeId', $volumeId, PDO::PARAM_INT);
+        $createChapter = $db->prepare("CALL createChapter(:title, :synopsis, :date, :volumeId, @lastChapterId, @lastChapterNumber)");
+        $createChapter->bindParam(':title', $chapterTitle, PDO::PARAM_STR, 255); // binding all parameters
+        $createChapter->bindParam(':synopsis', $chapterSynopsis, PDO::PARAM_STR, 255);
+        $createChapter->bindParam(':date', $date, PDO::PARAM_STR, 10);
+        $createChapter->bindParam(':volumeId', $volumeId, PDO::PARAM_INT);
         $createChapter->execute();
         $createChapter->closeCursor();
-        
+
         /* Fetch the result of the procedure */
         $result = $db->query("SELECT @lastChapterId, @lastChapterNumber")->fetch(PDO::FETCH_ASSOC);
-        
+
         /* Create the Chapter object corresponding to the chapter inserted */
         $chapter = new Chapter($result['@lastChapterId'], $result['@lastChapterNumber'], $chapterTitle, $chapterSynopsis, false, $date);
-        
+
         foreach ($_FILES["uploadedBubble"]["tmp_name"] as $strip) {
             /* Add each strip to the Chapter object */
             $chapter->AddComicStrip($strip);
         }
-        /* Redirect to the comic page*/
-          header("Location:comic.php");
+
+        /* SQL Querry to fetch the corresponding Comic Id */
+        try {
+            require('connection.php');
+            $result = $db->prepare("SELECT comicId FROM volumes WHERE Id = :volumeId");
+            $result->execute(array('volumeId' => $volumeId));
+            $line = $result->fetch();
+
+            /* Redirect to the comic page */
+            header("Location:comic.php?bookId=".$line['comicId']);
+        } catch (Exception $e) {
+            throw new Exception("<br>Error fetching the comicId of the new chapter : " . $e->getMessage());
+        }
     } catch (Exception $e) {
-        die('Error during bubble creation : ' . $e->getMessage());
+        die('Error during chapter creation : ' . $e->getMessage());
     }
 }
 ?>
@@ -65,18 +76,17 @@ if (isset($_POST['settleChapter'])) {
                 <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation" style="visibility: hidden;">
 
                 <div class="displayUser">
-                    <?php
-
-                    if (isset($_COOKIE['authentified'])) {
-                        $user = unserialize($_COOKIE['authentified']);
-                        // Only a connected user can upload
-                        echo "<p class='userName'>" . $user->getLogin() . "</p>";
-                        echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
-                    } else {
-                        // Redirect to Login
-                        header("Location:login.php");
-                    }
-                    ?>
+<?php
+if (isset($_COOKIE['authentified'])) {
+    $user = unserialize($_COOKIE['authentified']);
+    // Only a connected user can upload
+    echo "<p class='userName'>" . $user->getLogin() . "</p>";
+    echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
+} else {
+    // Redirect to Login
+    header("Location:login.php");
+}
+?>
                 </div> <!-- displayUser -->
                 <div class="logo"><a href="homePage.php"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
             </header>
