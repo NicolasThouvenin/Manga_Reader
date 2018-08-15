@@ -49,7 +49,7 @@
                             $createComic = $db->prepare("CALL createComic(:Title, :Synopsis, :StartDate, :AuthorId, :inCoverExt, @lastComicId)");
                             $createComic->bindParam(':Title', $comicTitle, PDO::PARAM_STR, 255);
                             $createComic->bindParam(':Synopsis', $comicSynopsis, PDO::PARAM_STR, 255);
-                            $createComic->bindParam(':StartDate',$date , PDO::PARAM_STR, 10);
+                            $createComic->bindParam(':StartDate', $date , PDO::PARAM_STR, 10);
                             $createComic->bindParam(':AuthorId', $userId, PDO::PARAM_INT);
                             $createComic->bindParam(':inCoverExt', $check[1], PDO::PARAM_STR, 10);
                             $createComic->execute();
@@ -57,8 +57,17 @@
 
                             $result = $db->query("SELECT @lastComicId")->fetch(PDO::FETCH_ASSOC);
                             $comic = new Comic($result['@lastComicId']);
+
                             $comic->AddCover($_FILES["cover"]["tmp_name"]);
                             $comic->createVolume(htmlentities($_POST['volumeTitle']), htmlentities($_POST['volumeSynopsis']));
+
+                            foreach ($_POST['genres'] as $genreId) {
+                                $attachComicToGenres = $db->prepare("CALL attachComicToGenre(:inGenreId, :inComicId)");
+                                $attachComicToGenres->bindParam(':inGenreId', $genreId, PDO::PARAM_INT);
+                                $attachComicToGenres->bindParam(':inComicId', $result['@lastComicId'], PDO::PARAM_INT);
+                                $attachComicToGenres->execute();
+                            }
+
                             header("Location:newChapter.php?volumeId=".$comic->getLastVolumeId());
 
                         } catch (Exception $e) {
@@ -66,10 +75,10 @@
                         }
                     } else {
                         $_SESSION['uniqidNewComic'] = uniqid(); // and it is based on the uniqid
-                        echo '<div id="new_comic"> // <!--creating a bloc for the new book\'s form-->
+                        echo '<div id="new_comic"><!--creating a bloc for the new book\'s form-->
                             <form method="POST" action="newComic.php" enctype="multipart/form-data"> 
                                 <p>Title : <input type="text" name="comicTitle" placeholder="New Comic Title" required></p>
-                                <p>Creation Date : <input type="date" name="inStartDate" value="<?php echo date("Y-m-d"); ?>" required></p> <!-- input for choose a date -->
+                                <p>Creation Date : <input type="date" name="inStartDate" required></p> <!-- input for choose a date -->
                                 <p>Comic Synopsis : <textarea name="synopsis" placeholder="Comic Synopsis" cols="40" rows="3" required></textarea></p> <!-- input for comments area -->
                                 <label>Genres : <select id="genres" multiple name="genres[]" required="required"> <!-- input for selecting in a list of genres -->
                                     '.Util::getGenreOptions().'
