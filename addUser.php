@@ -16,9 +16,9 @@
 
             session_start();
 
-            if (!isset($_SESSION['uniqid'])) {
+            if (!isset($_SESSION['uniqidRegister'])) {
                 throw new Exception("<br>The session doesn't have a form token from a server form");
-            } else if ($_SESSION['uniqid'] != $_POST['uniqid']) {
+            } else if ($_SESSION['uniqidRegister'] != $_POST['uniqidRegister']) {
                 throw new Exception("<br>The post request form token as different as session token");
             }
 

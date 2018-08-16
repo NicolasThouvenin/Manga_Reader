@@ -20,8 +20,8 @@
             <input type="email" id="email" name="email" placeholder="E-mail" required>
             <?php
                 session_start();
-                $_SESSION['uniqid'] = uniqid();
-                echo '<input id="uniqid" name="uniqid" type="hidden" value="'.$_SESSION['uniqid'].'">';
+                $_SESSION['uniqidRegister'] = uniqid();
+                echo '<input id="uniqidRegister" name="uniqidRegister" type="hidden" value="'.$_SESSION['uniqidRegister'].'">';
                 //Pour des raisons de sécurité, on acceptera que les post d'inscription renvoyant le token d'inscription
             ?>
             <input type="submit" name="submit" value="Create Account" class="registerButton">
