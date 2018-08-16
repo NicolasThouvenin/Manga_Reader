@@ -26,8 +26,7 @@
 			} else {
 				$headerMessage = "Thanks you for your inscription to bubbleup";
 				$resendEmailDisplay = 'none';
-				$uniqId = uniqid();
-				$authentified = new Authentified($_GET['userid'], $uniqId);
+				$authentified = new Authentified($_GET['userid']);
 	            $authentifiedSerialized = serialize($authentified);
 	            setcookie ('authentified', $authentifiedSerialized);
 			}

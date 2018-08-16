@@ -9,25 +9,26 @@
 
         private $Token;
 
-        public function __construct(int $Id, string $uniqid) {
+        public function __construct(int $Id) {
 
         	try {
         	    parent::__construct($Id); // Construit toutes les valeurs utiles de la classe parente User
-            	$this->SetToken($uniqid);
+            	$this->SetToken();
 
         	} catch (Exception $e) {
                 throw new Exception("<br>Erreur lors de la création de l'objet Authentified : ".$e->getMessage());
             }
         }
 
-        private function SetToken($uniqid) {
+        private function SetToken() {
         	/*
         		Cette function créer un token à partir d'un uniq Id de formulaire et l'intégre à la table tokens de la base de donnée.
-				L'idée est que l'utilsateur possède un toekn par machine dans un cookie.
+				L'idée est que l'utilsateur possède un token par machine dans un cookie.
         	*/
         	try {
                 require('connection.php');
-            	$this->Token = hash('sha256', session_id().$uniqid.$this->getLogin());
+                $uniqId = uniqid();
+            	$this->Token = hash('sha256', session_id().$uniqId.$this->getLogin());
                 $addToken = $db->prepare("CALL addToken(:login, :token)");
                 $login = $this->getLogin();
                 $addToken->bindParam(':login', $login, PDO::PARAM_STR, 255);

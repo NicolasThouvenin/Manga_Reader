@@ -27,8 +27,7 @@
             if ($logger->rowCount() == 1) {
                 while ($line = $logger->fetch()) {
                     if ($line['Unsubscribed'] == 0) {
-                    	print_r($line);
-                        $authentified = new Authentified($line['Id'], $_SESSION['uniqidLogin']);
+                        $authentified = new Authentified($line['Id']);
                         $authentifiedSerialized = serialize($authentified);
 
                         if (isset($checkedData['stayConnected'])) {
