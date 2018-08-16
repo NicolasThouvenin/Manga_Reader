@@ -20,7 +20,7 @@
                 throw new Exception("La requête post n'indique pas pas le même token d'authentification que celui de la session du serveur");
             }
 
-            $logger = $db->prepare("SELECT users.* FROM users WHERE Login = :login AND password = PASSWORD(:password) AND Unsubscribed = 0;");
+            $logger = $db->prepare("SELECT users.* FROM users WHERE Login = :login AND password = PASSWORD(:password) AND EmailValidated = 1 AND Unsubscribed = 0;");
 
             $logger->execute(array('login' => $checkedData['login'], 'password' => $checkedData['password']));
 
