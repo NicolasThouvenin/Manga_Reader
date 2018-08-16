@@ -17,8 +17,8 @@
                     <input type="password" id="password" name="password" placeholder="Password" required>
                     <?php
                     session_start(); // session is starting here
-                    $_SESSION['uniqid'] = uniqid(); // and it is based on the uniqid
-                    echo '<input id="uniqid" name="uniqid" type="hidden" value="' . $_SESSION['uniqid'] . '">';
+                    $_SESSION['uniqidLogin'] = uniqid(); // and it is based on the uniqid
+                    echo '<input id="uniqidLogin" name="uniqidLogin" type="hidden" value="' . $_SESSION['uniqidLogin'] . '">';
                     // For security reasons, only the posts with a valid formular token will be accepted
                     ?>
                     <label><input type="checkbox" id="stayConnected" name="stayConnected">Remember me</label>
