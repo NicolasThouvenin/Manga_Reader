@@ -1,0 +1,31 @@
+a {
+    color: rgb(189, 186, 172);
+    text-decoration: none;
+}
+
+html {
+    background-color: rgb(61, 61, 61);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(189, 186, 172);
+}
+
+body, p {
+    margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 82px;
+    background-color: rgb(41, 41, 41)
+}
+
+header div, header input {
+    display: inline-grid;
+}
+
+
+.log {
+    display: none;
+}
