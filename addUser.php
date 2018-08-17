@@ -7,41 +7,69 @@
 <body>
     <?php
 
-    	/* Cette page reçoit le post du formulaire d'incription des utilisateurs et pousse créer un utilisateur dans la base de données. */
+    /* Cette page reçoit le post du formulaire d'incription des utilisateurs et pousse créer un utilisateur dans la base de données. */
 
-        try {
+    try {
 
-            require('required.php');
-            require('connection.php');
+        require('required.php');
+        require('connection.php');
 
-            session_start();
+        session_start();
 
-            if (!isset($_SESSION['uniqidRegister'])) {
-                throw new Exception("<br>The session doesn't have a form token from a server form");
-            } else if ($_SESSION['uniqidRegister'] != $_POST['uniqidRegister']) {
-                throw new Exception("<br>The post request form token as different as session token");
-            }
+        if (!isset($_SESSION['uniqidRegister'])) {
+            throw new Exception("<br>The session doesn't have a form token from a server form");
+        } else if ($_SESSION['uniqidRegister'] != $_POST['uniqidRegister']) {
+            throw new Exception("<br>The post request form token as different as session token");
+        }
 
-            $checkedData = Util::checkPostData($_POST);
-            $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId, @lastUserEmailKey)");
+        $checkedData = Util::checkPostData($_POST);
+        $addUser = $db->prepare("CALL createUser(:login, :firstname, :surname, :birthDate, :password, :email, @lastUserId, @lastUserEmailKey)");
 
-            $addUser->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
-            $addUser->bindParam(':firstname', $checkedData['firstname'], PDO::PARAM_STR, 255);
-            $addUser->bindParam(':surname', $checkedData['surname'], PDO::PARAM_STR, 255);
-            $addUser->bindParam(':birthDate', $checkedData['birthDate'], PDO::PARAM_STR, 10);
-            $addUser->bindParam(':password', $checkedData['password'], PDO::PARAM_STR, 255);
-            $addUser->bindParam(':email', $checkedData['email'], PDO::PARAM_STR, 254);
+        $addUser->bindParam(':login', $checkedData['login'], PDO::PARAM_STR, 255);
+        $addUser->bindParam(':firstname', $checkedData['firstname'], PDO::PARAM_STR, 255);
+        $addUser->bindParam(':surname', $checkedData['surname'], PDO::PARAM_STR, 255);
+        $addUser->bindParam(':birthDate', $checkedData['birthDate'], PDO::PARAM_STR, 10);
+        $addUser->bindParam(':password', $checkedData['password'], PDO::PARAM_STR, 255);
+        $addUser->bindParam(':email', $checkedData['email'], PDO::PARAM_STR, 254);
 
-            $addUser->execute();
-            $addUser->closeCursor();
+        $addUser->execute();
+        $addUser->closeCursor();
 
-            $result = $db->query("SELECT @lastUserId, @lastUserEmailKey")->fetch(PDO::FETCH_ASSOC);
+        $result = $db->query("SELECT @lastUserId, @lastUserEmailKey")->fetch(PDO::FETCH_ASSOC);
 
-            header('Location: emailValidation.php?userid'.$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'].'&sendemail=true'.'&email='.$checkedData['email']);
+        header('Location: emailValidation.php?'.'&userid='.$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'].'&sendemail=true');
 
-        } catch(Exception $e) {
-            die('<br>Erreur de la création du nouvel utilisateur: '.$e->getMessage());
-        };
+//SENDiNG EMAIL
+    // initiating PHPMailer
+        require 'PHPMailer-5.2/PHPMailerAutoload.php';
+        $sendemail= new PHPMailer;
+        $sendemail->isSMTP();
+        $sendemail->Host="smtp.gmail.com";
+        $sendemail->Port=465;
+        $sendemail->SMTPAuth=true;
+        $sendemail->SMTPSecure="ssl";
+    //webmail server credentials
+        $sendemail->Username='blaisiustristodontor@gmail.com';
+        $sendemail->Password='Hn7t31PxGvTy8';
+    //email sending setup
+        $sendemail->setFrom('no-reply@bubbleup.fr','BubbleUp.fr');
+        $sendemail->addAddress($checkedData['email']);
+        $sendemail->addReplyTo('pharob@superuser.fr');
+        $sendemail->isHTML(true);
+        $sendemail->Subject='Your BubbleUp account confirmation :';
+        $sendemail->Body="Hello,\n
+        Thank you for your registration to BubbleUp. Please, click on the link to activate your account :\n
+        www.activersoncompte.etc...";
+        if(!$sendemail->send()){
+            echo "Message couldn't be sent!";
+        }
+        else{
+            echo "You have received an email from BubbleUp, to confirm your registration. If you haven't received it check your unwanted emails";
+        }
+
+    } catch(Exception $e) {
+        die('<br>Erreur de la création du nouvel utilisateur: '.$e->getMessage());
+    };
     ?>
 </body>
 </html>
