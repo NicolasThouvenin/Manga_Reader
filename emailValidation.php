@@ -22,21 +22,22 @@ if (isset($_GET['userid']) && isset($_GET['emailkey']) && isset($_GET['sendemail
 
 
 <?php
-//Getting user mail:
+	//Getting user mail:
 $userEmail = $_GET['email'];
-//initiating PHPMailer
+	//initiating PHPMailer
 require 'PHPMailer-5.2/PHPMailerAutoload.php';
 $mail= new PHPMailer;
 $mail->isSMTP();
-// $mail->SMTPDebug = 2;
 $mail->Host="smtp.gmail.com";
 $mail->Port=465;
 $mail->SMTPAuth=true;
 $mail->SMTPSecure="ssl";
 
+	//webmail server credentials
 $mail->Username='blaisiustristodontor@gmail.com';
 $mail->Password='Hn7t31PxGvTy8';
 
+	//email sending setup
 $mail->setFrom('no-reply@bubbleup.fr','BubbleUp.fr');
 $mail->addAddress($userEmail);
 $mail->addReplyTo('pharob@superuser.fr');
@@ -50,7 +51,7 @@ if(!$mail->send()){
 	echo "Message couldn't be sent!";
 }
 else{
-	echo "Message has been sent succesfully!";
+	echo "You have received an email from BubbleUp, to confirm your registration. If you haven't received it check your unwanted emails";
 }
 
 ?>
