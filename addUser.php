@@ -37,7 +37,7 @@
 
             $result = $db->query("SELECT @lastUserId, @lastUserEmailKey")->fetch(PDO::FETCH_ASSOC);
 
-            header('Location: emailValidation.php?userid'.$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'].'&sendemail=true');
+            header('Location: emailValidation.php?userid'.$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'].'&sendemail=true'.'&email='.$checkedData['email']);
 
         } catch(Exception $e) {
             die('<br>Erreur de la création du nouvel utilisateur: '.$e->getMessage());
