@@ -1,0 +1,171 @@
+/*****************************************************************/
+/*                             small devices < 640 px                                 */
+/*****************************************************************/
+
+/****************************/
+/***** Header & General  *****/
+/****************************/
+
+header {
+    width: 100%;
+    height: 60px;
+    background-color: rgb(41, 41, 41)
+}
+
+main {
+    padding: 60px 0px 10px 0;
+    width: 100%;
+    margin: auto;
+}
+
+.regularButton, .registerButton {
+    display: none;
+}
+
+#add {
+    float: left;
+    margin: 15px 2% 0 15px;
+    -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+    box-shadow:inset 0px 1px 0px 0px #f5978e;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f));
+    background:-moz-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-webkit-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-o-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:-ms-linear-gradient(top, #f24537 5%, #c62d1f 100%);
+    background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+    background-color:#f24537;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    border-radius: 20px;
+    border:1px solid #d02718;
+    display:inline-block;
+    color:#ffffff;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 500;
+    padding: 3px 7px 1px;
+    text-shadow: 0px 1px 0px #810e05;
+}
+
+#add:active {
+    position:relative;
+    top:1px;
+}
+
+.logo { /* display logo in center */
+    position: absolute;
+    top: 5px;
+    left: 20%;
+    width: 50%;
+}
+
+.logo img {
+    width: 100%;
+    margin: auto;
+    max-height: 70px;
+    max-width: 200px;
+    display: block;
+}
+
+
+#magnifier {
+    margin: 15px 10px 10px;
+    float: right;
+    width: 28px;
+    height: 28px;
+    border:1px solid silver;
+    background-color: #434343;
+    border-radius: 7px;
+
+}
+
+input[type="button"]{
+    font-size:10px;
+    font-weight:bold;
+    text-shadow:rgba(0, 0, 0, 0.30) 0 -1.25px 0;
+    color:#fff;
+    display:-moz-inline-stack;
+    -webkit-font-smoothing:antialiased;
+    display:inline-block;
+    vertical-align:middle;
+    border:1px solid silver;
+    padding:3px 5px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    -ms-border-radius:3px;
+    -o-border-radius:3px;
+    border-radius:3px;
+}
+
+
+.regularButton, .registerButton {
+    display: none;
+}
+
+
+.displayUser {
+    float: right;   
+}
+
+.smallLog {
+    margin: 15px 15px 0 0px;
+    width: 28px;
+    height: 28px;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    border-radius: 20px;
+    border:1px solid silver;
+    display:inline-block;
+}
+
+.connected {
+    background: #00cc66;
+    -webkit-box-shadow: rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    -moz-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+}
+
+.disconnected {
+    background-color:#f24537;
+    -webkit-box-shadow: rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    -moz-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+}
+
+#searchbar {
+    display: none;
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+}
+
+#userTab {
+    background-color: rgb(41, 41, 41);
+    position: absolute;
+    right: 0px;
+    top: 60px;
+    width: 120px;
+    height: 60px;
+    border-radius: 0px 0px 0px 10px;
+    border-bottom: 1px solid rgb(81, 81, 81);
+    border-left: 1px solid rgb(81, 81, 81);
+    padding: 5px;
+}
+
+.userName {
+    width: 100%;
+}
+
+/****************************/
+/*****   homePage & .PHP   *****/
+/****************************/
+
+article {
+    width: 150px;
+    padding: 20px 10px;
+    float: left;
+    font-size: 18px;
+}
+
