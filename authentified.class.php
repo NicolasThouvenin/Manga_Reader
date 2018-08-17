@@ -2,9 +2,7 @@
     class Authentified extends User {
         
         /* 
-            Cette classe correspond aux informations sur un utilisateur authentifié.
-            L'intérêt de la classe Authentified par rapport à ça classe parente User est qu'elle possède des méthodes pour créer
-            et gérer les token d'uahtneitifcation dans les cookie et la base de données.
+            This class have the authentified user informations. It have some methods to manipulate user token in cookie and database.
          */
 
         private $Token;
@@ -12,17 +10,17 @@
         public function __construct(int $Id) {
 
         	try {
-        	    parent::__construct($Id); // Construit toutes les valeurs utiles de la classe parente User
+        	    parent::__construct($Id); // It's necessary to set parent attributs
             	$this->SetToken();
 
         	} catch (Exception $e) {
-                throw new Exception("<br>Erreur lors de la création de l'objet Authentified : ".$e->getMessage());
+                throw new Exception("<br>Error during the creation of the authentified object : ".$e->getMessage());
             }
         }
 
         private function SetToken() {
         	/*
-        		Cette function créer un token à partir d'un uniq Id de formulaire et l'intégre à la table tokens de la base de donnée.
+        		This function create a token with 3 inputs : the session Id, an uniq id and the user login. It set this token in the tokens table in the database.
 				L'idée est que l'utilsateur possède un token par machine dans un cookie.
         	*/
         	try {
@@ -36,15 +34,14 @@
                 $addToken->execute();
                 $addToken->closeCursor();	
         	} catch (Exception $e) {
-                throw new Exception("<br>Erreur lors de la création du token dans la base de données : ".$e->getMessage());
+                throw new Exception("<br>Error during the token creation in the database : ".$e->getMessage());
             }
 
         }
 
         public function CheckToken() {
         	/*
-        		Cette function vérifie que l'objet Authentified possède un token valide.
-        		C'est notamment utile pour vérifié l'objet générer à partir du cookie
+        		This function check if the authentified object have a valid token. This method is usefull to check the token from cookie
         	*/
         	try {
         	    require('connection.php');
