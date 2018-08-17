@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Vérification de l'authentification</title>
+        <title>Authentication check</title>
         <meta charset="utf-8">
     </head>
     <body>
@@ -47,10 +47,10 @@
             } else {
                 $logger->closeCursor();
                 header('Location: login.php');
-            };
+            }
         } catch (Exception $e) {
-            die("Erreur de l'authentification: ". $e->getMessage());
-        };
+            die("Authentication Error: ". $e->getMessage());
+        }
         ?>
     </body>
 </html>
