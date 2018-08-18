@@ -132,6 +132,10 @@ input[type="button"]{
     border-radius: 10px;
 }
 
+.banner > p {
+    display: none;
+}
+
 #userTab {
     background-color: rgb(41, 41, 41);
     position: absolute;
@@ -150,7 +154,7 @@ input[type="button"]{
 }
 
 /****************************/
-/*****   homePage & .PHP   *****/
+/*****   homePage.PHP   *****/
 /****************************/
 
 article {
@@ -158,6 +162,7 @@ article {
     padding: 20px 10px;
     float: left;
     font-size: 18px;
+    margin: 0px auto;
 }
 
 /****************************/
@@ -225,4 +230,23 @@ article {
 
 .bad-input {
     border: red 2px solid;
+}
+
+/****************************/
+/****  designerHome.PHP  ****/
+/****************************/
+
+#new_icon {
+    background-color: rgb(181, 173, 144);
+    height: 225px;
+    width: 150px;
+}
+
+#new_icon > img {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 50px;
+    top: 87px;
+    margin: auto;
 }
