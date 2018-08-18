@@ -1,25 +1,28 @@
 <?php
-if (isset($_GET['userid']) && isset($_GET['emailkey']) && isset($_GET['sendemail'])) {
-	if ($_GET['sendemail'] == true) {
-		$headerMessage = "You have received an email from bubbleUp to confirm your registration. If you haven't received it check your unwanted mails";
-		$resendEmailDisplay = 'initial';
-	} else {
-		$headerMessage = "Thanks you for your inscription to bubbleup";
-		$resendEmailDisplay = 'none';
-		$authentified = new Authentified($_GET['userid']);
-		$authentifiedSerialized = serialize($authentified);
-		setcookie ('authentified', $authentifiedSerialized);
+require('connection.php');
+try {
+	if(isset($_GET['userid']) && isset($_GET['emailkey']) && isset($_GET['sendemail'])) {
+		$emailKey = htmlspecialchars($_GET['emailkey']);
+		$userId = htmlspecialchars($_GET['userid']);		
+		if($_GET['sendemail'] == true) {
+			$reqUser = $db->prepare("SELECT * FROM users WHERE id = ? AND emailkey = ?");
+			$reqUser->execute(array($userId, $emailKey));
+			$userExist = $reqUser->rowCount();
+			if($userExist == 1){
+				$updateUser = $db->prepare("UPDATE users SET emailValidated = 1 WHERE id = ? AND emailKey = ?");
+				$updateUser->execute(array($userId,$emailKey));
+				echo "<p>Your account is now activated. Welcome to BubbleUp!</p>";
+
+				$authentified = new Authentified($_GET['userid']);
+				$authentifiedSerialized = serialize($authentified);
+				setcookie ('authentified', $authentifiedSerialized);
+			}
+			else{
+				echo "Your account is already activated.";
+			}
+		}
 	}
+}catch (Exception $e) {
+
 }
 ?>
-
-<div>
-	<p><h2><?php echo $headerMessage ?></h2></p>
-	<input type="button" onclick="location.href =<?php echo 'emailValidation.php?'.'&userid='.$_GET['userid'].'&emailkey='.$_GET['@emailkey'].'&sendemail=true';?>" value="Resend email" style="display=<?php $resendEmailDisplay ; ?>">
-</div>
-
-
-
-
-</body>
-</html>
