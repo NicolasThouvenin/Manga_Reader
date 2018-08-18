@@ -37,7 +37,7 @@
 
         $result = $db->query("SELECT @lastUserId, @lastUserEmailKey")->fetch(PDO::FETCH_ASSOC);
 
-        header('Location: emailValidation.php?'.'&userid='.$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'].'&sendemail=true');
+        // header('Location: emailValidation.php?'.'&userid='.$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'].'&sendemail=true');
 
 //SENDiNG EMAIL
     // initiating PHPMailer
@@ -57,9 +57,10 @@
         $sendemail->addReplyTo('pharob@superuser.fr');
         $sendemail->isHTML(true);
         $sendemail->Subject='Your BubbleUp account confirmation :';
-        $sendemail->Body="Hello,\n
-        Thank you for your registration to BubbleUp. Please, click on the link to activate your account :\n
-        www.activersoncompte.etc...";
+        $sendemail->Body="<p>Hello!</p>
+        <p>Thank you for your registration to bubbleUp. Please, click on this link to activate your account :</p>
+        <p>   <a href='http://ns3272345.ip-5-39-84.eu/emailValidation.php?userid=".$result['@lastUserId'].'&emailkey='.$result['@lastUserEmailKey'].'&sendemail=true'."'/>Click here</a></p>
+        <p>Regards</p>";
         if(!$sendemail->send()){
             echo "Message couldn't be sent!";
         }
