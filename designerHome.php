@@ -6,13 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css\general.css">
         <link rel="stylesheet" type="text/css" media="screen and (max-width: 640px)" href="css\small.css">
-        <link rel="stylesheet" type="text/css" media="screen and (min-width: 641px)" href="css\main_lg.css">
+        <link rel="stylesheet" media="screen and (min-width: 1008px)" href="css\large.css">
         <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
     </head>
     <body>
         <div class="page">
             <header>
-                <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation" style="visibility: hidden;">
+                <input id="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation" style="visibility: hidden;">
 
                 <div class="displayUser">
                     <?php
@@ -67,7 +67,7 @@
                         ?>
 
                         <article id="<?php echo $comic->getId() ?>">
-                            <a href="comic.php?bookId=<?php echo $comic->getId() ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
+                            <a href="comic.php?bookId=<?php echo $comic->getId() ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="100" height="150"></a>
                             <p class="comics_name"><a href="comic.php?bookId=<?php $comic->getId() ?>"><?php echo $comic->getTitle() ?></a><p>
                         </article>
 
@@ -79,7 +79,8 @@
                 ?>
             </main>
         </div> <!-- page -->
-        <script src="script/sizeAdjust.js"></script>
+        <script src="script/headerAdjust.js"></script>
+        <script src="script/homeAdjust.js"></script>
         <script src="script/comicFilter.js"></script>
     </body>
 </html>

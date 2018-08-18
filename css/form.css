@@ -12,7 +12,6 @@
     padding: 30px 10px;
     margin: auto;
     width: 400px;
-
 }
 
 form {
@@ -28,7 +27,7 @@ form > input {
     border-radius: 10px
 }
 
-#authentification {
+#authentication {
     width: 180px;
     margin: auto;
 }

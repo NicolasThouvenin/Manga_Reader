@@ -6,7 +6,7 @@
         <title>Home</title>
         <link rel="stylesheet" type="text/css" href="css\general.css">
         <link rel="stylesheet" media="screen and (max-width: 640px)" href="css\small.css">
-        <link rel="stylesheet" media="screen and (min-width: 640px)" href="css\main_lg.css">
+        <link rel="stylesheet" media="screen and (min-width: 1008px)" href="css\large.css">
         <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
@@ -24,7 +24,7 @@
                         // if a user is connected
                         ?>
                         <img class='smallLog connected' src='ressources/avatar-icon-614x460.png' onclick='toggleUserTab()'>
-                        <div id="userTab" style="display: none;">
+                        <div id="userTab">
                             <p class='userName'><a href='profile.php'><?php echo $user->getLogin(); ?></a></p>
                             <p class='userName'><a href='disconnect.php'>Log out</a></p>
                         </div>
@@ -66,7 +66,7 @@
                             ?>
 
                             <article class="comic" id="comicId_<?php echo $line['Id'] ?>">
-                                <a href="comic.php?bookId=<?php echo $line['Id'] ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="150" height="225"></a>
+                                <a href="comic.php?bookId=<?php echo $line['Id'] ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="100" height="150"></a>
                                 <p class="comics_name"><a href="comic.php?bookId=<?php echo $line['Id'] ?>"><?php echo $line['Title'] ?></a><p>
                             </article>
 
@@ -80,7 +80,8 @@
             </main>
         </div> <!-- page -->
 
-        <script src="script/sizeAdjust.js"></script>
+        <script src="script/headerAdjust.js"></script>
+        <script src="script/homeAdjust.js"></script>
         <script src="script/comicFilter.js"></script>
     </body>
 </html>
