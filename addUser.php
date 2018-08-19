@@ -65,7 +65,9 @@
             echo "Message couldn't be sent!";
         }
         else{
-            echo "You have received an email from BubbleUp, to confirm your registration. If you haven't received it check your unwanted emails";
+            echo "You have received an email from BubbleUp, to confirm your registration. If you haven't received it check your unwanted emails <br>
+            <a href='http://ns3272345.ip-5-39-84.eu/homePage.php'><button type='button'>Go back to Menu</button></a>
+            ";
         }
 
     } catch(Exception $e) {
