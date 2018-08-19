@@ -7,7 +7,7 @@
 <body>
     <?php
 
-    /* Cette page reçoit le post du formulaire d'incription des utilisateurs et pousse créer un utilisateur dans la base de données. */
+    /* This page receives subscription post request and create an user in database */
 
     try {
 
@@ -71,7 +71,7 @@
         }
 
     } catch(Exception $e) {
-        die('<br>Erreur de la création du nouvel utilisateur: '.$e->getMessage());
+        die('<br>Error during the new user creation : '.$e->getMessage());
     };
     ?>
 </body>
