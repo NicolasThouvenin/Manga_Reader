@@ -1,6 +1,6 @@
 DELIMITER $$
 CREATE PROCEDURE deleteComicStrip(IN inComicStripId INTEGER)
-/* Cette procédure supprime une image et renumérote les images du chapitre situées après. */
+/* This stored procedure delete a comic strip from comicstrips table. The next comicstrips numbers are updated.  */
 BEGIN
 	DECLARE oldNumber INTEGER;
 	SELECT Number INTO oldNumber FROM comicStrips WHERE Id = inComicStripId; 

@@ -1,6 +1,6 @@
 DELIMITER ;;
 CREATE PROCEDURE createComicStrip(IN inFilename VARCHAR(75), IN inChapterId INTEGER, OUT lastComicStripId INTEGER, OUT lastComicStripNumber INTEGER)
-/* Cette procédure créer une nouvelle image dans la base et retourne son Id. */
+/* This stored procedure creates a comic strip in comic strips table and return its Id */
 BEGIN
 	SET lastComicStripId = -1;
 	SET lastComicStripNumber = -1;

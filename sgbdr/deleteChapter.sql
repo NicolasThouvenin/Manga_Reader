@@ -1,6 +1,6 @@
 DELIMITER $$
 CREATE PROCEDURE deleteChapter(IN inChapterId INTEGER)
-/* Cette procédure supprime un chapitre de la base grâce à son Id. Les numéros situé après sont décrémententés. */
+/* This stored procedure delete a chapter from chapters table. The next chapters numbers are updated. */
 BEGIN
 	DECLARE oldNumber INT;
 	SELECT Number INTO oldNumber FROM chapters;

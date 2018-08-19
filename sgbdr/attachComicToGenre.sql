@@ -1,6 +1,6 @@
 DELIMITER $$
 CREATE PROCEDURE attachComicToGenre(IN inGenreId INTEGER, IN inComicId INTEGER)
-/* Rattache une BD à un genre. */
+/* This stored procedure adds genre id and comic id in the comicsgenres table */
 BEGIN
 	INSERT INTO comicsgenres (genreId, comicId) VALUES (inGenreId, inComicId);
 END $$

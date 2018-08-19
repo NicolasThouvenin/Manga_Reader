@@ -1,6 +1,6 @@
 DELIMITER $$
 CREATE PROCEDURE deleteVolume(IN inVolumeId INTEGER)
-/* Cette procédure supprime un tome de la base grâce à son Id. Les numéros situé après sont décrémententés. */
+/* This stored procedure delete a volume from volumes table. The next volumes numbers are updated.  */
 BEGIN
 	DECLARE oldNumber INT;
 	SELECT Number INTO oldNumber FROM volumes;

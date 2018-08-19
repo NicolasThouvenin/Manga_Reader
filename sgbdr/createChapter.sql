@@ -1,6 +1,6 @@
 DELIMITER ;;
 CREATE PROCEDURE createChapter(IN inTitle VARCHAR(255), IN inSynopsis VARCHAR(255), IN inStartDate VARCHAR(10), IN inVolumeId INTEGER, OUT lastChapterId INTEGER, OUT lastChapterNumber INTEGER)
-/* Cette procédure créer un nouveau tome dans la base et retourne son Id. Le numéro du tome est calculé automatiquement. */
+/* This stored procedure creates a new chapter in the volumes table and return its id. The chapter number is automaticly calculate automatically. */
 BEGIN
 	SELECT Count(*) + 1 INTO lastChapterNumber FROM chapters
 	JOIN volumes

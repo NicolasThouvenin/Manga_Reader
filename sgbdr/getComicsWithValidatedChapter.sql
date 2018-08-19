@@ -1,6 +1,6 @@
 DELIMITER $$
 CREATE PROCEDURE getComicsWithValidatedChapter()
-/* Cette procédure stockée renvoie la liste des comics avec au moins un chapitre validé */
+/* This stored procedure return all comics with one ou more validated chapter */
 BEGIN
 	SELECT DISTINCT comics.*
 	FROM chapters

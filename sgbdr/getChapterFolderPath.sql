@@ -1,6 +1,6 @@
 DELIMITER ;;
 CREATE PROCEDURE getChapterFolderPath(IN inChapterId INT, OUT chapterFolderPath VARCHAR(255))
-/* Cette procédure retourne le chemin du dossier d'images d'un chapitre. */
+/* Return a standard chapter images folder path */
 BEGIN
 	SELECT CONCAT(comics.Id, '\\', volumes.Id , '\\', chapters.Id)
 	INTO chapterFolderPath
