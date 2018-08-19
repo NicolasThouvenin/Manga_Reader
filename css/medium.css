@@ -191,7 +191,7 @@ article {
     margin: 30px auto;
 }
 
-.loginButton {
+.form-submit-button {
     margin: 10px auto;
     padding: 5px 20px;
     color: #fff;
@@ -210,7 +210,7 @@ article {
 }
 
 /** Active State Style **/
-.form-submit-button > .loginButton:active {
+.form-submit-button:active {
     border-color: #5a5b5f;
     -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     -moz-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
