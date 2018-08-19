@@ -25,12 +25,13 @@
                 // For security reasons, only the posts with a valid formular token will be accepted
                 ?>
                 <label><input type="checkbox" id="stayConnected" name="stayConnected">Remember me</label>
-              
                 <input type="submit" name="submit" value="Login" class="loginButton">
-
             </form>
-            <span class="loginButton" onclick="location.href = 'register.php';">No account yet ? Create an account</span><br>
-            <span class="loginButton" onclick="location.href = 'passwordLost.php';">Forgot your password ? Click here</span>
+            <div>
+                <a href="register.php">No account yet ? Create an account</a>
+                <br>
+                <a href="passwordLost.php">Forgot your password ? Click here</a>  
+            </div>
         </div> <!-- form-div-->
     </body>
 </html>
