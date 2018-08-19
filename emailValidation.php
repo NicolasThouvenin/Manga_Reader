@@ -1,10 +1,9 @@
 <?php
 require('connection.php');
 try {
-	if(isset($_GET['userid']) && isset($_GET['emailkey']) && isset($_GET['sendemail'])) {
+	if(isset($_GET['userid']) && isset($_GET['emailkey'])) {
 		$emailKey = htmlspecialchars($_GET['emailkey']);
-		$userId = htmlspecialchars($_GET['userid']);		
-		if($_GET['sendemail'] == true) {
+		$userId = htmlspecialchars($_GET['userid']);
 			$reqUser = $db->prepare("SELECT * FROM users WHERE id = ? AND emailkey = ?");
 			$reqUser->execute(array($userId, $emailKey));
 			$userExist = $reqUser->rowCount();
@@ -21,7 +20,6 @@ try {
 			else{
 				echo "Your account is already activated.";
 			}
-		}
 	}
 }catch (Exception $e) {
 
