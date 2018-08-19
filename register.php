@@ -22,7 +22,7 @@
                 session_start();
                 $_SESSION['uniqidRegister'] = uniqid();
                 echo '<input id="uniqidRegister" name="uniqidRegister" type="hidden" value="'.$_SESSION['uniqidRegister'].'">';
-                //Pour des raisons de sécurité, on acceptera que les post d'inscription renvoyant le token d'inscription
+                // For security reasons, only the posts with a valid formular token will be accepted
             ?>
             <input type="submit" name="submit" value="Create Account" class="registerButton">
         </form>

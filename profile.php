@@ -60,7 +60,7 @@ if (isset($_COOKIE['authentified'])) {
                                 <?php
                                     $_SESSION['uniqidProfil'] = uniqid(); // and it is based on the uniqid
                                     echo '<input id="uniqidProfil" name="uniqidProfil" type="hidden" value="'.$_SESSION['uniqidProfil'].'">';
-                                    //Pour des raisons de sécurité, on acceptera que les post renvoyant le token du formulaire de login
+                                    // For security reasons, only the posts with a valid formular token will be accepted
                                 ?>
                                 <input type="submit" name="submit" value="Save" style="margin-top: 30px;">
                             </div>  <!-- book_meta -->
@@ -75,7 +75,7 @@ if (isset($_COOKIE['authentified'])) {
                         <?php
                             $_SESSION['uniqidUnsubscribe'] = uniqid(); // and it is based on the uniqid
                             echo '<input id="uniqidUnsubscribe" name="uniqidUnsubscribe" type="hidden" value="'.$_SESSION['uniqidUnsubscribe'].'">';
-                            //Pour des raisons de sécurité, on acceptera que les post renvoyant le token du formulaire de login
+                            // For security reasons, only the posts with a valid formular token will be accepted
                         ?>
                         <input type="submit" name="submit" value="Unsubscribe" style="margin-top: 30px;">
                     </form>
