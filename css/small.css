@@ -13,14 +13,11 @@ header {
 }
 
 main {
-    padding: 60px 0px 10px 0;
+    padding: 60px 0px 10px;
     width: 100%;
     margin: auto;
 }
 
-.regularButton, .registerButton {
-    display: none;
-}
 
 #add {
     float: left;
@@ -99,12 +96,6 @@ input[type="button"]{
     border-radius:3px;
 }
 
-
-.regularButton, .registerButton {
-    display: none;
-}
-
-
 .displayUser {
     float: right;   
 }
@@ -141,6 +132,10 @@ input[type="button"]{
     border-radius: 10px;
 }
 
+.banner > p {
+    display: none;
+}
+
 #userTab {
     background-color: rgb(41, 41, 41);
     position: absolute;
@@ -159,13 +154,111 @@ input[type="button"]{
 }
 
 /****************************/
-/*****   homePage & .PHP   *****/
+/*****   homePage.PHP   *****/
 /****************************/
 
 article {
-    width: 150px;
+    width: 100px;
     padding: 20px 10px;
     float: left;
     font-size: 18px;
+    margin: 0px 10px;
 }
 
+/****************************/
+/*****       login.PHP       *****/
+/****************************/
+
+.form-div {
+    width: 100vw;
+    padding-top: 15%;
+}
+
+#authentication > h2 {
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+}
+
+.input_login {
+    width: 80%;
+    max-width: 200px;
+    display: block;
+    border: 1px solid;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#authentication > label {
+    width: 80%;
+    max-width: 200px;
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#authentication > span {
+    height: 16px;
+    line-height: 16px;
+    width: 133px;
+    margin: 30px auto;
+}
+
+#login-logo >  img {
+    width: 320px;
+    height: 212px;
+    display: block;
+    margin: auto;
+    padding-right: 15px;
+}
+
+.loginButton {
+    margin: 10px auto;
+    padding: 5px 20px;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #5a5b5f;
+    border: 1px solid silver;
+    border-radius: 10px;
+    text-shadow: rgba(0, 0, 0, 0.30) 0 -1.25px 0;
+    display: block;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+    -moz-box-shadow: rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+    box-shadow: rgba(255, 255, 255, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+}
+
+/** Active State Style **/
+.loginButton:active {
+    border-color: #5a5b5f;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    -moz-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+}
+
+.bad-input {
+    border: red 2px solid;
+}
+
+/****************************/
+/****  designerHome.PHP  ****/
+/****************************/
+
+#new_icon {
+    background-color: rgb(181, 173, 144);
+    height: 150px;
+    width: 100px;
+}
+
+#new_icon > img {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 25px;
+    top: 50px;
+    margin: auto;
+}
