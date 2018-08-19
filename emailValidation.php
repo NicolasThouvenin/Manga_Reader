@@ -11,7 +11,8 @@ try {
 			if($userExist == 1){
 				$updateUser = $db->prepare("UPDATE users SET emailValidated = 1 WHERE id = ? AND emailKey = ?");
 				$updateUser->execute(array($userId,$emailKey));
-				echo "<p>Your account is now activated. Welcome to BubbleUp!</p>";
+				echo "<p>Your account is now activated. Welcome to BubbleUp!</p><br>
+				<a href='http://ns3272345.ip-5-39-84.eu/homePage.php'><button type='button'>Go to Menu</button></a>";
 
 				$authentified = new Authentified($_GET['userid']);
 				$authentifiedSerialized = serialize($authentified);
