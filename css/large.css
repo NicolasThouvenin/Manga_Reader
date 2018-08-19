@@ -196,10 +196,20 @@ article {
     border-radius: 10px;
 }
 
-#authentication > .loginButton {
+#authentication > span {
+    height: 16px;
+    line-height: 16px;
+    width: 133px;
+    margin: 30px auto;
+}
+
+.loginButton {
     margin: 10px auto;
     padding: 5px 20px;
     color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
     background-color: #5a5b5f;
     border: 1px solid silver;
     border-radius: 10px;
