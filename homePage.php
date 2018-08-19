@@ -34,7 +34,7 @@
                         ?>
                         <a href="login.php"><img class="smallLog disconnected" src="ressources/avatar-icon-614x460.png"></a>
                         <input type='button' onclick="location.href = 'login.php';" value="LOG IN" class="regularButton">
-                        <input type='button' onclick="location.href = 'register.php';" value="REGISTER" class="registerButton">
+                        <input type='button' onclick="location.href = 'register.php';" value="REGISTER" class="form-submit-button">
                         <?php
                     }
                     ?>
