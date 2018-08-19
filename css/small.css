@@ -174,7 +174,7 @@ article {
     padding-top: 15%;
 }
 
-.form-submit-button > h2 {
+#authentication > h2 {
     text-align: center;
     font-weight: 500;
     font-size: 30px;
@@ -191,7 +191,7 @@ article {
     border-radius: 10px;
 }
 
-.form-submit-button > label {
+#authentication > label {
     width: 80%;
     max-width: 200px;
     display: block;
@@ -200,7 +200,7 @@ article {
     border-radius: 10px;
 }
 
-.form-submit-button > span {
+#authentication > span {
     height: 16px;
     line-height: 16px;
     width: 133px;
@@ -253,7 +253,7 @@ article {
     display: block;
     margin: 10px auto;
     width: 200px;
-   
+
 }
 
 /****************************/
@@ -290,6 +290,11 @@ article {
     float: left;
 }
 
+#avatar {
+    margin-top: 50px;
+    height: 150px;
+}
+
 #book_meta, #user_info {
     line-height: 1.6em;
     width: 40%;
@@ -299,14 +304,14 @@ article {
 }
 
 #user_info > p {
-    line-height: 2em;
+    line-height: 1.5em;
     font-size: 18px;
+    padding: 3px 0;
 }
 
 #user_info > p > input {
-    float: right;
-    padding-right: 180px;
-    width: 170px;
+    padding-right: 0;
+    width: 100%;
     font-size: 18px;
     border: none;
     background-color: #616161;
@@ -320,6 +325,12 @@ article {
     margin: 0px 10px 10px;
     line-height: 1.4em;
     border-bottom: 1px solid silver;
+}
+
+#unsubscribe {
+    position: absolute;
+    top: 300px;
+    left: 20px;
 }
 
 /****   New Volume & Chapter Form  ****/

@@ -13,11 +13,6 @@ $comic = new Comic($_GET["bookId"]);
  */
 if (isset($_POST["submit"])) {
     try {
-        if (!isset($_SESSION['uniqidNewVolume'])) {
-            throw new Exception("La requête post de création de volume ne possède pas de token correspondant à un formulaire envoyé par le serveur");
-        } else if ($_SESSION['uniqidNewVolume'] != htmlentities($_POST['uniqidNewVolume'])) {
-            throw new Exception("La requête post de création de volume n'indique pas le même token d'authentification que celui de la session du serveur");
-        }
         $comic->createVolume(htmlentities($_POST["title"]), htmlentities($_POST["synopsis"]));
         header("Location:newChapter.php?volumeId=" . $comic->getLastVolumeId());
     } catch (Exception $e) {
@@ -30,7 +25,11 @@ if (isset($_POST["submit"])) {
     <head>
         <meta charset="utf-8">
         <title><?php echo $comic->getTitle(); ?></title>
-        <link rel="stylesheet" type="text/css" href="css\main_lg.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css\general.css">
+        <link rel="stylesheet" type="text/css" media="screen and (max-width: 640px)" href="css\small.css">
+        <link rel="stylesheet" media="screen and (min-width: 641px) and (max-width: 1008px)" href="css\medium.css">
+        <link rel="stylesheet" media="screen and (min-width: 1008px)" href="css\large.css">
         <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="script/bubbleBook.js"></script>
@@ -40,28 +39,34 @@ if (isset($_POST["submit"])) {
 
             <!-- *********** Generating Page Header ******************* -->
             <header>
-                <input class="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation">
+                <input id="add" type='button' onclick="location.href = 'designerHome.php';" value="Add Creation">
 
                 <div class="displayUser">
                     <?php
                     if (isset($_COOKIE['authentified'])) {
                         $user = unserialize($_COOKIE['authentified']);
                         // if a user is connected
-                        echo "<p class='userName'><a href='profile.php'>" . $user->getLogin() . "</a></p>";
-                        echo "<p><a class='userName' href='disconnect.php'>Log out</a></p>";
+                        ?>
+                        <img class='smallLog connected' src='ressources/avatar-icon-614x460.png' onclick='toggleUserTab()'>
+                        <div id="userTab">
+                            <p class='userName'><a href='profile.php'><?php echo $user->getLogin(); ?></a></p>
+                            <p class='userName'><a href='disconnect.php'>Log out</a></p>
+                        </div>
+                        <?php
                     } else {
                         ?>
-                        <input type='button' onclick="location.href = 'login.php';" value="Log in" >
-                        <input type='button' onclick="location.href = 'register.php';" value="Register" >
+                        <a href="login.php"><img class="smallLog disconnected" src="ressources/avatar-icon-614x460.png"></a>
+                        <input type='button' onclick="location.href = 'login.php';" value="LOG IN" class="regularButton">
+                        <input type='button' onclick="location.href = 'register.php';" value="REGISTER" class="registerButton">
                         <?php
                     }
                     ?>
                 </div> <!-- displayUser -->
-                <div class="logo"><a href="homePage.php"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
+                <div class="logo"><a href="homePage.php"><img src="ressources/bubbleLogo.png"></a></div>
             </header>
             <main>
                 <div class="banner">
-                    <input id="searchbar" type="search" name="q" placeholder="search comic or author">
+                    <span><?php echo $comic->getTitle(); ?></span>
                 </div> <!-- banner -->
 
                 <!-- *****************    Page Content ***************** -->
@@ -69,7 +74,7 @@ if (isset($_POST["submit"])) {
                 try {
                     ?>
                     <div id="book_cover">
-                        <img title="<?php echo $comic->getTitle(); ?>" src="<?php echo "comics\\" . $_GET['bookId'] . "\\cover." . $comic->getCoverExt(); ?>" alt="cover" height="375" width="250">
+                        <img id="cover" title="<?php echo $comic->getTitle(); ?>" src="<?php echo "comics\\" . $_GET['bookId'] . "\\cover." . $comic->getCoverExt(); ?>" alt="cover" height="225" width="150">
                     </div> <!-- book_cover -->
                     <div id="book_meta">
                         <p id="book_title"><?php echo $comic->getTitle(); ?></p>
@@ -93,9 +98,10 @@ if (isset($_POST["submit"])) {
                             }
                             ?>
                         </p>
-                        <p id="synopsis"><?php echo $comic->getSynopsis(); ?></p>
-
                     </div>  <!-- book_meta -->
+                    <p id="synopsis"><?php echo $comic->getSynopsis(); ?></p>
+
+
                     <?php
                     // If the user connected is the author, displays the creation links
                     if (isset($_COOKIE['authentified'])) {
@@ -121,11 +127,6 @@ if (isset($_POST["submit"])) {
                                     <form id="new_volume_form" method="POST" action="comic.php?bookId=<?php echo $_GET["bookId"]; ?>">
                                         <p></p><input type="text" name="title" placeholder="Volume Title" required></p>
                                         <p><textarea name="synopsis" placeholder="Volume Synopsis" cols="40" rows="3" required></textarea></p>
-                                        <?php
-                                            $_SESSION['uniqidNewVolume'] = uniqid(); // and it is based on the uniqid
-                                            echo '<input id="uniqidNewVolume" name="uniqidNewVolume" type="hidden" value="'.$_SESSION['uniqidNewVolume'].'">';
-                                            //Pour des raisons de sécurité, on acceptera que les post renvoyant le token du formulaire de login
-                                        ?>
                                         <input type="submit" name="submit" value="Create Volume">
                                     </form>
                                     <?php
@@ -178,5 +179,7 @@ if (isset($_POST["submit"])) {
                 ?>
             </main>
         </div> <!-- page -->
+        <script src="script/headerAdjust.js"></script>
+        <script src="script/comicAdjust.js"></script>
     </body>
 </html>
