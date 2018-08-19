@@ -2,7 +2,7 @@
 
 	class Volume {
 
-		/* Cette regroupe des informations et méthode utiles à la manipulation des volumes. */
+		/* This class reprents a volume */
 
 	    private $Id;
 	    private $Number;
@@ -68,7 +68,7 @@
 	    }
 
 	    private function SetChapters() {
-	    	/* Cette function inétrroge la base données et rempli une liste d'objet chapters */
+	    	/* This metode  function create an array of chapter objects. It queries the database itself */
 	        try {
 	            require('connection.php');
 
@@ -91,7 +91,7 @@
 	                $this->LastChapterNumber = $line['Number'];
 	            }
 	        } catch (Exception $e) {
-	            throw new Exception("<br>Erreur lors de la création de la liste de d'objets chapitres : " . $e->getMessage());
+	            throw new Exception("<br>Error during the creation of chapter objects array : " . $e->getMessage());
 	        }
 	    }
 

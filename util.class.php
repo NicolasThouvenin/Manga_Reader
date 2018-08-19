@@ -1,12 +1,8 @@
 <?php
-
-	/*
-		Cette classe à vocation à regrouper des méthodes utiles à différentes pages.
-	*/
 	class Util {
-		
+		/* This file provides some util methodes */
 		public static function checkPostData($data) {
-			/* Cette fonction utilise la function htmlentities sur les valeurs d'un array $_POST et renvoi un array sécurisé */
+			/* This method use the php function htmlentities for each values in $_POST and return an array with securised data */
             foreach ($data as $key => $value) {
                 $data[$key] = htmlentities($value);
             }

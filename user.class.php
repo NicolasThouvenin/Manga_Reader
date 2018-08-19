@@ -1,7 +1,7 @@
 <?php
         class User {
             
-            /* Cette classe correspond aux informations sur un utilisateur */
+            /* This class represents an user */
 
             protected $Id;
             protected $Login;
@@ -17,7 +17,7 @@
 
                 try {
 
-                	/* On utilise l'identifiant d'utilisateur pour intérroger le base et construire cette objet utilisateur avec toutes les informations d'un utilisateurs */
+                	/* The data from database are used to create this object */
 
                     require('connection.php');
 
@@ -34,12 +34,12 @@
                             $this->EmailValidated = ($line['EmailValidated'] === '1' ? true : false);
                         }
                     } else {
-                        throw new Exception('Utilisateur inconnu dans la base.');
+                        throw new Exception('<br>User not found in the database.');
                     }
                     $user->closeCursor();
 
                 } catch (Exception $e) {
-                    throw new Exception("<br>Erreur lors de la création de l'objet user : ".$e->getMessage());
+                    throw new Exception("<br>Error during the user object creation : ".$e->getMessage());
                 } 
             }
             
@@ -86,7 +86,7 @@
             }
 
             public function setBirthDate($BirthDate) {
-                $this->_validateLength($BirthDate, 255); //hétité de la class user
+                $this->_validateLength($BirthDate, 255);
                 $this->BirthDate = $BirthDate;
             }
 
@@ -101,12 +101,12 @@
             
             private function _validateLength(string $string, int $maxLength) {
                 if (strlen($string) > $maxLength) {
-                    throw new Exception('<br>La longueur de la chaine de caractère est trop longue.');
+                    throw new Exception('<br>The string length is too long');
                 }
             }
 
             function updateUser() {
-            	/* Met à jour les informations non critiques ur un utilisateurs. */
+            	/* this method updates the no critical user data */
                 try {
 
                     require('connection.php');
@@ -121,7 +121,7 @@
                     $updatUser->closeCursor();
 
                 } catch (Exception $e) {
-                    throw new Exception("<br>Erreur lors de la mise à jour de l'objet user : ".$e->getMessage());
+                    throw new Exception("<br>Error during the user object creation : ".$e->getMessage());
                 } 
                 
             }

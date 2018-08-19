@@ -1,6 +1,5 @@
 <?php 
-	/* Cette classe regroupe les information et méthode relatif à un Comic strip
-	L'objet est construit à partir des informations de la base de données et permet de pousser des données sur la base et sur le serveur de fichier.*/
+	/* Thi class represents a comic strip */
 
 	class ComicStrip
 	{
