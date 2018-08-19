@@ -30,7 +30,7 @@ function header(size) {
             userNames[1].style.display = "none";
         }
         /* For large devices */
-    } else if (size === "l") {
+    } else if (size === "l" || size === "m") {
         if (addButon) {
             addButon.value = "Add Creation";
         }

@@ -24,10 +24,17 @@ function homeLargeAdjust(x) {
 }
 
 var s = window.matchMedia("(max-width: 640px)");
+var m = window.matchMedia("(min-width: 641px) and (max-width: 1007px)");
 var l = window.matchMedia("(min-width: 1008px)");
 
-homeSmallAdjust(s); // Call listener function at run time
-s.addListener(homeSmallAdjust); // Attach listener function on state changes
+/* Call listener function at run time
+ * And attach it on state changes
+ */
+homeSmallAdjust(s);
+s.addListener(homeSmallAdjust);
 
-homeLargeAdjust(l); // Call listener function at run time
-l.addListener(homeLargeAdjust); // Attach listener function on state changes
+homeLargeAdjust(m);
+m.addListener(homeLargeAdjust);
+
+homeLargeAdjust(l);
+l.addListener(homeLargeAdjust);
