@@ -172,11 +172,18 @@ article {
 /****************************/
 
 #login-logo {
-    margin: 70px auto 30px;
+    margin: 70px auto 0px;
 }
 
 .bad-input {
     border: red 2px solid;
+}
+
+
+#authentication > h2 {
+    font-weight: 500;
+    font-size: 30px;
+    margin: -15px 0px 40px;
 }
 
 
@@ -238,6 +245,19 @@ article {
 form > h2 {
     text-align: center;
 }
+
+
+#login_links {
+    margin-top: 20px;
+}
+
+#login_links > a {
+    display: block;
+    margin: 10px auto;
+    width: 200px;
+   
+}
+
 
 /****************************/
 /***   book & profile.PHP    ***/

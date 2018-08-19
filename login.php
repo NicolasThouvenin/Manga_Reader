@@ -27,11 +27,10 @@
                 <label><input type="checkbox" id="stayConnected" name="stayConnected">Remember me</label>
                 <input type="submit" name="submit" value="Login" class="loginButton">
             </form>
-            <div>
-                <a href="register.php">No account yet ? Create an account</a>
-                <br>
-                <a href="passwordLost.php">Forgot your password ? Click here</a>  
-            </div>
+            <div id="login_links">
+                <a href="register.php">No account yet ?</a>
+                <a href="passwordLost.php">Forgot your password ?</a>  
+            </div><!-- login_links-->
         </div> <!-- form-div-->
     </body>
 </html>

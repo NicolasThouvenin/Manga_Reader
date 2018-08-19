@@ -132,7 +132,7 @@ input[type="button"]{
     border-radius: 10px;
 }
 
-.banner > p {
+.banner > p, .banner > span {
     display: none;
 }
 
@@ -178,6 +178,7 @@ article {
     text-align: center;
     font-weight: 500;
     font-size: 30px;
+    margin-top: -15px;
 }
 
 .input_login {
@@ -244,6 +245,17 @@ article {
     border: red 2px solid;
 }
 
+#login_links {
+    margin-top: 20px;
+}
+
+#login_links > a {
+    display: block;
+    margin: 10px auto;
+    width: 200px;
+   
+}
+
 /****************************/
 /****  designerHome.PHP  ****/
 /****************************/
@@ -261,4 +273,112 @@ article {
     left: 25px;
     top: 50px;
     margin: auto;
+}
+
+/****************************/
+/***   book & profile.PHP    ***/
+/****************************/
+
+/****   comic meta & profile info ****/
+
+#book_cover, #avatar {
+    margin: 20px 10px; 
+    padding: 10px;
+    width: 150px;
+    border: solid black 2px;
+    display: inline-block;
+    float: left;
+}
+
+#book_meta, #user_info {
+    line-height: 1.6em;
+    width: 40%;
+    float: left;
+    padding: 10px 0px   ;
+    margin-top: 10px;
+}
+
+#user_info > p {
+    line-height: 2em;
+    font-size: 18px;
+}
+
+#user_info > p > input {
+    float: right;
+    padding-right: 180px;
+    width: 170px;
+    font-size: 18px;
+    border: none;
+    background-color: #616161;
+    color: rgb(189, 186, 172);
+}
+
+#synopsis {
+    clear: both;
+    max-width: 450px;
+    padding: 10px 10px 20px 10px;
+    margin: 0px 10px 10px;
+    line-height: 1.4em;
+    border-bottom: 1px solid silver;
+}
+
+/****   New Volume & Chapter Form  ****/
+
+#add_new {
+    /*border-top: solid #414141 2px;*/
+    width: 100%;
+    /*margin-top: 20px;*/
+    padding: 10px 0px 0px;
+
+}
+
+#add_volume, #add_chapter {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 5px 10px 0px;
+    cursor: pointer;
+    display: block;
+}
+
+#new_volume_form {
+    display: none;
+    padding: 20px;
+}
+
+#new_volume_form > p {
+    margin: 5px 0px;
+}
+
+/****   Chapters & Volumes  ****/
+
+#chapters_header {
+    background: linear-gradient(to right, rgb(102,102,102) 10%, rgb(61,61,61) 100%);
+    margin: 30px 0;
+    height: 25px;
+    line-height: 25px;
+    width: 100%;
+    max-width: 450px;
+    /*border: solid rgb(94, 94, 94) 1px;*/
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.volume {
+    font-weight: 500;
+}
+
+.volume_synopsis {
+    font-weight: normal;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.volume_release, .chapter_release {
+    font-weight: normal;
+    float: right;
+    padding-right: 10px;
+}
+
+ul {
+    list-style: none;
 }
