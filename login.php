@@ -14,7 +14,7 @@
             <div id="login-logo">
                 <img src="ressources/bubbleSignLogo.png" onclick="location.href = 'homePage.php';">
             </div>
-            <form id="authentication" name="authentication" method="post" action="checkAuthentication.php">
+            <form class='main-form' id="authentication" name="authentication" method="post" action="checkAuthentication.php">
                 <h2>Sign in</h2>
                 <input class="input_login" type="text" id="login" name="login" placeholder="Login" required>
                 <input class="input_login" type="password" id="password" name="password" placeholder="Password" required>
@@ -25,7 +25,7 @@
                 // For security reasons, only the posts with a valid formular token will be accepted
                 ?>
                 <label><input type="checkbox" id="stayConnected" name="stayConnected">Remember me</label>
-                <input type="submit" name="submit" value="Login" class="loginButton">
+                <input type="submit" name="submit" value="Login" class="form-submit-button">
             </form>
             <div id="login_links">
                 <a href="register.php">No account yet ?</a>

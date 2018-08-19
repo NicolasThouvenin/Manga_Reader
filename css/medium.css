@@ -52,21 +52,6 @@ button, input[type="button"]{
     box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
 }
 
-.registerButton {
-    cursor: pointer;
-    background: #00cc66;
-    -webkit-box-shadow: rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
-    -moz-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
-    box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
-}
-
-/** Active State Style **/
-.registerButton:active {
-    -webkit-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
-    -moz-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
-    box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
-}
-
 #add {
     float: left;
     margin: 27px 0 0 40px;
@@ -171,7 +156,7 @@ article {
 }
 
 /****************************/
-/***  Login & Register.PHP  ***/
+/***  Login & .PHP  ***/
 /****************************/
 
 #login-logo {
@@ -190,7 +175,7 @@ article {
 }
 
 
-#authentication > .input_login {
+.form-submit-button > .input_login {
     display: block;
     border: 1px solid;
     width: 100%;
@@ -199,7 +184,7 @@ article {
     border-radius: 10px;
 }
 
-#authentication > span {
+.form-submit-button > span {
     height: 16px;
     line-height: 16px;
     width: 133px;
@@ -225,14 +210,14 @@ article {
 }
 
 /** Active State Style **/
-#authentication > .loginButton:active {
+.form-submit-button > .loginButton:active {
     border-color: #5a5b5f;
     -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     -moz-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
 }
 
-#authentication {
+.form-submit-button {
     width: 200px;
     margin: auto;
     padding: 10px;
