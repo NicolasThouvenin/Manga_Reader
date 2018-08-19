@@ -24,7 +24,7 @@ function homeLargeAdjust(x) {
 }
 
 var s = window.matchMedia("(max-width: 640px)");
-var m = window.matchMedia("(min-width: 641px) and (max-width: 1007px)");
+var m = window.matchMedia("(min-width: 641px) and (max-width: 1008px)");
 var l = window.matchMedia("(min-width: 1008px)");
 
 /* Call listener function at run time

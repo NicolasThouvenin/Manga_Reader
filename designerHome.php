@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css\general.css">
         <link rel="stylesheet" type="text/css" media="screen and (max-width: 640px)" href="css\small.css">
-        <link rel="stylesheet" media="screen and (min-width: 641px) and (max-width: 1007px)" href="css\medium.css">
+        <link rel="stylesheet" media="screen and (min-width: 641px) and (max-width: 1008px)" href="css\medium.css">
         <link rel="stylesheet" media="screen and (min-width: 1008px)" href="css\large.css">
         <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
     </head>

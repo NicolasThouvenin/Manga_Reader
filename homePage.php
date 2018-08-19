@@ -6,7 +6,7 @@
         <title>Home</title>
         <link rel="stylesheet" type="text/css" href="css\general.css">
         <link rel="stylesheet" media="screen and (max-width: 640px)" href="css\small.css">
-        <link rel="stylesheet" media="screen and (min-width: 641px) and (max-width: 1007px)" href="css\medium.css">
+        <link rel="stylesheet" media="screen and (min-width: 641px) and (max-width: 1008px)" href="css\medium.css">
         <link rel="stylesheet" media="screen and (min-width: 1008px)" href="css\large.css">
         <link rel="icon" href="ressources/favicon.ico" type="image/x-icon" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
