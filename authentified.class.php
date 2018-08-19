@@ -2,7 +2,7 @@
     class Authentified extends User {
         
         /* 
-            This class have the authentified user informations. It have some methods to manipulate user token in cookie and database.
+            This class has the authentified user data. It has methods to manipulate user token in cookie and database.
          */
 
         private $Token;
@@ -10,7 +10,7 @@
         public function __construct(int $Id) {
 
         	try {
-        	    parent::__construct($Id); // It's necessary to set parent attributs
+        	    parent::__construct($Id); // It is necessary to set parent attributes
             	$this->SetToken();
 
         	} catch (Exception $e) {
@@ -20,8 +20,7 @@
 
         private function SetToken() {
         	/*
-        		This function create a token with 3 inputs : the session Id, an uniq id and the user login. It set this token in the tokens table in the database.
-				L'idée est que l'utilsateur possède un token par machine dans un cookie.
+        		This method creates a token with 3 inputs : the session Id, an uniq id and the user login. It set this token in the tokens table in the database.
         	*/
         	try {
                 require('connection.php');
@@ -41,7 +40,7 @@
 
         public function CheckToken() {
         	/*
-        		This function check if the authentified object have a valid token. This method is usefull to check the token from cookie
+        		This method checks if the authentified object has a valid token. This method is usefull to check the token inside the cookie
         	*/
         	try {
         	    require('connection.php');
@@ -55,7 +54,7 @@
                 return ($result['@isAuthentified'] === '1' ? true : false);
 
         	} catch (Exception $e) {
-                throw new Exception("<br>Erreur lors de la vérification du token utilisateur de la base de données : ".$e->getMessage());
+                throw new Exception("<br>Error during the user token verification inside database : ".$e->getMessage());
             }
         }
     }
