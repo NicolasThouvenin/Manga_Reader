@@ -1,7 +1,8 @@
 <?php
 
     /*
-        Cette classe représente un chapitre de comic. Elle permet d'accéder et de modifier au information de celle-ci sur la base de données.
+        This class representes a chapter of comic.
+        It provides access and modification in the database and in the files server.
     */
 
     class Chapter {
@@ -73,7 +74,7 @@
         }
 
         private function SetComicStrips() {
-            /* Cette fonction permet de créer une liste d'objet comicstrip (vignettes) d'un chapitre à partir de la base de données */
+            /* This method creates an array of comicstrip objetcs with data from database */
             try {
 
                 require('connection.php');
@@ -86,14 +87,13 @@
                     $this->comicStrips[$line['Id']] = $comicStrip;
                 }
             } catch (Exception $e) {
-                throw new Exception("<br>Erreur lors de la création de la liste de d'objets comicStrip : ". $e->getMessage());
+                throw new Exception("<br>Error during the creation of the array of comicstrip objetcs : ". $e->getMessage());
             }
         }
 
         function GetComicStrips() {
             /* 
-                Cette function est un générateur renvoyant tout les comicstrips (vignettes) d'un chapitre dans l'ordre des numéros.
-                Les éléments sont renvoyés dans le bon ordre grâce aux numéros.
+                This method returns all comicstrip of the chapter sorted by number.
              */
             if (!$this->ComicStripsLoaded) {
                 $this->SetComicStrips();
@@ -113,8 +113,7 @@
 
         function AddComicStrip($comicStripTmpName) {
             /*
-                Cette fonction permet d'ajouter un nouveau comicStrip (vignette) dans la base de données et de chargé l'image sur le serveur d'image.
-                Afin de géner l'apiration des images par des robotsles images ont un nom aléatoire.
+                This method adds new comicstrip in the database and in the files server.
             */
             try {
 
@@ -123,7 +122,7 @@
                     $this->ComicStripsLoaded = true;
                 }
 
-                $Filename = hash('sha256', uniqid()).'.'.$this->GetExtension($comicStripTmpName);
+                $Filename = hash('sha256', uniqid()).'.'.$this->GetExtension($comicStripTmpName); //In order to protect images from aspiration, a crypted name is use.
                 $FilePath = $this->chapterImagesFolder.'\\'. $Filename;
 
                 if (move_uploaded_file($comicStripTmpName, $FilePath)) {
@@ -141,15 +140,15 @@
                     $comicStrip = new ComicStrip($result['@lastComicStripId'], $result['@lastComicStripNumber'], $Filename);
                     $this->ComicStrips[$result['@lastComicStripId']] = $comicStrip;
                 } else {
-                    throw new Exception("<br>Le fichier n'a pas pu être poussé sur le serveur");
+                    throw new Exception("<br>The file could not send to the files server");
                 }
             } catch (Exception $e) {
-                throw new Exception("<br>Erreur lors de l'ajout du nouveau comicStrip : " . $e->getMessage());
+                throw new Exception("<br>Error during the comicstrip addition : " . $e->getMessage());
             }
         }
 
         private function SetChapterImagesFolder() {
-            /* Cette fonction sert à créer le dossier sur le serveur d'image où les images d'un chapitre seront stockées */
+            /* This method creates a folder in the files server. The chapter's images are put in this folder */
             try {
 
                 require('connection.php');
@@ -167,18 +166,18 @@
                     mkdir($this->chapterImagesFolder, 0777, true);
                 }
             } catch (Exception $e) {
-                throw new Exception("<br>Erreur lors de la recherche du chemin du dossier image du chapitre : " . $e->getMessage());
+                throw new Exception("<br>Error during the images folder creation of the chapter : " . $e->getMessage());
             }
         }
 
         private function GetExtension($tmpName) {
             /*
-                Cette fonction permet de rechercher l'extension d'un fichier et de valider qu'il s'agisse bien d'une image.
-                Cela évite d'uploader des fichiers potentiellement dangereux sur le serveur.
+                This method get the extension of a file and checks if it is a true image file.
+                It is a method to avoid uploading dangerous files in the files server.
             */
             $check = explode('/', mime_content_type($tmpName));
             if ($check[0] !== 'image') {
-                throw new Exception("<br>Le fichier n'est pas une image : " . $e->getMessage());
+                throw new Exception("<br>This file is not an image : " . $e->getMessage());
             } else {
                 return $check[1];
             }

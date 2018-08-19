@@ -2,7 +2,7 @@
 
 	class Author extends User {
 
-		/* Cette classe correspond aux informations sur un auteur et donne accès à ses bandes dessinnées. */
+		/* This class has the author data. It give access to its comics. */
 
 		private $Comics = array();
 		private $ComicsLoaded = false;
@@ -12,7 +12,7 @@
 		}
 
 		private function SetComics() {
-			/* Cette fonction permet de créer un array d'objet comics à partir d'une sélection sur la base de données */
+			/* This method creates an array with comic objects set up by a database query */
 			try {
 				require('connection.php');
 				$query = "SELECT comics.Id FROM comics
@@ -28,15 +28,15 @@
 	            	$this->Comics[$line['Id']] = $comic;
 	            }
 			}  catch (Exception $e) {
-                throw new Exception("<br>Erreur lors de la création de la liste de comics : ".$e->getMessage());
+                throw new Exception("<br>Error during the creation of an array with comic objetcs : ".$e->getMessage());
             }
 
 		}
 
 		function getComics() {
-				/* Cette fonction est un générateur permettant d'accéder aux objets comic d'un auteur */
+				/* This method is an generator that return each comic objects of the author */
 			if (!$this->ComicsLoaded) {
-				//On ne crée la liste d'objets comics que si on en a besoin car l'objet Author peut être utilisé sans qu'on ai besoin de ses comics
+				//The array of comic objects is created only if necessary
 				$this->SetComics();
 				$this->ComicsLoaded = true;
 			}

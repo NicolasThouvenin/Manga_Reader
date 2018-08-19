@@ -46,7 +46,7 @@ class Comic {
             $this->SetAuthors();
             $this->SetImagesFolder();
         } catch (Exception $e) {
-            throw new Exception("\nErreur lors de la création de l'objet comic : " . $e->getMessage());
+            throw new Exception("<br>Error during the comic object creation : " . $e->getMessage());
         }
     }
 
@@ -91,7 +91,7 @@ class Comic {
     }
 
     private function setCoverExt($CoverExt) {
-
+        /* Insert comic cover extension in database */
         try {
 
             require('connection.php');
@@ -101,11 +101,13 @@ class Comic {
 
             $this->CoverExt = $CoverExt;
         } catch (Exception $e) {
-            throw new Exception("\nErreur lors l'insertion de la nouvelle extension du cover dans la base de données : " . $e->getMessage());
+            throw new Exception("<br>Error during the insertion in database of the cover image extension : " . $e->getMessage());
         }
     }
 
     private function SetVolumes() {
+
+        /* This method create an array of volume objetcs */
 
         try {
 
@@ -129,7 +131,7 @@ class Comic {
                 $this->LastVolumeNumber = $line['Number'];
             }
         } catch (Exception $e) {
-            throw new Exception("\nErreur lors de la création de la liste de volumes : " . $e->getMessage());
+            throw new Exception("<br>Error during the creation of array of volume objects : " . $e->getMessage());
         }
     }
 
@@ -171,7 +173,7 @@ class Comic {
     }
 
     private function SetGenreIds() {
-
+        /* Create an array of genre ids */
         try {
 
             require('connection.php');
@@ -183,7 +185,7 @@ class Comic {
                 array_push($this->GenreIds, $line['genreId']);
             }
         } catch (Exception $e) {
-            throw new Exception("\nErreur lors de la création de la liste de d'indentifiant de genres : " . $e->getMessage());
+            throw new Exception("<br>Error during the creation of genre ids list : " . $e->getMessage());
         }
     }
 
@@ -198,7 +200,7 @@ class Comic {
     }
 
     private function SetAuthors() {
-
+        /* Create a array of author objects */
         try {
 
             require('connection.php');
@@ -216,7 +218,7 @@ class Comic {
                 $this->Authors[$line['Id']] = $author;
             }
         } catch (Exception $e) {
-            throw new Exception("\nErreur lors de la création de la liste d'objets auteurs : " . $e->getMessage());
+            throw new Exception("<br>Error during the creation of the array of author objects : " . $e->getMessage());
         }
     }
 
@@ -231,6 +233,7 @@ class Comic {
     }
 
     function AddCover($coverTmpName) {
+        /* Put an cover image on the files server */
         try {
 
             $fileExt = $this->GetExtension($coverTmpName);
@@ -239,10 +242,10 @@ class Comic {
 
             $FilePath = $this->ImagesFolder . '\\cover.' . $fileExt;
             if (!move_uploaded_file($coverTmpName, $FilePath)) {
-                throw new Exception("\nL'image du cover n'a pas pu être ajouté par move_uploaded_file : " . $e->getMessage());
+                throw new Exception("<br>The cover image could not be adding on the files servers : " . $e->getMessage());
             }
         } catch (Exception $e) {
-            throw new Exception("\nErreur lors de l'ajout du cover : " . $e->getMessage());
+            throw new Exception("<br>Error during the cover image addition : " . $e->getMessage());
         }
     }
 
@@ -251,26 +254,29 @@ class Comic {
     }
 
     private function SetImagesFolder() {
+        /* Create a comic image folder to put all chapters images folders */
         try {
             $this->ImagesFolder = 'comics\\' . $this->Id;
             if (!file_exists($this->ImagesFolder)) {
                 mkdir($this->ImagesFolder, 0777, true);
             }
         } catch (Exception $e) {
-            throw new Exception("\nErreur lors de la création du dossier d'image du comic : " . $e->getMessage());
+            throw new Exception("<br>Error during the creation of the comic image folder : " . $e->getMessage());
         }
     }
 
     private function GetExtension($tmpName) {
+        /* Return the image extension or an error if it is not an image */
         $check = explode('/', mime_content_type($tmpName));
         if ($check[0] !== 'image') {
-            throw new Exception("\nLe fichier n'est pas une image : " . $e->getMessage());
+            throw new Exception("<br>The file is not an image : " . $e->getMessage());
         } else {
             return $check[1];
         }
     }
 
     function createVolume($title, $synopsis) {
+        /* Create a volume in the database and return a volume object */
         try {
             require('connection.php');
 
@@ -296,7 +302,7 @@ class Comic {
             $this->Volumes[$result['@LastVolumeNumber']] = $volume;
             $this->LastVolumeNumber = $result['@LastVolumeNumber'];
         } catch (Exception $e) {
-            throw new Exception("\nError during new volume creation : " . $e->getMessage());
+            throw new Exception("<br>Error during new volume creation : " . $e->getMessage());
         }
     }
 
