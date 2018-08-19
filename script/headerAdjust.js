@@ -1,5 +1,7 @@
-var isAdd = document.getElementById("add");
-var isSearch = document.getElementById("searchbar");
+var addButon = document.getElementById("add");
+var searchBar = document.getElementById("searchbar");
+var userTab = document.getElementById("userTab");
+var userNames = document.getElementsByClassName("userName");
 
 /**
  * Adapt the dispal for small devices
@@ -8,35 +10,41 @@ var isSearch = document.getElementById("searchbar");
  */
 function header(size) {
 
-    if (size === "s") { // If media query matches
-        if (isSearch) {
-            isSearch.style.display = "none";
+/* For small devices  */
+    if (size === "s") {
+        if (searchBar) {
+            searchBar.style.display = "none";
         }
-        document.getElementById("userTab").style.display = "none";
-        if (isAdd) {
-            isAdd.value = "+";
+        if (userTab) {
+            userTab.style.display = "none";
+        }
+        if (addButon) {
+            addButon.value = "+";
         }
         document.getElementsByClassName("smallLog")[0].style.display = "inline-block";
         if (document.getElementsByClassName("registerButton")[0]) {
             document.getElementsByClassName("registerButton")[0].style.display = "none";
             document.getElementsByClassName("regularButton")[0].style.display = "none";
         } else {
-            document.getElementsByClassName("userName")[0].style.display = "none";
-            document.getElementsByClassName("userName")[1].style.display = "none";
+            userNames[0].style.display = "none";
+            userNames[1].style.display = "none";
         }
+        /* For large devices */
     } else if (size === "l") {
-        if (isAdd) {
-            isAdd.value = "Add Creation";
+        if (addButon) {
+            addButon.value = "Add Creation";
         }
-        document.getElementById("userTab").style.display = "block";
-        document.getElementById("searchbar").style.display = "inline-block";
+        if (userTab) {
+            userTab.style.display = "block";
+        }
+        searchBar.style.display = "inline-block";
         document.getElementsByClassName("smallLog")[0].style.display = "none";
         if (document.getElementsByClassName("registerButton")[0]) {
             document.getElementsByClassName("registerButton")[0].style.display = "inline-block";
             document.getElementsByClassName("regularButton")[0].style.display = "inline-block";
         } else {
-            document.getElementsByClassName("userName")[0].style.display = "block";
-            document.getElementsByClassName("userName")[1].style.display = "block";
+            userNames[0].style.display = "block";
+            userNames[1].style.display = "block";
         }
     }
 }
@@ -48,20 +56,20 @@ function header(size) {
  * @returns {undefined}
  */
 function toggleUserTab() {
-    if (isSearch) {
+    if (searchBar) {
         /* If the searchbar is open, close it*/
-        if (isSearch.style.display !== "none") {
-            isSearch.style.display = "none";
+        if (searchBar.style.display !== "none") {
+            searchBar.style.display = "none";
         }
     }
-    if (document.getElementById("userTab").style.display === "none") {
-        document.getElementById("userTab").style.display = "block";
-        document.getElementsByClassName("userName")[0].style.display = "inline-block";
-        document.getElementsByClassName("userName")[1].style.display = "inline-block";
+    if (userTab.style.display === "none") {
+        userTab.style.display = "block";
+        userNames[0].style.display = "inline-block";
+        userNames[1].style.display = "inline-block";
     } else {
-        document.getElementById("userTab").style.display = "none";
-        document.getElementsByClassName("userName")[0].style.display = "none";
-        document.getElementsByClassName("userName")[1].style.display = "none";
+        userTab.style.display = "none";
+        userNames[0].style.display = "none";
+        userNames[1].style.display = "none";
     }
 }
 
@@ -73,16 +81,16 @@ function toggleUserTab() {
 function toggleSearch() {
     /* If the usertab is open, close it*/
     if (document.getElementsByClassName("connected")[0]) {
-        if (document.getElementById("userTab").style.display !== "none") {
-            document.getElementById("userTab").style.display = "none";
-            document.getElementsByClassName("userName")[0].style.display = "none";
-            document.getElementsByClassName("userName")[1].style.display = "none";
+        if (userTab.style.display !== "none") {
+            userTab.style.display = "none";
+            userNames[0].style.display = "none";
+            userNames[1].style.display = "none";
         }
     }
-    if (isSearch.style.display === "none") {
-        isSearch.style.display = "inline-block";
+    if (searchBar.style.display === "none") {
+        searchBar.style.display = "inline-block";
     } else {
-        isSearch.style.display = "none";
+        searchBar.style.display = "none";
     }
 }
 
