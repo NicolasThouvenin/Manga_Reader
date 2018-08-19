@@ -12,7 +12,7 @@
     <body>
         <div class="form-div">
             <div id="login-logo">
-                <img src="ressources/bubbleSignLogo.png" onclick="location.href = 'homePage.php';"
+                <img src="ressources/bubbleSignLogo.png" onclick="location.href = 'homePage.php';">
             </div>
             <form id="authentication" name="authentication" method="post" action="checkAuthentication.php">
                 <h2>Sign in</h2>
