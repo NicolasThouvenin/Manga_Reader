@@ -1,6 +1,7 @@
 a {
     color: rgb(189, 186, 172);
     text-decoration: none;
+     cursor: pointer;
 }
 
 html {
@@ -25,7 +26,10 @@ header div, header input {
     display: inline-grid;
 }
 
-
 .log {
     display: none;
+}
+
+.error {
+    padding: 10px;
 }

@@ -1,5 +1,4 @@
 function homeSmallAdjust(x) {
-    header(x);
     if (x.matches) {
         header("s");
         article = document.querySelectorAll("article > a > img");

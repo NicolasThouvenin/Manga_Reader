@@ -336,11 +336,8 @@ article {
 /****   New Volume & Chapter Form  ****/
 
 #add_new {
-    /*border-top: solid #414141 2px;*/
     width: 100%;
-    /*margin-top: 20px;*/
     padding: 10px 0px 0px;
-
 }
 
 #add_volume, #add_chapter {

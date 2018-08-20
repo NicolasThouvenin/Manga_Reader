@@ -10,7 +10,7 @@ var userNames = document.getElementsByClassName("userName");
  */
 function header(size) {
 
-/* For small devices  */
+    /* For small devices  */
     if (size === "s") {
         if (searchBar) {
             searchBar.style.display = "none";
@@ -22,9 +22,9 @@ function header(size) {
             addButon.value = "+";
         }
         document.getElementsByClassName("smallLog")[0].style.display = "inline-block";
-        if (document.getElementsByClassName("registerButton")[0]) {
-            document.getElementsByClassName("registerButton")[0].style.display = "none";
-            document.getElementsByClassName("regularButton")[0].style.display = "none";
+        if (document.getElementsByClassName("header_button")[0]) {
+            document.getElementsByClassName("header_button")[0].style.display = "none";
+            document.getElementsByClassName("header_button")[1].style.display = "none";
         } else {
             userNames[0].style.display = "none";
             userNames[1].style.display = "none";
@@ -37,11 +37,13 @@ function header(size) {
         if (userTab) {
             userTab.style.display = "block";
         }
-        searchBar.style.display = "inline-block";
+        if (searchBar) {
+            searchBar.style.display = "inline-block";
+        }
         document.getElementsByClassName("smallLog")[0].style.display = "none";
-        if (document.getElementsByClassName("registerButton")[0]) {
-            document.getElementsByClassName("registerButton")[0].style.display = "inline-block";
-            document.getElementsByClassName("regularButton")[0].style.display = "inline-block";
+        if (document.getElementsByClassName("header_button")[0]) {
+            document.getElementsByClassName("header_button")[0].style.display = "inline-block";
+            document.getElementsByClassName("header_button")[1].style.display = "inline-block";
         } else {
             userNames[0].style.display = "block";
             userNames[1].style.display = "block";

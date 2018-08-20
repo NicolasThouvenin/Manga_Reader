@@ -52,6 +52,21 @@ button, input[type="button"]{
     box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
 }
 
+.registerButton {
+    cursor: pointer;
+    background: #00cc66;
+    -webkit-box-shadow: rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    -moz-box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(102, 255, 179, 0.3) 0 1px 0;
+    box-shadow:rgba(102, 255, 179, 0.3) 0 1px 0, inset rgba(255, 255, 255, 0.3) 0 1px 0;
+}
+
+/** Active State Style **/
+.registerButton:active {
+    -webkit-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    -moz-box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+    box-shadow:rgba(102, 255, 179, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
+}
+
 #add {
     float: left;
     margin: 27px 0 0 40px;
@@ -123,18 +138,25 @@ button, input[type="button"]{
 }
 
 main {
-    padding: 82px 0px 10px 0;
+    padding: 82px 20px 10px;
     width: 100%;
     max-width: 810px;
     margin: auto;
 }
 
 .banner {
-
     width: 100%;
     height: 50px;
     background-color: dimgray;
     margin-bottom: 20px;
+}
+
+.banner > span {
+    display: block;
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+    margin: auto;
 }
 
 #searchbar {
@@ -156,7 +178,7 @@ article {
 }
 
 /****************************/
-/***  Login & .PHP  ***/
+/***  Login & Register.PHP  ***/
 /****************************/
 
 #login-logo {
@@ -175,7 +197,7 @@ article {
 }
 
 
-.form-submit-button > .input_login {
+#authentication > .input_login {
     display: block;
     border: 1px solid;
     width: 100%;
@@ -184,7 +206,7 @@ article {
     border-radius: 10px;
 }
 
-.form-submit-button > span {
+#authentication > span {
     height: 16px;
     line-height: 16px;
     width: 133px;
@@ -210,14 +232,14 @@ article {
 }
 
 /** Active State Style **/
-.form-submit-button:active {
+#authentication > .form-submit-button:active {
     border-color: #5a5b5f;
     -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     -moz-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
 }
 
-.form-submit-button {
+#authentication {
     width: 200px;
     margin: auto;
     padding: 10px;
@@ -239,6 +261,8 @@ form > h2 {
     width: 250px;
     border: solid black 2px;
     display: inline-block;
+    margin: 10px;
+    margin-right: 5px;
 }
 
 #avatar > label > img {
@@ -248,9 +272,15 @@ form > h2 {
 
 #book_meta, #user_info {
     line-height: 1.6em;
-    width: 476px;
+    width: 38%;
     float: right;
     padding: 20px;
+    margin-right: 7%;
+}
+
+#user_info {
+    margin: 0px;
+    width: 40%;
 }
 
 #user_info > p {
@@ -260,7 +290,6 @@ form > h2 {
 
 #user_info > p > input {
     float: right;
-    padding-right: 180px;
     width: 170px;
     font-size: 18px;
     border: none;
@@ -271,6 +300,10 @@ form > h2 {
 #synopsis {
     padding-top: 30px;
     line-height: 1.4em;
+}
+
+#unsubscribe {
+    margin: 30px;
 }
 
 /****   New Volume & Chapter Form  ****/
@@ -451,14 +484,3 @@ ul {
     margin-left: auto;
 }
 
-/****************************/
-/*****      profile.PHP      *****/
-/****************************/
-
-.banner > span {
-    display: block;
-    text-align: center;
-    font-size: 28px;
-    line-height: 50px;
-    font-weight: 500;
-}

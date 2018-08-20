@@ -11,6 +11,18 @@ function homeSmallAdjust(x) {
 function homeLargeAdjust(x) {
     if (x.matches) {
         header("l");
+//        document.getElementsByClassName("banner")[0].style.position = "inherit";
+        cover = document.getElementById("cover");
+        cover.width = "250";
+        cover.height = "375";
+        console.log(cover);
+    }
+}
+
+function homeMediumAdjust(x) {
+    if (x.matches) {
+        header("m");
+//        document.getElementsByClassName("banner")[0].style.position = "fixed";
         cover = document.getElementById("cover");
         cover.width = "250";
         cover.height = "375";
@@ -28,8 +40,8 @@ var l = window.matchMedia("(min-width: 1008px)");
 homeSmallAdjust(s);
 s.addListener(homeSmallAdjust);
 
-homeLargeAdjust(m);
-m.addListener(homeLargeAdjust);
+homeMediumAdjust(m);
+m.addListener(homeMediumAdjust);
 
 homeLargeAdjust(l);
 l.addListener(homeLargeAdjust);
