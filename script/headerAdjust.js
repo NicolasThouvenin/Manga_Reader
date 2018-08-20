@@ -1,11 +1,13 @@
+/* Header Elements that will be modified */
 var addButon = document.getElementById("add");
 var searchBar = document.getElementById("searchbar");
 var userTab = document.getElementById("userTab");
 var userNames = document.getElementsByClassName("userName");
+var headerButon = document.getElementsByClassName("header_button");
 
 /**
- * Adapt the dispal for small devices
- * @param {MediaQueryList object}
+ * Adapt the display to device width
+ * @param {char} size : size code of the device
  * @returns {undefined}
  */
 function header(size) {
@@ -22,14 +24,14 @@ function header(size) {
             addButon.value = "+";
         }
         document.getElementsByClassName("smallLog")[0].style.display = "inline-block";
-        if (document.getElementsByClassName("header_button")[0]) {
-            document.getElementsByClassName("header_button")[0].style.display = "none";
-            document.getElementsByClassName("header_button")[1].style.display = "none";
+        if (headerButon[0]) {
+            headerButon[0].style.display = "none";
+            headerButon[1].style.display = "none";
         } else {
             userNames[0].style.display = "none";
             userNames[1].style.display = "none";
         }
-        /* For large devices */
+        /* For large and medium devices */
     } else if (size === "l" || size === "m") {
         if (addButon) {
             addButon.value = "Add Creation";
@@ -41,9 +43,9 @@ function header(size) {
             searchBar.style.display = "inline-block";
         }
         document.getElementsByClassName("smallLog")[0].style.display = "none";
-        if (document.getElementsByClassName("header_button")[0]) {
-            document.getElementsByClassName("header_button")[0].style.display = "inline-block";
-            document.getElementsByClassName("header_button")[1].style.display = "inline-block";
+        if (headerButon[0]) {
+            headerButon[0].style.display = "inline-block";
+            headerButon[1].style.display = "inline-block";
         } else {
             userNames[0].style.display = "block";
             userNames[1].style.display = "block";

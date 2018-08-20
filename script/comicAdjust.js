@@ -1,32 +1,42 @@
+/**
+ * Adapt the display for small devices
+ * @param {MediaQueryList object} x
+ * @returns {undefined}
+ */
 function homeSmallAdjust(x) {
     if (x.matches) {
         header("s");
         cover = document.getElementById("cover");
         cover.width = "150";
         cover.height = "225";
-        console.log(cover);
     }
 }
 
+/**
+ * Adapt the display for large devices
+ * @param {MediaQueryList object} x
+ * @returns {undefined}
+ */
 function homeLargeAdjust(x) {
     if (x.matches) {
         header("l");
-//        document.getElementsByClassName("banner")[0].style.position = "inherit";
         cover = document.getElementById("cover");
         cover.width = "250";
         cover.height = "375";
-        console.log(cover);
     }
 }
 
+/**
+ * Adapt the display for medium devices
+ * @param {MediaQueryList object} x
+ * @returns {undefined}
+ */
 function homeMediumAdjust(x) {
     if (x.matches) {
         header("m");
-//        document.getElementsByClassName("banner")[0].style.position = "fixed";
         cover = document.getElementById("cover");
         cover.width = "250";
         cover.height = "375";
-        console.log(cover);
     }
 }
 

@@ -1,21 +1,31 @@
+/**
+ * Adapt the display for small devices
+ * @param {MediaQueryList object} x
+ * @returns {undefined}
+ */
 function homeSmallAdjust(x) {
     if (x.matches) {
+        /* Launch the header adjustment*/
         header("s");
         article = document.querySelectorAll("article > a > img");
         for (i = 0; i < article.length; i++) {
-            console.log(article[i]);
             article[i].width = "100";
             article[i].height = "150";
         }
     }
 }
 
+/**
+ * Adapt the display for large and medium devices
+ * @param {MediaQueryList object} x
+ * @returns {undefined}
+ */
 function homeLargeAdjust(x) {
     if (x.matches) {
+        /* Launch the header adjustment*/
         header("l");
         article = document.querySelectorAll("article > a > img");
         for (i = 0; i < article.length; i++) {
-            console.log(article[i]);
             article[i].width = "150";
             article[i].height = "225";
         }

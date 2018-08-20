@@ -1,20 +1,28 @@
+/**
+ * Adapt the display for small devices
+ * @param {MediaQueryList object} x
+ * @returns {undefined}
+ */
 function homeSmallAdjust(x) {
     if (x.matches) {
         header("s");
         avatar = document.getElementById("avatar_pic");
         avatar.width = "150";
         avatar.height = "150";
-        console.log(avatar);
     }
 }
 
+/**
+ * Adapt the display for large and medium devices
+ * @param {MediaQueryList object} x
+ * @returns {undefined}
+ */
 function homeLargeAdjust(x) {
     if (x.matches) {
         header("l");
         avatar = document.getElementById("avatar_pic");
         avatar.width = "250";
         avatar.height = "250";
-        console.log(avatar);
     }
 }
 
