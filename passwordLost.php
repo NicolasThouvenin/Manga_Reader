@@ -7,12 +7,14 @@
 <body>
 
 
-
+<!--  This is for password change -->
     <?php
     require('required.php');
     require('connection.php');
     try {
         session_start();
+        
+//         If there is something in the url, it means that we have already clicked on the url received in email
         if(isset($_GET['email']) AND isset($_GET['passwordKey']))
         {
 
@@ -37,7 +39,7 @@
                 echo "Password changed!";
             }
             else{
-                echo "Passwords are not matching.";
+                echo "Passwords must be the same.";
             }
         }
         else{
