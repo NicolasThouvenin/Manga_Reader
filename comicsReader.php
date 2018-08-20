@@ -65,11 +65,10 @@
                             while ($line = $result->fetch()) {
                                 ?>
                                 <div class="bubble">
-                                    <!--<div class="bubble_number"><?php // echo $i ?> </div>-->
                                     <div class="strip_container">
                                         <img class="comicstrip" onclick="plusSlides(1)" src="<?php echo $path . $line["Filename"]; ?>">
                                     </div>
-                                    <!--<div class="text">1</div>-->
+                                    <div class="text">1</div>
                                 </div>
                                 <?php
                             }
