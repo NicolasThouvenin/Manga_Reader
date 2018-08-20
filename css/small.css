@@ -147,6 +147,7 @@ input[type="button"]{
     border-bottom: 1px solid rgb(81, 81, 81);
     border-left: 1px solid rgb(81, 81, 81);
     padding: 5px;
+    z-index: 999;
 }
 
 .userName {
@@ -404,8 +405,8 @@ ul {
 .strip_container {
     width: 80%;
     display: block;
-    margin: auto;
-    padding-top: 30px;
+    margin: 80px auto 0px;
+    
 }
 
 .comicstrip {
