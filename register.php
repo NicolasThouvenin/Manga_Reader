@@ -14,7 +14,7 @@
             <div id="login-logo">
                 <img src="ressources/bubbleSignLogo.png" onclick="location.href = 'homePage.php';">
             </div>
-            <form  class='main-form' id="register" name="register" method="post" action="addUser.php">
+            <form class='main-form' id="register" name="register" method="post" action="addUser.php">
                 <h2>Create your account</h2> <!-- form for sign up -->
                 <input class="input_login" type="text" id="login" name="login" placeholder="Login" required>
                 <input class="input_login" type="text" id="firstname" name="firstname" placeholder="First Name" required>

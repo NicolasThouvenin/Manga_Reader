@@ -27,7 +27,7 @@ form > input {
     border-radius: 10px
 }
 
-#authentication {
+.main-form {
     width: 180px;
     margin: auto;
 }

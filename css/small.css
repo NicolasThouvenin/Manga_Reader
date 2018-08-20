@@ -174,7 +174,7 @@ article {
     padding-top: 15%;
 }
 
-#authentication > h2 {
+.main-form > h2 {
     text-align: center;
     font-weight: 500;
     font-size: 30px;
@@ -191,7 +191,7 @@ article {
     border-radius: 10px;
 }
 
-#authentication > label {
+.main-form > label {
     width: 80%;
     max-width: 200px;
     display: block;
@@ -200,7 +200,7 @@ article {
     border-radius: 10px;
 }
 
-#authentication > span {
+.main-form > span {
     height: 16px;
     line-height: 16px;
     width: 133px;

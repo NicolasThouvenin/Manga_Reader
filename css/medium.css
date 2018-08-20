@@ -197,7 +197,7 @@ article {
 }
 
 
-#authentication > .input_login {
+.main-form > .input_login {
     display: block;
     border: 1px solid;
     width: 100%;
@@ -206,7 +206,7 @@ article {
     border-radius: 10px;
 }
 
-#authentication > span {
+.main-form > span {
     height: 16px;
     line-height: 16px;
     width: 133px;
@@ -232,14 +232,14 @@ article {
 }
 
 /** Active State Style **/
-#authentication > .form-submit-button:active {
+.main-form > .form-submit-button:active {
     border-color: #5a5b5f;
     -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     -moz-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
     box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.25) 0 1px 4px;
 }
 
-#authentication {
+.main-form {
     width: 200px;
     margin: auto;
     padding: 10px;
