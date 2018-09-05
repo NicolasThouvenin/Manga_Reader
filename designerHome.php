@@ -69,7 +69,7 @@
 
                         <article id="<?php echo $comic->getId() ?>">
                             <a href="comic.php?bookId=<?php echo $comic->getId() ?>"><img src="<?php echo $coverPath ?>" alt="cover" width="100" height="150"></a>
-                            <p class="comics_name"><a href="comic.php?bookId=<?php $comic->getId() ?>"><?php echo $comic->getTitle() ?></a><p>
+                            <p class="comics_name"><a href="comic.php?bookId=<?php echo $comic->getId() ?>"><?php echo $comic->getTitle() ?></a><p>
                         </article>
 
                         <?php
