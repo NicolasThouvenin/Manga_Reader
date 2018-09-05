@@ -123,7 +123,7 @@
                 }
 
                 $Filename = hash('sha256', uniqid()).'.'.$this->GetExtension($comicStripTmpName); //In order to protect images from aspiration, a crypted name is use.
-                $FilePath = $this->chapterImagesFolder.'\\'. $Filename;
+                $FilePath = $this->chapterImagesFolder.'/'. $Filename;
 
                 if (move_uploaded_file($comicStripTmpName, $FilePath)) {
 
@@ -160,7 +160,7 @@
                 $getChapterImagesFolder->closeCursor();
                 $result = $db->query("SELECT @chapterFolderPath")->fetch(PDO::FETCH_ASSOC);
 
-                $this->chapterImagesFolder = 'comics' . '\\' . $result['@chapterFolderPath'];
+                $this->chapterImagesFolder = 'comics' . '/' . $result['@chapterFolderPath'];
 
                 if (!file_exists($this->chapterImagesFolder)) {
                     mkdir($this->chapterImagesFolder, 0777, true);
