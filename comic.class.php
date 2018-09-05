@@ -240,7 +240,7 @@ class Comic {
 
             $this->setCoverExt($fileExt);
 
-            $FilePath = $this->ImagesFolder . '\\cover.' . $fileExt;
+            $FilePath = $this->ImagesFolder . '//cover.' . $fileExt;
             if (!move_uploaded_file($coverTmpName, $FilePath)) {
                 throw new Exception("<br>The cover image could not be adding on the files servers : " . $e->getMessage());
             }
@@ -250,13 +250,13 @@ class Comic {
     }
 
     function getCover() {
-        return $this->ImagesFolder . '\\cover.' . $this->CoverExt;
+        return $this->ImagesFolder . '//cover.' . $this->CoverExt;
     }
 
     private function SetImagesFolder() {
         /* Create a comic image folder to put all chapters images folders */
         try {
-            $this->ImagesFolder = 'comics\\' . $this->Id;
+            $this->ImagesFolder = 'comics//' . $this->Id;
             if (!file_exists($this->ImagesFolder)) {
                 mkdir($this->ImagesFolder, 0777, true);
             }
