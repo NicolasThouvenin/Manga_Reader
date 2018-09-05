@@ -6,5 +6,5 @@ BEGIN
 	SET lastComicStripNumber = -1;
 	INSERT INTO comicstrips (Number, Filename, chapterId) VALUES (lastComicStripNumber, inFilename, inChapterId);
 	SET lastComicStripId = LAST_INSERT_ID();
-	SELECT count(*) INTO lastComicStripId FROM comicstrips WHERE chapterId = inChapterId;
+	SELECT count(*) INTO lastComicStripNumber FROM comicstrips WHERE chapterId = inChapterId;
 END ;;
