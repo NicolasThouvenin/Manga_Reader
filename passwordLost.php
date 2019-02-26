@@ -81,12 +81,12 @@
 					$sendemail->SMTPAuth=true;
 					$sendemail->SMTPSecure="ssl";
                      //webmail server credentials
-					$sendemail->Username='blaisiustristodontor@gmail.com';
-					$sendemail->Password='Hn7t31PxGvTy8';
+					$sendemail->Username='mrbiduletrucmachin@gmail.com';
+					$sendemail->Password='MotDePasse';
                      //email sending setup
 					$sendemail->setFrom('no-reply@bubbleup.fr','BubbleUp.fr');
 					$sendemail->addAddress($_POST['email']);
-					$sendemail->addReplyTo('pharob@superuser.fr');
+					$sendemail->addReplyTo('mrbiduletrucmachin@gmail.com');
 					$sendemail->isHTML(true);
 					$sendemail->Subject='Your BubbleUp Password lost:';
 					$sendemail->Body="<p>Hello!</p>
